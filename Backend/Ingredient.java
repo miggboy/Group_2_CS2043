@@ -23,9 +23,9 @@ public class Ingredient {
      * Loads the saved list of ingredients from disk or calls the makeDefaultList method with a specific state if the file is not present.
      * This method performs the following steps:
      * 1. Checks if the directory for saving the list exists. If not, it calls makeDefaultList(0).
-     * 2. Ensures that the path points to a directory. If not, it calls makeDefaultList(1).
-     * 3. Appends the filename "Ingredients.bin" to the path and checks if the file exists. If not, it calls makeDefaultList(2).
-     * 4. Verifies that the path does not point to a directory. If it does, it calls makeDefaultList(3).
+     * 2. Ensures that the directory is, in fact, a directory. If not, it throws an error.
+     * 3. Appends the filename "Ingredients.bin" to the path and checks if the file exists. If not, it calls makeDefaultList(1).
+     * 4. Verifies that the path does not point to a directory. If it does, it throws an error.
      * 5. Creates an object input stream and loads the file.
      * 6. Throws a ClassCastException if the loaded file does not contain a valid ArrayList of Ingredients, then exits the JVM if any exception was thrown.
      * 7. Returns the ArrayList as initially requested if no errors were thrown.
@@ -37,12 +37,11 @@ public class Ingredient {
         // Directory path for saving the list
         String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
         File f = new File(importPath);
-
         // Step 1: Verify if the directory exists, and handle accordingly
         if (!f.exists()) {
             Ingredient.writeDefaultList(0);
         } else if (!f.isDirectory()) {
-            Ingredient.writeDefaultList(1);
+            throw new IOException(System.getProperty("user.dir") + "\\.RecipeBrowser" + " is a file, where it should be a folder. Execution cannot continue.");
         }
 
         // Append the filename to the path
@@ -53,7 +52,7 @@ public class Ingredient {
         if (!f.exists()) {
             Ingredient.writeDefaultList(3);
         } else if (f.isDirectory()) {
-            Ingredient.writeDefaultList(2);
+            throw new IOException(System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin" + " is a folder, where it should be a file. Execution cannot continue.");
         }
 
         // Load the file and return the list of ingredients
@@ -82,8 +81,7 @@ public class Ingredient {
     }
 
     /**
-     * Utility method for creating and writing a default ingredients list to a file. Most of the checks are done in the loadSavedList() method,
-     * so calling this method directly may be dangerous to the filesystem or JVM.
+     * Utility method for creating and writing a default ingredients list to a file.
      * This method serves various purposes depending on the provided 'state' parameter:
      * - If 'state' is 0, it creates the necessary directory structure for saving the list, then moves to state 3.
      * - If 'state' is 1, it throws an IOException indicating that the intended location for the directory is already a file.
@@ -92,11 +90,9 @@ public class Ingredient {
      * 
      * @param state An integer representing the desired action or initial state:
      *              - 0 for creating directories.
-     *              - 1 for reporting a directory as a file.
-     *              - 2 for reporting a file as a directory.
-     *              - 3 for generating and writing a default ingredients list.
+     *              - 1 for generating and writing a default ingredients list.
      * 
-     * @throws IOException if there are issues with file I/O operations or the directory/file structure.
+     * @throws IOException if there are issues with file I/O operations.
      * @throws IllegalArgumentException if an unsupported 'state' value is provided.
      */
     public static void writeDefaultList(int state) throws IOException, IllegalArgumentException{
@@ -105,12 +101,6 @@ public class Ingredient {
             state = 3;
         }
         if (state == 1) {
-            throw new IOException(System.getProperty("user.dir") + "\\.RecipeBrowser" + " is a file, where it should be a folder. Execution cannot continue.");
-        }
-        if (state == 2) {
-            throw new IOException(System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin" + " is a folder, where it should be a file. Execution cannot continue.");
-        }
-        if (state == 3) {
             ArrayList<Ingredient> list = makeDefaultList();
             ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin"));
             objOut.writeObject(list);
