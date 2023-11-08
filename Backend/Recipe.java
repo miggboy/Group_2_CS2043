@@ -143,21 +143,21 @@ public class Recipe implements Serializable {
     // Define and initialize individual recipes
     Recipe one = new Recipe(
       "Salmon with Brown Sugar Glaze",
-      "Preheat the oven to 425\\u00B0F. Position a rack in the center, line a sheet pan with foil, and set it aside. \\n" +
-      "\\n" +
-      "In a small bowl, stir the brown sugar, mustard, honey, salt, black pepper, and red pepper flakes until smooth and drizzly. \\n" +
-      "\\n" +
-      "If you like to eat the salmon skin, pat it very, very dry with a clean dish towel or paper towels. Skip this step if you prefer not to eat the skin. \\n" +
-      "\\n" +
-      "Place the filets, skin side-down and with space between each filet, on the prepared sheet pan. \\n" +
-      "\\n" +
-      "Spoon the glaze onto the filets, making sure it fully covers the tops. Use the back of the spoon to spread it out. \\n" +
-      "\\n" +
-      "Bake until the tops are golden brown and crispy in spots. The salmon will feel slightly firm when pressed with your fingers and it should flake easily with a fork, 12 to 14 minutes. If your filets are thin (less than an inch thick), start checking for doneness at the 10-minute mark. A digital thermometer inserted into the thickest part of the salmon should register between 125\\u00B0F and 130\\u00B0F\\u2014this is considered cooked medium.\\n" + //
-      "\\n" +
-      "Use a spatula to transfer the salmon onto plates and serve warm. \\n" +
-      "\\n" +
-      "Store leftovers in the fridge for up to 4 days. To reheat, place it on a foil-lined sheet pan and bake it slowly at 300\\u00B0F until warmed through. This low and slow method will prevent the salmon from drying out too much.",
+      "Preheat the oven to 425\u00B0F. Position a rack in the center, line a sheet pan with foil, and set it aside. \n" +
+      "\n" +
+      "In a small bowl, stir the brown sugar, mustard, honey, salt, black pepper, and red pepper flakes until smooth and drizzly. \n" +
+      "\n" +
+      "If you like to eat the salmon skin, pat it very, very dry with a clean dish towel or paper towels. Skip this step if you prefer not to eat the skin. \n" +
+      "\n" +
+      "Place the filets, skin side-down and with space between each filet, on the prepared sheet pan. \n" +
+      "\n" +
+      "Spoon the glaze onto the filets, making sure it fully covers the tops. Use the back of the spoon to spread it out. \n" +
+      "\n" +
+      "Bake until the tops are golden brown and crispy in spots. The salmon will feel slightly firm when pressed with your fingers and it should flake easily with a fork, 12 to 14 minutes. If your filets are thin (less than an inch thick), start checking for doneness at the 10-minute mark. A digital thermometer inserted into the thickest part of the salmon should register between 125\u00B0F and 130\u00B0F\u2014this is considered cooked medium.\n" +
+      "\n" +
+      "Use a spatula to transfer the salmon onto plates and serve warm. \n" +
+      "\n" +
+      "Store leftovers in the fridge for up to 4 days. To reheat, place it on a foil-lined sheet pan and bake it slowly at 300\u00B0F until warmed through. This low and slow method will prevent the salmon from drying out too much.",
       "25 Minutes",
       4,
       true
@@ -238,6 +238,22 @@ public class Recipe implements Serializable {
     ingredients = new ArrayList<RecipeIngredient>();
     ratings = new ArrayList<Integer>();
     this.isDefault = isDefault;
+  }
+
+  /**
+   * Creates a copy of the current recipe
+   *
+   * @param in The recipe to be copied
+   * @return A copy of it.
+   */
+  public Recipe(Recipe in) {
+    name = in.getName();
+    instructions = in.getInstructions();
+    prepTime = in.getPrepTime();
+    ingredients = in.getIngredients();
+    servingCount = in.getServingCount();
+    ratings = in.getRatingArray();
+    isDefault = in.isDefault;
   }
 
   public boolean isDefault() {
@@ -381,5 +397,23 @@ public class Recipe implements Serializable {
       }
     }
     return success;
+  }
+
+  /**
+   * A private class that allows the copy constructor to copy the ingredients array without a for loop.
+   *
+   * @return the ingredients ArrayList.
+   */
+  private ArrayList<RecipeIngredient> getIngredients() {
+    return ingredients;
+  }
+
+  /**
+   * A private class that allows the copy constructor to copy the ratings array without a for loop.
+   *
+   * @return the ratings ArrayList.
+   */
+  private ArrayList<Integer> getRatingArray() {
+    return ratings;
   }
 }

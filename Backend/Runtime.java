@@ -22,11 +22,11 @@ public class Runtime {
     }
   }
 
-  public ArrayList<Ingredient> getIngredients() {
-    return new ArrayList<Ingredient>(ingredientList);
+  public Ingredient getIngredients(int i) {
+    return new Ingredient(ingredientList.get(i));
   }
 
-  public ArrayList<Recipe> getRecipes() {
-    return new ArrayList<Recipe>(recipeList);
+  public Recipe getRecipes(int i) {
+    return new Recipe(recipeList.get(i));
   }
 }

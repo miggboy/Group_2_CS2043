@@ -11,7 +11,7 @@ public class RecipeIngredient implements Serializable {
   public RecipeIngredient(String ingredientName, String amountIn) {
     ingredient = ingredientName;
     amount = amountIn;
-    substitutions = null;
+    substitutions = "";
   }
 
   public RecipeIngredient(
