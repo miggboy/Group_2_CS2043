@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * @author Max MacNeill
  * @version 1.0.0
  */
-public class Ingredient {
+public class Ingredient implements Serializable {
 
   /**
    * Loads the saved list of ingredients from disk or calls the makeDefaultList method with a specific state if the file is not present.

@@ -6,13 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The `Recipe` class represents a recipe, including its name, instructions, preparation time, serving count, ingredients, and ratings.
  * This class is used to manage and retrieve information about recipes, such as their details and ingredient list.
  */
-public class Recipe {
+public class Recipe implements Serializable {
 
   /**
    * Loads the saved list of recipes from disk or calls the makeDefaultList method with a specific state if the file is not present.
@@ -35,7 +36,7 @@ public class Recipe {
     File f = new File(importPath);
     // Step 1: Verify if the directory exists, and handle accordingly
     if (!f.exists()) {
-      Ingredient.writeDefaultList(0);
+      Recipe.writeDefaultList(0);
     } else if (!f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.dir") +
@@ -50,7 +51,7 @@ public class Recipe {
 
     // Step 3: Verify if the file exists, and handle accordingly
     if (!f.exists()) {
-      Ingredient.writeDefaultList(3);
+      Recipe.writeDefaultList(1);
     } else if (f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.dir") +
@@ -97,10 +98,8 @@ public class Recipe {
   /**
    * Utility method for creating and writing a default recipes list to a file.
    * This method serves various purposes depending on the provided 'state' parameter:
-   * - If 'state' is 0, it creates the necessary directory structure for saving the list, then moves to state 3.
-   * - If 'state' is 1, it throws an IOException indicating that the intended location for the directory is already a file.
-   * - If 'state' is 2, it throws an IOException indicating that the intended location for the file is already a directory.
-   * - If 'state' is 3, it generates a default recipes list, serializes it, and writes it to the designated file.
+   * - If 'state' is 0, it creates the necessary directory structure for saving the list, then moves to state 1.
+   * - If 'state' is 1, it generates a default recipes list, serializes it, and writes it to the designated file.
    *
    * @param state An integer representing the desired action or initial state:
    *              - 0 for creating directories.
@@ -113,7 +112,7 @@ public class Recipe {
     throws IOException, IllegalArgumentException {
     if (state == 0) {
       new File(System.getProperty("user.dir") + "\\.RecipeBrowser").mkdir();
-      state = 3;
+      state = 1;
     }
     if (state == 1) {
       ArrayList<Recipe> list = makeDefaultList();
@@ -125,7 +124,7 @@ public class Recipe {
       objOut.writeObject(list);
       objOut.close();
     }
-    throw new IllegalArgumentException(
+    if (state != 1) throw new IllegalArgumentException(
       "A state was requested which this function does not implement."
     );
   }

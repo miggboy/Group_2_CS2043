@@ -1,6 +1,8 @@
 package Backend;
 
-public class RecipeIngredient {
+import java.io.Serializable;
+
+public class RecipeIngredient implements Serializable {
 
   private String ingredient;
   private String amount;
