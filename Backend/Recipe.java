@@ -326,7 +326,7 @@ public class Recipe {
             if (ingredients.get(i).getIngredientName().equals(toRemove)) {
                 ingredients.remove(i);
                 success = true;
-
+                i--; // removed i, so check that index again.
             }
         }
         return success;
