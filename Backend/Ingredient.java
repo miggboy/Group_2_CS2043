@@ -68,7 +68,7 @@ public class Ingredient {
                 ArrayList<Ingredient> ingredientsListTemp = (ArrayList<Ingredient>) obj; 
                 ingredientsList = ingredientsListTemp;
             } else {
-                throw new ClassCastException("defaultIngredients is not an ArrayList of Ingredients");
+                throw new ClassCastException("Ingredients.bin is not an ArrayList of Ingredients");
             }
         } catch (Exception e) {
             // Handle exceptions and exit on failure
@@ -121,11 +121,13 @@ public class Ingredient {
         ArrayList<Ingredient> defaultIngredients = new ArrayList<Ingredient>();
 
         // Define and initialize individual ingredients
-        Ingredient one = new Ingredient("carrots", false);
-        Ingredient two = new Ingredient("beans", false);
-        Ingredient three = new Ingredient("potatoes", false);
-        Ingredient four = new Ingredient("corn", false);
-        Ingredient five = new Ingredient("bacon", false);
+        Ingredient one = new Ingredient("Brown Sugar", false);
+        Ingredient two = new Ingredient("Dijon Mustard", false);
+        Ingredient three = new Ingredient("Honey", false);
+        Ingredient four = new Ingredient("Kosher Salt", false);
+        Ingredient five = new Ingredient("Black Pepper", false);
+        Ingredient six = new Ingredient("Red Pepper Flakes", false);
+        Ingredient seven = new Ingredient("Salmon Filets", false);
 
         // Add the ingredients to the default list
         defaultIngredients.add(one);
@@ -133,6 +135,8 @@ public class Ingredient {
         defaultIngredients.add(three);
         defaultIngredients.add(four);
         defaultIngredients.add(five);
+        defaultIngredients.add(six);
+        defaultIngredients.add(seven);
 
         // Return the default ingredients list
         return defaultIngredients;
@@ -151,6 +155,12 @@ public class Ingredient {
         name = nameIn;
         available = false;
         removable = isRemovable;
+    }
+
+    public Ingredient(Ingredient copy) {
+        name = copy.getName();
+        available = copy.isAvailable();
+        removable = isRemovable();
     }
 
     /**
@@ -177,7 +187,7 @@ public class Ingredient {
      * @return The name of the ingredient as a String.
      */
     public String getName() {
-        return name;
+        return new String(name);
     }
 
     /**
@@ -196,5 +206,19 @@ public class Ingredient {
      */
     public void setRemovable(boolean isRemovable){
         removable = isRemovable;
+    }
+
+    public boolean equals(Ingredient compare) {
+        if (this.getName().equals(compare.getName())) return true;
+        else return false;
+    }
+
+    public boolean equals(String compare) {
+        if (this.getName().equals(compare)) return true;
+        else return false;
+    }
+
+    public String toString() {
+        return new String(name);
     }
 }
