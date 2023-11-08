@@ -1,37 +1,42 @@
 package Backend;
 
 public class RecipeIngredient {
-    private String ingredient;
-    private String amount;
-    private String substitutions;
 
-    public RecipeIngredient(String ingredientName, String amountIn) {
-        ingredient = ingredientName;
-        amount = amountIn;
-        substitutions = null;
-    }
+  private String ingredient;
+  private String amount;
+  private String substitutions;
 
-    public RecipeIngredient(String ingredientName, String amountIn, String substitutionsIn) {
-        ingredient = ingredientName;
-        amount = amountIn;
-        substitutions = substitutionsIn;
-    }
+  public RecipeIngredient(String ingredientName, String amountIn) {
+    ingredient = ingredientName;
+    amount = amountIn;
+    substitutions = null;
+  }
 
-    public RecipeIngredient(RecipeIngredient copy) {
-        ingredient = copy.getIngredientName();
-        amount = copy.getAmount();
-        substitutions = copy.getSubstitutions();
-    }
+  public RecipeIngredient(
+    String ingredientName,
+    String amountIn,
+    String substitutionsIn
+  ) {
+    ingredient = ingredientName;
+    amount = amountIn;
+    substitutions = substitutionsIn;
+  }
 
-    public String getIngredientName() {
-        return new String(ingredient);
-    }
+  public RecipeIngredient(RecipeIngredient copy) {
+    ingredient = copy.getIngredientName();
+    amount = copy.getAmount();
+    substitutions = copy.getSubstitutions();
+  }
 
-    public String getAmount() {
-        return new String(amount);
-    }
+  public String getIngredientName() {
+    return new String(ingredient);
+  }
 
-    public String getSubstitutions() {
-        return new String(substitutions);
-    }
+  public String getAmount() {
+    return new String(amount);
+  }
+
+  public String getSubstitutions() {
+    return new String(substitutions);
+  }
 }
