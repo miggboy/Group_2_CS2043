@@ -110,6 +110,26 @@ public class Ingredient {
     }
 
     /**
+     * Writes the inputted list of Ingredients to the save file.
+     * 
+     * @param input the ArrayList to be saved.
+     * @throws IOException if there are issues with file I/O operations.
+     */
+    public static void writeCurrentList(ArrayList<Ingredient> input) throws IOException {
+        String exportPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+        File f = new File(exportPath);
+        if (!f.exists()) {
+            f.mkdir();
+        } else if (!f.isDirectory()) {
+            throw new IOException(System.getProperty("user.dir") + "\\.RecipeBrowser" + " is a file, where it should be a folder. Execution cannot continue.");
+        }
+
+        ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(exportPath + "\\Ingredients.bin"));
+        objOut.writeObject(input);
+        objOut.close();
+    }
+
+    /**
      * Generates and returns a default list of ingredients. This method does not make any changes to the filesystem.
      * The generated list includes several common ingredients with the removable flag set to false. 
      * Any new ingredients needed for new recipies added to the backend should be added here.
