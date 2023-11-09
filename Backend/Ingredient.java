@@ -263,16 +263,33 @@ public class Ingredient implements Serializable {
     removable = isRemovable;
   }
 
+  /**
+   * Checks another ingredient to see if they have the same name.
+   *
+   * @param compare the Ingredient to be compared.
+   * @return if they have the same name.
+   */
   public boolean equals(Ingredient compare) {
     if (
       this.getName().equals(compare.getName())
     ) return true; else return false;
   }
 
+  /**
+   * Checks a String to see if it matches the ingredient's name.
+   *
+   * @param compare the String to be compared.
+   * @return if they match.
+   */
   public boolean equals(String compare) {
     if (this.getName().equals(compare)) return true; else return false;
   }
 
+  /**
+   * Returns the ingredient's name.
+   *
+   * @return the name.
+   */
   public String toString() {
     return new String(name);
   }
