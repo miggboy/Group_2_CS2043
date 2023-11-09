@@ -62,6 +62,13 @@ public class Runtime {
    * @throws IOException if something breaks while writing the data.
    */
   private void saveRuntime() throws IOException {
+    File f = new File(System.getProperty("user.dir") + "\\.RecipeBrowser");
+    String[] entries = f.list();
+    for (String s : entries) {
+      File currentFile = new File(f.getPath(), s);
+      currentFile.delete();
+    }
+
     Ingredient.writeCurrentList(ingredientList);
     Recipe.writeCurrentList(recipeList);
   }
@@ -84,13 +91,6 @@ public class Runtime {
 
     if (success) {
       ingredientList.add(in);
-    }
-
-    File f = new File(System.getProperty("user.dir") + "\\.RecipeBrowser");
-    String[] entries = f.list();
-    for (String s : entries) {
-      File currentFile = new File(f.getPath(), s);
-      currentFile.delete();
     }
 
     saveRuntime();
