@@ -12,6 +12,10 @@ import java.util.ArrayList;
 /**
  * The `Recipe` class represents a recipe, including its name, instructions, preparation time, serving count, ingredients, and ratings.
  * This class is used to manage and retrieve information about recipes, such as their details and ingredient list.
+ *
+ * This class serves as a component of a recipe management system, allowing users to interact with and manipulate ingredient data.
+ * @author Max MacNeill
+ * @version 1.0.0
  */
 public class Recipe implements Serializable {
 
