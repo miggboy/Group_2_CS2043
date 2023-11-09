@@ -91,9 +91,8 @@ public class Runtime {
 
     if (success) {
       ingredientList.add(in);
+      saveRuntime();
     }
-
-    saveRuntime();
 
     return success;
   }
