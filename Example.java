@@ -14,8 +14,10 @@ public class Example {
       currentFile.delete();
     }
     f.delete();
+    //The above should not be included in the final frontend and is for debugging only.
 
     Runtime testing = new Runtime();
+    System.out.println("Testing Recipe Processing:\n");
     Recipe rec = testing.getRecipes(0);
     int ingredientCount = rec.getIngredientCount();
     System.out.println(rec.getName());
@@ -33,5 +35,11 @@ public class Example {
     }
     System.out.println("Instructions:\n");
     System.out.println(rec.getInstructions());
+    System.out.println();
+    System.out.println("Testing Ingredient Processing:\n");
+    Ingredient ing = testing.getIngredients(2);
+    System.out.println("Name: " + ing.getName());
+    System.out.println("Is Available: " + ing.isAvailable());
+    System.out.println("Is Removable: " + ing.isRemovable());
   }
 }
