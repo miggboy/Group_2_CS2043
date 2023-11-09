@@ -1,5 +1,7 @@
 package Backend;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -52,5 +54,47 @@ public class Runtime {
    */
   public Recipe getRecipes(int i) {
     return new Recipe(recipeList.get(i));
+  }
+
+  /**
+   * Saves the current runtime data to disc.
+   *
+   * @throws IOException if something breaks while writing the data.
+   */
+  private void saveRuntime() throws IOException {
+    Ingredient.writeCurrentList(ingredientList);
+    Recipe.writeCurrentList(recipeList);
+  }
+
+  /**
+   * Adds a new ingredient to the runtime.
+   *
+   * @param in The ingredient to be added
+   * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
+   * @throws IOException if the data fails to save to the drive.
+   */
+  public boolean addIngredient(Ingredient in) throws IOException {
+    boolean success = true;
+
+    for (int i = 0; i < ingredientList.size(); i++) {
+      if (ingredientList.get(i).equals(in)) {
+        success = false;
+      }
+    }
+
+    if (success) {
+      ingredientList.add(in);
+    }
+
+    File f = new File(System.getProperty("user.dir") + "\\.RecipeBrowser");
+    String[] entries = f.list();
+    for (String s : entries) {
+      File currentFile = new File(f.getPath(), s);
+      currentFile.delete();
+    }
+
+    saveRuntime();
+
+    return success;
   }
 }
