@@ -37,6 +37,22 @@ public class Runtime {
   }
 
   /**
+   * Get the number of recipes
+   * @return the number of recipes
+   */
+  public int ingredientCount() {
+    return ingredientList.size();
+  }
+
+  /**
+   * Get the number of ingredients
+   * @return the number of recipes
+   */
+  public int recipeCount() {
+    return recipeList.size();
+  }
+
+  /**
    * Retrieves an individual ingredient from the ingredient list by index.
    *
    * @param i The index of the ingredient to retrieve.
