@@ -103,10 +103,8 @@ public class Ingredient implements Serializable {
   /**
    * Utility method for creating and writing a default ingredients list to a file.
    * This method serves various purposes depending on the provided 'state' parameter:
-   * - If 'state' is 0, it creates the necessary directory structure for saving the list, then moves to state 3.
-   * - If 'state' is 1, it throws an IOException indicating that the intended location for the directory is already a file.
-   * - If 'state' is 2, it throws an IOException indicating that the intended location for the file is already a directory.
-   * - If 'state' is 3, it generates a default ingredients list, serializes it, and writes it to the designated file.
+   * - If 'state' is 0, it creates the necessary directory structure for saving the list, then moves to state 1.
+   * - If 'state' is 1, it generates a default ingredients list, serializes it, and writes it to the designated file.
    *
    * @param state An integer representing the desired action or initial state:
    *              - 0 for creating directories.
