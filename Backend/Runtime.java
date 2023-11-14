@@ -115,6 +115,16 @@ public class Runtime {
     return success;
   }
 
+  /**
+   * Adds a new recipe to the runtime.
+   *
+   * @param nameIn the name of the recipe.
+   * @param instructionsIn the instructions to prepare the recipe.
+   * @param prepTimeIn how long it takes to prepare the recipe, including ingredient prep and cooking.
+   * @param servingCountIn how many people can be served by one patch of this recipe.
+   * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
+   * @throws IOException if the data fails to save to the drive.
+   */
   public boolean addRecipe(
     String nameIn,
     String instructionsIn,
