@@ -37,6 +37,24 @@ public class Runtime {
   }
 
   /**
+   * Get the number of recipes
+   *
+   * @return the number of recipes
+   */
+  public int ingredientCount() {
+    return ingredientList.size();
+  }
+
+  /**
+   * Get the number of ingredients
+   *
+   * @return the number of recipes
+   */
+  public int recipeCount() {
+    return recipeList.size();
+  }
+
+  /**
    * Retrieves an individual ingredient from the ingredient list by index.
    *
    * @param i The index of the ingredient to retrieve.
@@ -80,7 +98,7 @@ public class Runtime {
    * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
    * @throws IOException if the data fails to save to the drive.
    */
-  public boolean addIngredient(Ingredient in) throws IOException {
+  public boolean addIngredient(String in) throws IOException {
     boolean success = true;
 
     for (int i = 0; i < ingredientList.size(); i++) {
@@ -90,7 +108,40 @@ public class Runtime {
     }
 
     if (success) {
-      ingredientList.add(in);
+      ingredientList.add(new Ingredient(in, true));
+      saveRuntime();
+    }
+
+    return success;
+  }
+
+  /**
+   * Adds a new recipe to the runtime.
+   *
+   * @param nameIn the name of the recipe.
+   * @param instructionsIn the instructions to prepare the recipe.
+   * @param prepTimeIn how long it takes to prepare the recipe, including ingredient prep and cooking.
+   * @param servingCountIn how many people can be served by one patch of this recipe.
+   * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
+   * @throws IOException if the data fails to save to the drive.
+   */
+  public boolean addRecipe(
+    String nameIn,
+    String instructionsIn,
+    String prepTimeIn,
+    int servingCountIn
+  ) throws IOException {
+    boolean success = true;
+    for (int i = 0; i < recipeList.size(); i++) {
+      if (recipeList.get(i).getName() == nameIn) {
+        success = false;
+      }
+    }
+
+    if (success) {
+      recipeList.add(
+        new Recipe(nameIn, instructionsIn, prepTimeIn, servingCountIn, false)
+      );
       saveRuntime();
     }
 
