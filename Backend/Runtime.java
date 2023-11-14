@@ -60,8 +60,18 @@ public class Runtime {
    * @param i The index of the ingredient to retrieve.
    * @return A copy of the `Ingredient` object at the specified index.
    */
-  public Ingredient getIngredients(int i) {
+  public Ingredient getIngredient(int i) {
     return new Ingredient(ingredientList.get(i));
+  }
+
+  /**
+   * Checks whether an ingredient is available by index.
+   *
+   * @param i The index of the ingredient to retrieve.
+   * @return a boolean representing whether the ingredient is available.
+   */
+  public boolean isAvailable(int i) {
+    return ingredientList.get(i).isAvailable();
   }
 
   /**
@@ -70,7 +80,7 @@ public class Runtime {
    * @param i The index of the recipe to retrieve.
    * @return A copy of the `Recipe` object at the specified index.
    */
-  public Recipe getRecipes(int i) {
+  public Recipe getRecipe(int i) {
     return new Recipe(recipeList.get(i));
   }
 
@@ -146,5 +156,73 @@ public class Runtime {
     }
 
     return success;
+  }
+
+  /**
+   * Sets an ingredient within the runtime as available, if it exist, then saves the runtime data to disk.
+   *
+   * @param name The name of the ingredient to be set as available.
+   * @throws IOException if writing to disk fails.
+   */
+  public void setAvailable(String name) throws IOException {
+    for (int i = 0; i < ingredientList.size(); i++) {
+      if (ingredientList.get(i).equals(name)) {
+        ingredientList.get(i).setAvailable(true);
+      }
+    }
+    this.saveRuntime();
+  }
+
+  /**
+   * Sets an ingredient within the runtime as unavailable, if it exist, then saves the runtime data to disk.
+   *
+   * @param name The name of the ingredient to be set as unavailable.
+   * @throws IOException if writing to disk fails.
+   */
+  public void setUnAvailable(String name) throws IOException {
+    for (int i = 0; i < ingredientList.size(); i++) {
+      if (ingredientList.get(i).equals(name)) {
+        ingredientList.get(i).setAvailable(false);
+      }
+    }
+    this.saveRuntime();
+  }
+
+  /**
+   * Returns an ArrayList of recipes with exactly the specified number of missing ingredients (Using the existing array of available ingredients.)
+   * Recipes with fewer missing ingredients will not be returned. For example, if 1 missing ingredient is requested, recipes with all ingredients available will not return.
+   *
+   * @param missing the number of ingredients missing to filter for.
+   * @return an ArrayList of Recipes
+   */
+  public ArrayList<Recipe> getRecipes(int missing) {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    for (int i = 0; i < recipeList.size(); i++) {
+      Recipe buffer = recipeList.get(i);
+      int count = buffer.getIngredientCount();
+      boolean match = true;
+      for (int j = 0; j < count; j++) {
+        String compare = buffer.getIngredient(j).getIngredientName();
+        boolean found = false;
+        for (int k = 0; k < ingredientList.size(); k++) {
+          Ingredient test = ingredientList.get(i);
+          System.out.println(
+            "Found " + compare + ", it is available: " + test.isAvailable()
+          );
+          if (test.equals(compare)) {
+            found = true;
+          }
+        }
+        if (!found) {
+          match = false;
+        }
+      }
+      if (match) {
+        ret.add(new Recipe(buffer));
+      }
+    }
+
+    return ret;
   }
 }
