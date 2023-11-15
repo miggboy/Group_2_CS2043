@@ -201,24 +201,24 @@ public class Runtime {
     for (int i = 0; i < recipeList.size(); i++) {
       Recipe buffer = recipeList.get(i);
       int count = buffer.getIngredientCount();
-      boolean match = true;
+      int match = 0;
       for (int j = 0; j < count; j++) {
         String compare = buffer.getIngredient(j).getIngredientName();
         boolean found = false;
         for (int k = 0; k < ingredientList.size(); k++) {
-          Ingredient test = ingredientList.get(i);
-          System.out.println(
-            "Found " + compare + ", it is available: " + test.isAvailable()
-          );
-          if (test.equals(compare)) {
+          Ingredient test = ingredientList.get(k);
+          if (test.equals(compare) && test.isAvailable()) {
             found = true;
+            System.out.println(
+              "Found " + compare + " Which is available: " + test.isAvailable()
+            );
           }
         }
         if (!found) {
-          match = false;
+          match += 1;
         }
       }
-      if (match) {
+      if (match == missing) {
         ret.add(new Recipe(buffer));
       }
     }
