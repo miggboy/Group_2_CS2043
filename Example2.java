@@ -13,12 +13,12 @@ public class Example2 {
         runtime.setAvailable(name);
       } catch (Exception e) {
         System.out.println("An error has occured in saving to disk.");
-        System.exit(i + 1);
+        System.exit(-1);
       }
     }
 
+    System.out.println("First test - all active, 0 missing");
     ArrayList<Recipe> canMake = runtime.getRecipes(0);
-    System.out.println(canMake.size());
     for (int i = 0; i < canMake.size(); i++) {
       Recipe rec = canMake.get(i);
       int ingredientCount = rec.getIngredientCount();
@@ -38,6 +38,76 @@ public class Example2 {
     }
 
     System.out.println();
+    System.out.println("Second test - all active, 1 missing");
+
+    canMake = runtime.getRecipes(1);
+    for (int i = 0; i < canMake.size(); i++) {
+      Recipe rec = canMake.get(i);
+      int ingredientCount = rec.getIngredientCount();
+      System.out.println(rec.getName());
+      System.out.println("Rating: " + rec.getAverageRating());
+      System.out.println("Prep Time: " + rec.getPrepTime());
+      System.out.println("Serves: " + rec.getServingCount());
+      System.out.println("Ingredients:");
+      for (int j = 0; j < ingredientCount; j++) {
+        System.out.println(
+          " -  " +
+          rec.getIngredient(j).getIngredientName() +
+          " - " +
+          rec.getIngredient(j).getAmount()
+        );
+      }
+    }
+
     System.out.println();
+    System.out.println("Third test - 1 inactive, 0 missing");
+
+    try {
+      runtime.setUnAvailable(runtime.getIngredient(1).getName());
+    } catch (Exception e) {
+      System.out.println("An error has occured in saving to disk.");
+      System.exit(-1);
+    }
+
+    canMake = runtime.getRecipes(0);
+    for (int i = 0; i < canMake.size(); i++) {
+      Recipe rec = canMake.get(i);
+      int ingredientCount = rec.getIngredientCount();
+      System.out.println(rec.getName());
+      System.out.println("Rating: " + rec.getAverageRating());
+      System.out.println("Prep Time: " + rec.getPrepTime());
+      System.out.println("Serves: " + rec.getServingCount());
+      System.out.println("Ingredients:");
+      for (int j = 0; j < ingredientCount; j++) {
+        System.out.println(
+          " -  " +
+          rec.getIngredient(j).getIngredientName() +
+          " - " +
+          rec.getIngredient(j).getAmount()
+        );
+      }
+    }
+
+    System.out.println();
+    System.out.println("Fourth test - 1 inactive, 1 missing");
+
+    canMake = runtime.getRecipes(1);
+    for (int i = 0; i < canMake.size(); i++) {
+      Recipe rec = canMake.get(i);
+      int ingredientCount = rec.getIngredientCount();
+      System.out.println(rec.getName());
+      System.out.println("Rating: " + rec.getAverageRating());
+      System.out.println("Prep Time: " + rec.getPrepTime());
+      System.out.println("Serves: " + rec.getServingCount());
+      System.out.println("Ingredients:");
+      for (int j = 0; j < ingredientCount; j++) {
+        System.out.println(
+          " -  " +
+          rec.getIngredient(j).getIngredientName() +
+          " - " +
+          rec.getIngredient(j).getAmount()
+        );
+      }
+    }
   }
 }
