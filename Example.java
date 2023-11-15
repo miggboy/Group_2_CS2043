@@ -18,7 +18,7 @@ public class Example {
 
     Runtime testing = new Runtime();
     System.out.println("Testing Recipe Processing:\n");
-    Recipe rec = testing.getRecipes(0);
+    Recipe rec = testing.getRecipe(0);
     int ingredientCount = rec.getIngredientCount();
     System.out.println(rec.getName());
     System.out.println("Rating: " + rec.getAverageRating());
@@ -37,7 +37,7 @@ public class Example {
     System.out.println(rec.getInstructions());
     System.out.println();
     System.out.println("Testing Ingredient Processing:\n");
-    Ingredient ing = testing.getIngredients(2);
+    Ingredient ing = testing.getIngredient(2);
     System.out.println("Name: " + ing.getName());
     System.out.println("Is Available: " + ing.isAvailable());
     System.out.println("Is Removable: " + ing.isRemovable());
