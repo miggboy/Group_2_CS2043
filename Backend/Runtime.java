@@ -132,8 +132,10 @@ public class Runtime {
    * @param instructionsIn the instructions to prepare the recipe.
    * @param prepTimeIn how long it takes to prepare the recipe, including ingredient prep and cooking.
    * @param servingCountIn how many people can be served by one patch of this recipe.
+   * @param ingredients takes 3 arrays of strings, of the same length, the first including ingredient names, the second containing the quantity of the ingredient at the same index, and the third including substitutions for the ingredient name at the same index.
    * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
    * @throws IOException if the data fails to save to the drive.
+   * @throws IllegalArgumentException if the ingredients arrays are not correctly configured.
    */
   public boolean addRecipe(
     String nameIn,
@@ -141,6 +143,21 @@ public class Runtime {
     String prepTimeIn,
     int servingCountIn
   ) throws IOException {
+    boolean arrayValid = true;
+    if (ingredients.length != 3) {
+      arrayValid = false;
+    }
+    if (
+      ingredients[0].length != ingredients[1].length ||
+      ingredients[1].length != ingredients[2].length
+    ) {
+      arrayValid = false;
+    }
+
+    if (!arrayValid) {
+      throw new IllegalArgumentException("The ingredients array is invalid.");
+    }
+
     boolean success = true;
     for (int i = 0; i < recipeList.size(); i++) {
       if (recipeList.get(i).getName() == nameIn) {
@@ -148,10 +165,24 @@ public class Runtime {
       }
     }
 
-    if (success) {
-      recipeList.add(
-        new Recipe(nameIn, instructionsIn, prepTimeIn, servingCountIn, false)
+    Recipe toSave = new Recipe(
+      nameIn,
+      instructionsIn,
+      prepTimeIn,
+      servingCountIn,
+      false
+    );
+
+    for (int i = 0; i < ingredients[0].length; i++) {
+      toSave.addIngredient(
+        ingredients[0][i],
+        ingredients[1][i],
+        ingredients[2][i]
       );
+    }
+
+    if (success) {
+      recipeList.add(toSave);
       saveRuntime();
     }
 
