@@ -141,7 +141,8 @@ public class Runtime {
     String nameIn,
     String instructionsIn,
     String prepTimeIn,
-    int servingCountIn
+    int servingCountIn,
+    String[][] ingredients
   ) throws IOException {
     boolean arrayValid = true;
     if (ingredients.length != 3) {
