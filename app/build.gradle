@@ -9,8 +9,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'maven'
-    id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
