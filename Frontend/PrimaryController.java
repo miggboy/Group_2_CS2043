@@ -59,4 +59,20 @@ public class PrimaryController implements Initializable{
 		});
 	}
 
+	
+	@FXML
+    void addIngredientAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addIngredient.fxml"));
+            Parent root1 = loader.load();
+         
+            Stage stage1 = new Stage();
+            Scene scene1 = new Scene(root1);
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (IOException e) {
+            System.out.println("Cannot load new window: " + e.getMessage());
+        }
+    }
+
 }
