@@ -269,4 +269,25 @@ public class Runtime {
 
     return ret;
   }
+  
+  /**
+   * 
+   * @param list
+   * @param desTime
+   * @return newList: The arrayList of recipes that can be prepped in the cooking time range specified
+   * 				  by the user.
+   * @author Jaspreet S.Bedi
+   */
+  public ArrayList<Recipe> comPrepTime(ArrayList<Recipe> list,String desTime) {
+	  ArrayList<Recipe> newList = new ArrayList<Recipe>();
+	  
+	  for(Recipe x: list) {
+		  if(Integer.parseInt(x.getPrepTime()) == Integer.parseInt(desTime)) {
+			  newList.add(x);
+		  }
+	  }
+	  
+	  return newList;
+	  
+  }
 }
