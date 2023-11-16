@@ -1,0 +1,18 @@
+.root {
+	-fx-background-color: #ffe4b5 ;
+}
+
+#startButton {
+	-fx-background-color: #ffb6c1; /* Pastel pink background */
+    -fx-background-radius: 20; /* Rounded corners */
+    -fx-font-family: "Verdana";
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+}
+
+#credits {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Adjust the text color to match your application */
+}
