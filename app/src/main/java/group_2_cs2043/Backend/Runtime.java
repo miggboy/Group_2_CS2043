@@ -1,4 +1,4 @@
-package Backend;
+package app.src.main.java.group_2_cs2043.Backend;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @version 1.0.0
  */
 public class Runtime {
-
   private ArrayList<Ingredient> ingredientList;
   private ArrayList<Recipe> recipeList;
 
@@ -143,7 +142,8 @@ public class Runtime {
     String prepTimeIn,
     int servingCountIn,
     String[][] ingredients
-  ) throws IOException {
+  )
+    throws IOException {
     boolean arrayValid = true;
     if (ingredients.length != 3) {
       arrayValid = false;

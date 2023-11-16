@@ -1,4 +1,4 @@
-package Backend;
+package app.src.main.java.group_2_cs2043.Backend;
 
 import java.io.Serializable;
 
@@ -10,7 +10,6 @@ import java.io.Serializable;
  * @version 1.0.0
  */
 public class RecipeIngredient implements Serializable {
-
   private String ingredient;
   private String amount;
   private String substitutions;
