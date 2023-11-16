@@ -1,25 +1,28 @@
-package Backend;
+package group_2_cs2043.Backend;
 
 import java.io.Serializable;
 
 /**
- * The `RecipeIngredient` class represents an ingredient within a recipe, including its name, amount, and potential substitutions.
- * Instances of this class are intended to be used as components in recipe representations.
+ * The `RecipeIngredient` class represents an ingredient within a recipe,
+ * including its name, amount, and potential substitutions.
+ * Instances of this class are intended to be used as components in recipe
+ * representations.
  *
  * @author Max MacNeill
  * @version 1.0.0
  */
 public class RecipeIngredient implements Serializable {
-
   private String ingredient;
   private String amount;
   private String substitutions;
 
   /**
-   * Constructs a new `RecipeIngredient` object with the specified ingredient name and amount.
+   * Constructs a new `RecipeIngredient` object with the specified ingredient name
+   * and amount.
    *
    * @param ingredientName The name of the ingredient.
-   * @param amountIn The quantity or amount of the ingredient to be used in the recipe.
+   * @param amountIn       The quantity or amount of the ingredient to be used in
+   *                       the recipe.
    */
   public RecipeIngredient(String ingredientName, String amountIn) {
     ingredient = ingredientName;
@@ -28,24 +31,26 @@ public class RecipeIngredient implements Serializable {
   }
 
   /**
-   * Constructs a new `RecipeIngredient` object with the specified ingredient name, amount, and substitutions.
+   * Constructs a new `RecipeIngredient` object with the specified ingredient
+   * name, amount, and substitutions.
    *
-   * @param ingredientName The name of the ingredient.
-   * @param amountIn The quantity or amount of the ingredient to be used in the recipe.
+   * @param ingredientName  The name of the ingredient.
+   * @param amountIn        The quantity or amount of the ingredient to be used in
+   *                        the recipe.
    * @param substitutionsIn Any potential substitutions for the ingredient.
    */
   public RecipeIngredient(
-    String ingredientName,
-    String amountIn,
-    String substitutionsIn
-  ) {
+      String ingredientName,
+      String amountIn,
+      String substitutionsIn) {
     ingredient = ingredientName;
     amount = amountIn;
     substitutions = substitutionsIn;
   }
 
   /**
-   * Constructs a new `RecipeIngredient` object by copying the properties of another `RecipeIngredient` object.
+   * Constructs a new `RecipeIngredient` object by copying the properties of
+   * another `RecipeIngredient` object.
    *
    * @param copy The `RecipeIngredient` object to be copied.
    */

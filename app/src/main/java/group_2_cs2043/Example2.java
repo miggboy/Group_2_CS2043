@@ -1,12 +1,14 @@
-import Backend.Recipe;
-import Backend.Runtime;
+package group_2_cs2043;
+
+import group_2_cs2043.Backend.Recipe;
+import group_2_cs2043.Backend.Runtime;
 import java.util.ArrayList;
 
 public class Example2 {
 
   public static void main(String[] args) {
     Runtime runtime = new Runtime();
-    //Starting out this example by setting all ingredients to available.
+    // Starting out this example by setting all ingredients to available.
     for (int i = 0; i < runtime.ingredientCount(); i++) {
       String name = runtime.getIngredient(i).getName();
       try {
@@ -29,11 +31,10 @@ public class Example2 {
       System.out.println("Ingredients:");
       for (int j = 0; j < ingredientCount; j++) {
         System.out.println(
-          " -  " +
-          rec.getIngredient(j).getIngredientName() +
-          " - " +
-          rec.getIngredient(j).getAmount()
-        );
+            " -  " +
+                rec.getIngredient(j).getIngredientName() +
+                " - " +
+                rec.getIngredient(j).getAmount());
       }
     }
 
@@ -51,11 +52,10 @@ public class Example2 {
       System.out.println("Ingredients:");
       for (int j = 0; j < ingredientCount; j++) {
         System.out.println(
-          " -  " +
-          rec.getIngredient(j).getIngredientName() +
-          " - " +
-          rec.getIngredient(j).getAmount()
-        );
+            " -  " +
+                rec.getIngredient(j).getIngredientName() +
+                " - " +
+                rec.getIngredient(j).getAmount());
       }
     }
 
@@ -80,11 +80,10 @@ public class Example2 {
       System.out.println("Ingredients:");
       for (int j = 0; j < ingredientCount; j++) {
         System.out.println(
-          " -  " +
-          rec.getIngredient(j).getIngredientName() +
-          " - " +
-          rec.getIngredient(j).getAmount()
-        );
+            " -  " +
+                rec.getIngredient(j).getIngredientName() +
+                " - " +
+                rec.getIngredient(j).getAmount());
       }
     }
 
@@ -102,11 +101,10 @@ public class Example2 {
       System.out.println("Ingredients:");
       for (int j = 0; j < ingredientCount; j++) {
         System.out.println(
-          " -  " +
-          rec.getIngredient(j).getIngredientName() +
-          " - " +
-          rec.getIngredient(j).getAmount()
-        );
+            " -  " +
+                rec.getIngredient(j).getIngredientName() +
+                " - " +
+                rec.getIngredient(j).getAmount());
       }
     }
   }
