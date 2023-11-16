@@ -3,7 +3,6 @@ package group_2_cs2043.Backend;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The `Runtime` class represents the runtime environment for the recipe
