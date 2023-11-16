@@ -32,3 +32,4 @@ build
 
 # Ignore my IDE's config dir.
 .vscode
+/bin/
