@@ -9,11 +9,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/*
+ * This class is a controller class for the title screen.
+ * 
+ * @author Miguel Daigle Gould
+ */
 public class TitleController {
 
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
+	/*
+	 * This method executes when a user clicks the "Start" button.
+	 * It serves to transition into the primary scene.
+	 */
 	
 	@FXML
     protected void onStartClick(ActionEvent event) throws IOException {
