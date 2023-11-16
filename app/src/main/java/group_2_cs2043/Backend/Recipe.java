@@ -1,4 +1,4 @@
-package Backend;
+package app.src.main.java.group_2_cs2043.Backend;
 
 import java.io.File;
 import java.io.FileInputStream;
