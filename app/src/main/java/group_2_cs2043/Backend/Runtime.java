@@ -1,13 +1,16 @@
-package app.src.main.java.group_2_cs2043.Backend;
+package group_2_cs2043.Backend;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * The `Runtime` class represents the runtime environment for the recipe management system.
- * It encapsulates the lists of ingredients and recipes, providing methods to retrieve individual ingredients and recipes.
- * The class handles the initialization of the backend by loading saved lists during its construction.
+ * The `Runtime` class represents the runtime environment for the recipe
+ * management system.
+ * It encapsulates the lists of ingredients and recipes, providing methods to
+ * retrieve individual ingredients and recipes.
+ * The class handles the initialization of the backend by loading saved lists
+ * during its construction.
  *
  * @author Max MacNeill
  * @version 1.0.0
@@ -17,8 +20,10 @@ public class Runtime {
   private ArrayList<Recipe> recipeList;
 
   /**
-   * Constructs a new `Runtime` object, initializing the backend by loading saved lists of ingredients and recipes.
-   * If an exception occurs during initialization, the details are printed, and a stack trace is provided.
+   * Constructs a new `Runtime` object, initializing the backend by loading saved
+   * lists of ingredients and recipes.
+   * If an exception occurs during initialization, the details are printed, and a
+   * stack trace is provided.
    */
   public Runtime() {
     try {
@@ -27,10 +32,9 @@ public class Runtime {
     } catch (Exception e) {
       System.out.println(e.getClass());
       System.out.println(
-        "The backend failed to initialize due to the following error: \n\n" +
-        e.getMessage() +
-        "\n\nA stack trace will follow."
-      );
+          "The backend failed to initialize due to the following error: \n\n" +
+              e.getMessage() +
+              "\n\nA stack trace will follow.");
       e.printStackTrace();
     }
   }
@@ -104,7 +108,8 @@ public class Runtime {
    * Adds a new ingredient to the runtime.
    *
    * @param in The ingredient to be added
-   * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
+   * @return true if the ingredient was sucessfully added, false if an ingredient
+   *         with the same name already existed.
    * @throws IOException if the data fails to save to the drive.
    */
   public boolean addIngredient(String in) throws IOException {
@@ -127,31 +132,36 @@ public class Runtime {
   /**
    * Adds a new recipe to the runtime.
    *
-   * @param nameIn the name of the recipe.
+   * @param nameIn         the name of the recipe.
    * @param instructionsIn the instructions to prepare the recipe.
-   * @param prepTimeIn how long it takes to prepare the recipe, including ingredient prep and cooking.
-   * @param servingCountIn how many people can be served by one patch of this recipe.
-   * @param ingredients takes 3 arrays of strings, of the same length, the first including ingredient names, the second containing the quantity of the ingredient at the same index, and the third including substitutions for the ingredient name at the same index.
-   * @return true if the ingredient was sucessfully added, false if an ingredient with the same name already existed.
-   * @throws IOException if the data fails to save to the drive.
-   * @throws IllegalArgumentException if the ingredients arrays are not correctly configured.
+   * @param prepTimeIn     how long it takes to prepare the recipe, including
+   *                       ingredient prep and cooking.
+   * @param servingCountIn how many people can be served by one patch of this
+   *                       recipe.
+   * @param ingredients    takes 3 arrays of strings, of the same length, the
+   *                       first including ingredient names, the second containing
+   *                       the quantity of the ingredient at the same index, and
+   *                       the third including substitutions for the ingredient
+   *                       name at the same index.
+   * @return true if the ingredient was sucessfully added, false if an ingredient
+   *         with the same name already existed.
+   * @throws IOException              if the data fails to save to the drive.
+   * @throws IllegalArgumentException if the ingredients arrays are not correctly
+   *                                  configured.
    */
   public boolean addRecipe(
-    String nameIn,
-    String instructionsIn,
-    String prepTimeIn,
-    int servingCountIn,
-    String[][] ingredients
-  )
-    throws IOException {
+      String nameIn,
+      String instructionsIn,
+      String prepTimeIn,
+      int servingCountIn,
+      String[][] ingredients)
+      throws IOException {
     boolean arrayValid = true;
     if (ingredients.length != 3) {
       arrayValid = false;
     }
-    if (
-      ingredients[0].length != ingredients[1].length ||
-      ingredients[1].length != ingredients[2].length
-    ) {
+    if (ingredients[0].length != ingredients[1].length ||
+        ingredients[1].length != ingredients[2].length) {
       arrayValid = false;
     }
 
@@ -167,19 +177,17 @@ public class Runtime {
     }
 
     Recipe toSave = new Recipe(
-      nameIn,
-      instructionsIn,
-      prepTimeIn,
-      servingCountIn,
-      false
-    );
+        nameIn,
+        instructionsIn,
+        prepTimeIn,
+        servingCountIn,
+        false);
 
     for (int i = 0; i < ingredients[0].length; i++) {
       toSave.addIngredient(
-        ingredients[0][i],
-        ingredients[1][i],
-        ingredients[2][i]
-      );
+          ingredients[0][i],
+          ingredients[1][i],
+          ingredients[2][i]);
     }
 
     if (success) {
@@ -191,7 +199,8 @@ public class Runtime {
   }
 
   /**
-   * Sets an ingredient within the runtime as available, if it exist, then saves the runtime data to disk.
+   * Sets an ingredient within the runtime as available, if it exist, then saves
+   * the runtime data to disk.
    *
    * @param name The name of the ingredient to be set as available.
    * @throws IOException if writing to disk fails.
@@ -206,7 +215,8 @@ public class Runtime {
   }
 
   /**
-   * Sets an ingredient within the runtime as unavailable, if it exist, then saves the runtime data to disk.
+   * Sets an ingredient within the runtime as unavailable, if it exist, then saves
+   * the runtime data to disk.
    *
    * @param name The name of the ingredient to be set as unavailable.
    * @throws IOException if writing to disk fails.
@@ -221,8 +231,11 @@ public class Runtime {
   }
 
   /**
-   * Returns an ArrayList of recipes with exactly the specified number of missing ingredients (Using the existing array of available ingredients.)
-   * Recipes with fewer missing ingredients will not be returned. For example, if 1 missing ingredient is requested, recipes with all ingredients available will not return.
+   * Returns an ArrayList of recipes with exactly the specified number of missing
+   * ingredients (Using the existing array of available ingredients.)
+   * Recipes with fewer missing ingredients will not be returned. For example, if
+   * 1 missing ingredient is requested, recipes with all ingredients available
+   * will not return.
    *
    * @param missing the number of ingredients missing to filter for.
    * @return an ArrayList of Recipes
@@ -242,8 +255,7 @@ public class Runtime {
           if (test.equals(compare) && test.isAvailable()) {
             found = true;
             System.out.println(
-              "Found " + compare + " Which is available: " + test.isAvailable()
-            );
+                "Found " + compare + " Which is available: " + test.isAvailable());
           }
         }
         if (!found) {
