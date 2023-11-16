@@ -1,4 +1,4 @@
-import Backend.Ingredient;
+import group_2_cs2043.Backend.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +7,7 @@ public class AddIngredientController{
 
     @FXML
     private Button enterNewIngredient;
-    
+
     @FXML
     private TextField newIngredientToAdd;
 
@@ -18,7 +18,7 @@ public class AddIngredientController{
     @FXML
     void enterNewIngredientToAdd(ActionEvent event) {
         String newIngredientName = newIngredientToAdd.getText();
-        
+
     }
-    
+
 }
