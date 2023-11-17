@@ -1,6 +1,6 @@
 package group_2_cs2043.Frontend;
 
-import group_2_cs2043.Backend.Ingredient;
+import group_2_cs2043.Backend.Ingredient; //TODO: This is unused?
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +20,6 @@ public class AddIngredientController {
    */
   @FXML
   void enterNewIngredientToAdd(ActionEvent event) {
-    String newIngredientName = newIngredientToAdd.getText();
+    String newIngredientName = newIngredientToAdd.getText(); //TODO: This is unused?
   }
 }
