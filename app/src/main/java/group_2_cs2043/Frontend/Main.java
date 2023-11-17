@@ -1,13 +1,12 @@
 package group_2_cs2043.Frontend;
 
 import java.net.URL;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 /*
  * The Main.java class serves as the primary launcher for the application.
@@ -16,34 +15,36 @@ import javafx.scene.image.Image;
  * @author Miguel Daigle Gould
  */
 public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
 
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("CSS/application.css").toExternalForm());
-			primaryStage.setScene(scene);
+  @Override
+  public void start(Stage primaryStage) {
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
 
-			primaryStage.setResizable(false);
-	        //primaryStage.initStyle(StageStyle.UNDECORATED);
-			URL url = getClass().getResource("IMG/icon.png");
-	        String str = url.toString();
-	        Image icon = new Image(str);
-	        primaryStage.getIcons().add(icon);
+      Scene scene = new Scene(root);
+      scene
+        .getStylesheets()
+        .add(getClass().getResource("CSS/application.css").toExternalForm());
+      primaryStage.setScene(scene);
 
-			primaryStage.show();
+      primaryStage.setResizable(false);
+      //primaryStage.initStyle(StageStyle.UNDECORATED);
+      URL url = getClass().getResource("IMG/icon.png");
+      String str = url.toString();
+      Image icon = new Image(str);
+      primaryStage.getIcons().add(icon);
 
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+      primaryStage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-	/*
-	 * Launches the application.
-	 */
+  /*
+   * Launches the application.
+   */
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 }
