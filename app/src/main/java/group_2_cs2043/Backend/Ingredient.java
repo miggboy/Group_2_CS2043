@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * This class serves as a component of a recipe management system, allowing
  * users to interact with and manipulate ingredient data.
- * 
+ *
  * @author Max MacNeill
  * @version 1.0.0
  */
@@ -47,7 +47,7 @@ public class Ingredient implements Serializable {
    *                     configuration cannot be read or created.
    */
   public static ArrayList<Ingredient> loadSavedList()
-      throws IOException, IllegalArgumentException {
+    throws IOException, IllegalArgumentException {
     // Directory path for saving the list
     String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
     File f = new File(importPath);
@@ -56,9 +56,10 @@ public class Ingredient implements Serializable {
       Ingredient.writeDefaultList(0);
     } else if (!f.isDirectory()) {
       throw new IOException(
-          System.getProperty("user.dir") +
-              "\\.RecipeBrowser" +
-              " is a file, where it should be a folder. Execution cannot continue.");
+        System.getProperty("user.dir") +
+        "\\.RecipeBrowser" +
+        " is a file, where it should be a folder. Execution cannot continue."
+      );
     }
 
     // Append the filename to the path
@@ -70,18 +71,21 @@ public class Ingredient implements Serializable {
       Ingredient.writeDefaultList(1);
     } else if (f.isDirectory()) {
       throw new IOException(
-          System.getProperty("user.dir") +
-              "\\.RecipeBrowser\\Ingredients.bin" +
-              " is a folder, where it should be a file. Execution cannot continue.");
+        System.getProperty("user.dir") +
+        "\\.RecipeBrowser\\Ingredients.bin" +
+        " is a folder, where it should be a file. Execution cannot continue."
+      );
     }
 
     // Load the file and return the list of ingredients
     ArrayList<Ingredient> ingredientsList = new ArrayList<Ingredient>(); // avoid compiler warnings about uninitialized
-                                                                         // value within Try block which cannot actually
-                                                                         // be uninitialized
+    // value within Try block which cannot actually
+    // be uninitialized
     try (
-        ObjectInputStream objIn = new ObjectInputStream(
-            new FileInputStream(importPath))) {
+      ObjectInputStream objIn = new ObjectInputStream(
+        new FileInputStream(importPath)
+      )
+    ) {
       Object obj = objIn.readObject();
       if (obj instanceof ArrayList<?>) {
         /*
@@ -94,14 +98,17 @@ public class Ingredient implements Serializable {
         ingredientsList = ingredientsListTemp;
       } else {
         throw new ClassCastException(
-            "Ingredients.bin is not an ArrayList of Ingredients");
+          "Ingredients.bin is not an ArrayList of Ingredients"
+        );
       }
     } catch (Exception e) {
       // Handle exceptions and exit on failure
       System.out.println(
-          "Exception thrown reading serialized object: " + e.getMessage());
+        "Exception thrown reading serialized object: " + e.getMessage()
+      );
       System.out.println(
-          "Execution cannot continue without a valid default ingredients list. Exiting.");
+        "Execution cannot continue without a valid default ingredients list. Exiting."
+      );
       System.exit(-1);
     }
 
@@ -126,7 +133,7 @@ public class Ingredient implements Serializable {
    * @throws IllegalArgumentException if an unsupported 'state' value is provided.
    */
   public static void writeDefaultList(int state)
-      throws IOException, IllegalArgumentException {
+    throws IOException, IllegalArgumentException {
     if (state == 0) {
       new File(System.getProperty("user.dir") + "\\.RecipeBrowser").mkdir();
       state = 1;
@@ -134,14 +141,16 @@ public class Ingredient implements Serializable {
     if (state == 1) {
       ArrayList<Ingredient> list = makeDefaultList();
       ObjectOutputStream objOut = new ObjectOutputStream(
-          new FileOutputStream(
-              System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin"));
+        new FileOutputStream(
+          System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin"
+        )
+      );
       objOut.writeObject(list);
       objOut.close();
     }
-    if (state != 1)
-      throw new IllegalArgumentException(
-          "A state was requested which this function does not implement.");
+    if (state != 1) throw new IllegalArgumentException(
+      "A state was requested which this function does not implement."
+    );
   }
 
   /**
@@ -151,20 +160,22 @@ public class Ingredient implements Serializable {
    * @throws IOException if there are issues with file I/O operations.
    */
   public static void writeCurrentList(ArrayList<Ingredient> input)
-      throws IOException {
+    throws IOException {
     String exportPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
     File f = new File(exportPath);
     if (!f.exists()) {
       f.mkdir();
     } else if (!f.isDirectory()) {
       throw new IOException(
-          System.getProperty("user.dir") +
-              "\\.RecipeBrowser" +
-              " is a file, where it should be a folder. Execution cannot continue.");
+        System.getProperty("user.dir") +
+        "\\.RecipeBrowser" +
+        " is a file, where it should be a folder. Execution cannot continue."
+      );
     }
 
     ObjectOutputStream objOut = new ObjectOutputStream(
-        new FileOutputStream(exportPath + "\\Ingredients.bin"));
+      new FileOutputStream(exportPath + "\\Ingredients.bin")
+    );
     objOut.writeObject(input);
     objOut.close();
   }
@@ -284,10 +295,9 @@ public class Ingredient implements Serializable {
    * @return if they have the same name.
    */
   public boolean equals(Ingredient compare) {
-    if (this.getName().equals(compare.getName()))
-      return true;
-    else
-      return false;
+    if (
+      this.getName().equals(compare.getName())
+    ) return true; else return false;
   }
 
   /**
@@ -297,10 +307,7 @@ public class Ingredient implements Serializable {
    * @return if they match.
    */
   public boolean equals(String compare) {
-    if (this.getName().equals(compare))
-      return true;
-    else
-      return false;
+    if (this.getName().equals(compare)) return true; else return false;
   }
 
   /**

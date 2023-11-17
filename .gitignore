@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!gradle-wrapper.jar
 *.war
 *.nar
 *.ear
@@ -32,3 +33,10 @@ build
 
 # Ignore my IDE's config dir.
 .vscode
+
+/bin/
+.project
+.classpath
+.settings
+
+.idea

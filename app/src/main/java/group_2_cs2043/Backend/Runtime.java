@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * @version 1.0.0
  */
 public class Runtime {
+
   private ArrayList<Ingredient> ingredientList;
   private ArrayList<Recipe> recipeList;
 
@@ -32,9 +33,10 @@ public class Runtime {
     } catch (Exception e) {
       System.out.println(e.getClass());
       System.out.println(
-          "The backend failed to initialize due to the following error: \n\n" +
-              e.getMessage() +
-              "\n\nA stack trace will follow.");
+        "The backend failed to initialize due to the following error: \n\n" +
+        e.getMessage() +
+        "\n\nA stack trace will follow."
+      );
       e.printStackTrace();
     }
   }
@@ -150,18 +152,20 @@ public class Runtime {
    *                                  configured.
    */
   public boolean addRecipe(
-      String nameIn,
-      String instructionsIn,
-      String prepTimeIn,
-      int servingCountIn,
-      String[][] ingredients)
-      throws IOException {
+    String nameIn,
+    String instructionsIn,
+    String prepTimeIn,
+    int servingCountIn,
+    String[][] ingredients
+  ) throws IOException {
     boolean arrayValid = true;
     if (ingredients.length != 3) {
       arrayValid = false;
     }
-    if (ingredients[0].length != ingredients[1].length ||
-        ingredients[1].length != ingredients[2].length) {
+    if (
+      ingredients[0].length != ingredients[1].length ||
+      ingredients[1].length != ingredients[2].length
+    ) {
       arrayValid = false;
     }
 
@@ -171,23 +175,25 @@ public class Runtime {
 
     boolean success = true;
     for (int i = 0; i < recipeList.size(); i++) {
-      if (recipeList.get(i).getName() == nameIn) {
+      if (recipeList.get(i).getName().equals(nameIn)) {
         success = false;
       }
     }
 
     Recipe toSave = new Recipe(
-        nameIn,
-        instructionsIn,
-        prepTimeIn,
-        servingCountIn,
-        false);
+      nameIn,
+      instructionsIn,
+      prepTimeIn,
+      servingCountIn,
+      false
+    );
 
     for (int i = 0; i < ingredients[0].length; i++) {
       toSave.addIngredient(
-          ingredients[0][i],
-          ingredients[1][i],
-          ingredients[2][i]);
+        ingredients[0][i],
+        ingredients[1][i],
+        ingredients[2][i]
+      );
     }
 
     if (success) {
@@ -255,7 +261,8 @@ public class Runtime {
           if (test.equals(compare) && test.isAvailable()) {
             found = true;
             System.out.println(
-                "Found " + compare + " Which is available: " + test.isAvailable());
+              "Found " + compare + " Which is available: " + test.isAvailable()
+            );
           }
         }
         if (!found) {
@@ -268,5 +275,25 @@ public class Runtime {
     }
 
     return ret;
+  }
+
+  /**
+   *
+   * @param list
+   * @param desTime
+   * @return newList: The arrayList of recipes that can be prepped in the cooking time range specified
+   * 				  by the user.
+   * @author Jaspreet S.Bedi
+   */
+  public ArrayList<Recipe> comPrepTime(ArrayList<Recipe> list, String desTime) {
+    ArrayList<Recipe> newList = new ArrayList<Recipe>();
+
+    for (Recipe x : list) {
+      if (Integer.parseInt(x.getPrepTime()) == Integer.parseInt(desTime)) {
+        newList.add(x);
+      }
+    }
+
+    return newList;
   }
 }
