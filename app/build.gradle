@@ -9,28 +9,12 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 javafx {
-    // Points to JDK and its JavaFX libraries, also declares target runtime JDK
-//    javaRuntime = '/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk'
-
     version = '17' // Specify javafx sdk version
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.media', 'javafx.graphics']
-    sdk = System.getenv('JAVAFX_HOME')
-    if (sdk == null || sdk.isBlank()) {
-        throw new InvalidUserDataException("JAVAFX_HOME environment variable is not set. It must be set to root folder where JAVAFX SDK is located")
-    }
-    application {
-        def javafxHome = System.getenv('JAVAFX_HOME')
-        mainClassName = 'com.foo.FooApp'
-        applicationName = 'foo-app'
-        applicationDefaultJvmArgs = [
-            "--module-path=${javafxHome}" + File.separator + 'lib',
-            '--add-modules=javafx.controls,javafx.swing,javafx.media,javafx.graphics']
-        println("applicationDefaultJvmArgs:" + applicationDefaultJvmArgs)
-    }
+    modules = ['javafx.fxml']
 }
 
 repositories {
@@ -41,14 +25,11 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'group_2_cs2043.App'
+    mainClass = 'group_2_cs2043.Frontend.Main'
 }
 
 tasks.named('test') {
