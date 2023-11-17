@@ -1,3 +1,5 @@
+package group_2_cs2043.Frontend;
+
 import group_2_cs2043.Backend.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -175,7 +175,7 @@ public class Runtime {
 
     boolean success = true;
     for (int i = 0; i < recipeList.size(); i++) {
-      if (recipeList.get(i).getName() == nameIn) {
+      if (recipeList.get(i).getName().equals(nameIn)) {
         success = false;
       }
     }
