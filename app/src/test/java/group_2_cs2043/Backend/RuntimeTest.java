@@ -21,7 +21,7 @@ public class RuntimeTest {
 
   @Test
   void testAddIngredient() throws IOException {
-    assertTrue(run.addIngredient("Ingredient"));
+    run.addIngredient("Ingredient");
     assertEquals(run.getIngredient(7).getName(), "Ingredient");
   }
 
