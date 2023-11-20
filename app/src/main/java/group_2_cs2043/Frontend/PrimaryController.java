@@ -73,7 +73,7 @@ public class PrimaryController implements Initializable {
   void addIngredientAction(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("addIngredient.fxml")
+        getClass().getResource("/addIngredient.fxml")
       );
       Parent root1 = loader.load();
 
