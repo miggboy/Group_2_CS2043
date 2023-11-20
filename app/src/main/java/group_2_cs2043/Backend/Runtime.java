@@ -17,6 +17,28 @@ import java.util.ArrayList;
  */
 public class Runtime {
 
+  private static void deleteDirectory(File f) {
+    File[] allContents = f.listFiles();
+    if (allContents != null) {
+      for (File file : allContents) {
+        deleteDirectory(file);
+      }
+    }
+    f.delete();
+  }
+
+  public static void clearSavedData() {
+    String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+    File f = new File(importPath);
+    File[] allContents = f.listFiles();
+    if (allContents != null) {
+      for (File file : allContents) {
+        deleteDirectory(file);
+      }
+    }
+    f.delete();
+  }
+
   private ArrayList<Ingredient> ingredientList;
   private ArrayList<Recipe> recipeList;
 
