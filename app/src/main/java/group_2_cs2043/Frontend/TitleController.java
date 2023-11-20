@@ -27,7 +27,7 @@ public class TitleController {
 
   @FXML
   protected void onStartClick(ActionEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+    root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
     stage.setScene(scene);

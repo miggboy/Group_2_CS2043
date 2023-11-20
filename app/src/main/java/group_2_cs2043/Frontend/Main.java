@@ -1,6 +1,5 @@
 package group_2_cs2043.Frontend;
 
-import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,18 +18,16 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("/titleScreen.fxml"));
 
       Scene scene = new Scene(root);
       scene
         .getStylesheets()
-        .add(getClass().getResource("CSS/application.css").toExternalForm());
+        .add(getClass().getResource("/CSS/application.css").toExternalForm());
       primaryStage.setScene(scene);
 
       primaryStage.setResizable(false);
-      //primaryStage.initStyle(StageStyle.UNDECORATED);
-      URL url = getClass().getResource("IMG/icon.png");
-      String str = url.toString();
+      String str = getClass().getResource("/IMG/icon.png").toString();
       Image icon = new Image(str);
       primaryStage.getIcons().add(icon);
 
