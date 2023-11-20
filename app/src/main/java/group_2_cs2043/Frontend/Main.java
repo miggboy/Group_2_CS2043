@@ -27,7 +27,6 @@ public class Main extends Application {
       primaryStage.setScene(scene);
 
       primaryStage.setResizable(false);
-      //primaryStage.initStyle(StageStyle.UNDECORATED);
       String str = getClass().getResource("/IMG/icon.png").toString();
       Image icon = new Image(str);
       primaryStage.getIcons().add(icon);
