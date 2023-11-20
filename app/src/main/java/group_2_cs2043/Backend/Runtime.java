@@ -17,6 +17,11 @@ import java.util.ArrayList;
  */
 public class Runtime {
 
+  /**
+   * Deletes a directory recursively (Helper method)
+   *
+   * @param f The directory to delete
+   */
   private static void deleteDirectory(File f) {
     File[] allContents = f.listFiles();
     if (allContents != null) {
@@ -27,16 +32,13 @@ public class Runtime {
     f.delete();
   }
 
+  /**
+   * Deletes all saved data.
+   */
   public static void clearSavedData() {
     String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
     File f = new File(importPath);
-    File[] allContents = f.listFiles();
-    if (allContents != null) {
-      for (File file : allContents) {
-        deleteDirectory(file);
-      }
-    }
-    f.delete();
+    deleteDirectory(f);
   }
 
   private ArrayList<Ingredient> ingredientList;
