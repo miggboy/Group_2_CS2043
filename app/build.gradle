@@ -12,6 +12,11 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
+compileOptions {
+    sourceCompatibility 17
+    targetCompatibility 17
+}
+
 javafx {
     version = '17' // Specify javafx sdk version
     modules = ['javafx.fxml', 'javafx.controls', 'javafx.base', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
