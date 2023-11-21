@@ -37,7 +37,9 @@ public class PrimaryController implements Initializable {
   private Ingredient currentIngredient;
 
   /*
-   * Method runs upon instantiation. Loads ObservableList with ingredient data
+   * Method runs upon instantiation. Loads ObservableList with ingredient data, then in turn manipulates two ListView's
+   * ingredientsListView: 	provides view of available ingredients (both default and user-added)
+   * selectedListView:		provides view of selected ingredients (to be passed into next scene to return matching Recipes)
    */
 
   @Override
