@@ -1,6 +1,5 @@
 package group_2_cs2043.Frontend;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -29,20 +28,23 @@ public class RecipeViewController implements Initializable {
 	private TableColumn<Recipe, ArrayList<Integer>> ratingColumn;
 	
 	private ObservableList<Recipe> recipeList;
-	private ArrayList<Recipe> recipeArray;
 	private Runtime runtime = new Runtime();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			recipeArray = Recipe.loadSavedList();
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		ArrayList<Recipe> tempArray = new ArrayList<Recipe>();
+		
+		int TEMP = 5; 			//This is a placeholder int representing missing ingredient tolerance
+		
+		recipeList = FXCollections.observableArrayList();	//Instantiate recipeList with all Recipe data
+		
+		//This loop appends all recipes up to a maximum missing number (TEMP for now). Least missing ones go first, then increment.
+		
+		for(int i = 0; i < TEMP; i++) {
+			tempArray = runtime.getRecipes(i);
+			recipeList.addAll(tempArray);
 		}
-		
-		recipeArray = runtime.getRecipes(1);
-		
-		recipeList = FXCollections.observableArrayList(recipeArray);	//Instantiate recipeList with all Recipe data
 		
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));;
 		prepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));

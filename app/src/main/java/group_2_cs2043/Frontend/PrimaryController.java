@@ -149,7 +149,7 @@ public class PrimaryController implements Initializable {
    * This method opens a prompt for removing a selected Ingredient.
    * @throws IOException 
    */
-  /*
+  
   @FXML
   public void onRemoveIngredientClick() throws IOException {
 	  currentIngredient = ingredientsListView.getSelectionModel().getSelectedItem();
@@ -178,7 +178,7 @@ public class PrimaryController implements Initializable {
 	      
 	  }
   }
-  */
+  
   /**
    * This method opens the Recipe screen.
    */
