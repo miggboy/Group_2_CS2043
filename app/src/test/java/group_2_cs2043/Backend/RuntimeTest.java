@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,7 +33,7 @@ public class RuntimeTest {
     arguments[0][0] = "Ingredient";
     arguments[1][0] = "Quantity";
     arguments[2][0] = "Substitution";
-    run.addRecipe("Name", "Instructions", 1, 0, arguments);
+    run.addRecipe("Name", "Instructions", Duration.ofMinutes(3), 0, arguments);
     run.setAvailable("Ingredient");
     Recipe rec = run.getRecipes(0).get(0);
     assertEquals(rec.getName(), "Name");
@@ -48,11 +49,11 @@ public class RuntimeTest {
     arguments[0][0] = "Ingredient";
     arguments[1][0] = "Quantity";
     arguments[2][0] = "Substitution";
-    run.addRecipe("Name", "Instructions", 3, 0, arguments);
+    run.addRecipe("Name", "Instructions", Duration.ofMinutes(1), 0, arguments);
     run.setAvailable("Ingredient");
     ArrayList<Recipe> list = run.getRecipes(0);
-    ArrayList<Recipe> listTwo = run.comPrepTime(list, "3 Minutes");
-    ArrayList<Recipe> listThree = run.comPrepTime(list, "3 Hours");
+    ArrayList<Recipe> listTwo = run.comPrepTime(list, Duration.ofMinutes(1));
+    ArrayList<Recipe> listThree = run.comPrepTime(list, Duration.ofHours(1));
     assertEquals(listTwo.size(), 1);
     assertEquals(listThree.size(), 0);
   }
@@ -97,10 +98,14 @@ public class RuntimeTest {
     assertFalse(run.isAvailable(2));
     run.setAvailable("Honey");
     assertTrue(run.isAvailable(2));
+    run.setUnAvailable("Honey");
   }
 
   @Test
   void testSetUnAvailable() throws IOException {
+    assertFalse(run.isAvailable(2));
+    run.setAvailable("Honey");
+    assertTrue(run.isAvailable(2));
     run.setUnAvailable("Honey");
     assertFalse(run.isAvailable(2));
   }

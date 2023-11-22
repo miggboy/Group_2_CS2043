@@ -2,6 +2,7 @@ package group_2_cs2043.Backend;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 
 /**
@@ -160,7 +161,7 @@ public class Runtime {
    *
    * @param nameIn         the name of the recipe.
    * @param instructionsIn the instructions to prepare the recipe.
-   * @param prepTimeIn     how long it takes to prepare the recipe in minutes,
+   * @param prepTimeIn     how long it takes to prepare the recipe,
    *                       including ingredient prep and cooking.
    * @param servingCountIn how many people can be served by one patch of this
    *                       recipe.
@@ -178,7 +179,7 @@ public class Runtime {
   public boolean addRecipe(
     String nameIn,
     String instructionsIn,
-    int prepTimeIn,
+    Duration prepTimeIn,
     int servingCountIn,
     String[][] ingredients
   ) throws IOException {
@@ -309,11 +310,14 @@ public class Runtime {
    * 				  by the user.
    * @author Jaspreet S.Bedi
    */
-  public ArrayList<Recipe> comPrepTime(ArrayList<Recipe> list, String desTime) {
+  public ArrayList<Recipe> comPrepTime(
+    ArrayList<Recipe> list,
+    Duration desTime
+  ) {
     ArrayList<Recipe> newList = new ArrayList<Recipe>();
 
     for (Recipe x : list) {
-      if (Integer.parseInt(x.getPrepTime()) == Integer.parseInt(desTime)) {
+      if (x.getPrepTime().equals(desTime)) {
         newList.add(x);
       }
     }

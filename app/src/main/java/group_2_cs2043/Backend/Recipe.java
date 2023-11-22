@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 
 /**
@@ -184,7 +185,7 @@ public class Recipe implements Serializable {
       "Use a spatula to transfer the salmon onto plates and serve warm. \n" +
       "\n" +
       "Store leftovers in the fridge for up to 4 days. To reheat, place it on a foil-lined sheet pan and bake it slowly at 300\u00B0F until warmed through. This low and slow method will prevent the salmon from drying out too much.",
-      25,
+      Duration.ofMinutes(25),
       4,
       true
     );
@@ -235,7 +236,7 @@ public class Recipe implements Serializable {
 
   private String name;
   private String instructions;
-  private int prepTime;
+  private Duration prepTime;
   private ArrayList<RecipeIngredient> ingredients;
   private int servingCount;
   private ArrayList<Integer> ratings;
@@ -255,7 +256,7 @@ public class Recipe implements Serializable {
   public Recipe(
     String nameIn,
     String instructionsIn,
-    int prepTimeIn,
+    Duration prepTimeIn,
     int servingCountIn,
     boolean isDefault
   ) {
@@ -277,7 +278,7 @@ public class Recipe implements Serializable {
   public Recipe(Recipe in) {
     name = in.getName();
     instructions = in.getInstructions();
-    prepTime = in.getPrepTimeInt();
+    prepTime = in.getPrepTime();
     ingredients = in.getIngredients();
     servingCount = in.getServingCount();
     ratings = in.getRatingArray();
@@ -311,12 +312,8 @@ public class Recipe implements Serializable {
    *
    * @return The preparation time for the recipe as a String.
    */
-  public String getPrepTime() {
-    return prepTime + " Minutes";
-  }
-  
-  public int getPrepTimeInt() {
-	  return prepTime;
+  public Duration getPrepTime() {
+    return prepTime;
   }
 
   /**
