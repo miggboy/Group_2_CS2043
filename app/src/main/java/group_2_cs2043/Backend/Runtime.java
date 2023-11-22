@@ -268,6 +268,36 @@ public class Runtime {
   }
 
   /**
+   * Sets a recipe as a favorite by name.
+   * @param name The name of the Recipe (case sensitive)
+   * @param in if it should be a favorite or not.
+   */
+  public void setFavorite(String name, boolean in) {
+    for (int i = 0; i < recipeList.size(); i++) {
+      if (recipeList.get(i).getName().equals(name)) {
+        recipeList.get(i).setFavorite(in);
+      }
+    }
+  }
+
+  /**
+   * Returns all recipes with favorite=true
+   *
+   * @return the recipes
+   */
+  public ArrayList<Recipe> getFavoriteRecipes() {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    for (int i = 0; i < recipeList.size(); i++) {
+      if (recipeList.get(i).isFavorite()) {
+        ret.add(recipeList.get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  /**
    * Returns an ArrayList of recipes with exactly the specified number of missing
    * ingredients (Using the existing array of available ingredients.)
    * Recipes with fewer missing ingredients will not be returned. For example, if
