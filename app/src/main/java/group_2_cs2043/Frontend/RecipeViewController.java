@@ -63,7 +63,8 @@ public class RecipeViewController implements Initializable {
 		
 		recipeTable.setItems(recipeList);
 	}
-	/*
+	
+	/**
 	 * Go back to the previous screen
 	 */
     @FXML
@@ -73,6 +74,5 @@ public class RecipeViewController implements Initializable {
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
-	    
     }
 }

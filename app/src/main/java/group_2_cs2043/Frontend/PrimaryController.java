@@ -55,10 +55,7 @@ public class PrimaryController implements Initializable {
   @Override
   public void initialize(URL arg0, ResourceBundle arg1){
 	  
-	//Load in existing ingredients
-    try {
-        ingredientArray = Ingredient.loadSavedList();
-    } catch (IOException e) {}
+	ingredientArray = getSavedIngredientsArray();
     
     //Load all available ingredients, derived from existing ingredients
     for(int i = 0; i < ingredientArray.size(); i++) {
@@ -118,6 +115,16 @@ public class PrimaryController implements Initializable {
 	 ingredientList.addAll(ingredientArray);
   }
   
+  /**
+   * Helper method for getting saved Ingredients list from drive 
+   */
+  public ArrayList<Ingredient> getSavedIngredientsArray() {
+	  ArrayList<Ingredient> arr = new ArrayList<Ingredient>();
+	  for(int i = 0; i < runtime.ingredientCount(); i++) {
+		  arr.add(runtime.getIngredient(i));
+	  }
+	  return arr;
+  }
   
   /**
   * This method opens a pop-up window to add a new Ingredient.
@@ -138,45 +145,20 @@ public class PrimaryController implements Initializable {
       stage.initModality(Modality.APPLICATION_MODAL);
       stage.showAndWait();									//Program will wait until pop-up is closed.
       
-      
       //Clearing list and refilling is necessary to refresh ListView
       ingredientList.clear();
-      ArrayList<Ingredient> reList = Ingredient.loadSavedList();
-      ingredientList.addAll(reList);
+      ingredientList.addAll(getSavedIngredientsArray());
   }
   
   /**
-   * This method opens a prompt for removing a selected Ingredient.
-   * @throws IOException 
+   * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
    */
-  
   @FXML
-  public void onRemoveIngredientClick() throws IOException {
-	  currentIngredient = ingredientsListView.getSelectionModel().getSelectedItem();
-	  
-	  if(currentIngredient != null) {
-		  
-		  
-		  ingredientList.clear();
-	      ArrayList<Ingredient> reList = Ingredient.loadSavedList();
-	    
-	      //.remove() method always returns false.
-	      //Might be an issue with .equals not Overriding
-	      //Manual iteration here for now
-	      for(int i = 0; i < reList.size(); i++) {
-	    	  if(reList.get(i).getName().equals(currentIngredient.getName())) {
-	    		  reList.remove(i);
-	    		  break;
-	    	  }
-	      }
-	      
-	      Ingredient.writeCurrentList(reList);
-	      ingredientList.addAll(reList);
-	      if(selectedList.contains(currentIngredient)) {
-	    	  selectedList.remove(currentIngredient);
-	      }
-	      
-	  }
+  public void onClearSelectionClick() throws IOException{
+	for(int i = 0; i < selectedList.size(); i++) {
+		runtime.setUnAvailable(selectedList.get(i).getName());
+	}
+	selectedList.clear();  
   }
   
   /**
@@ -191,15 +173,5 @@ public class PrimaryController implements Initializable {
 	    stage.show();
   }
   
-  
-  /**
-   * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
-   */
-  @FXML
-  public void onClearSelectionClick() throws IOException{
-	for(int i = 0; i < selectedList.size(); i++) {
-		runtime.setUnAvailable(selectedList.get(i).getName());
-	}
-	selectedList.clear();  
-  }
+
 }
