@@ -160,8 +160,8 @@ public class Runtime {
    *
    * @param nameIn         the name of the recipe.
    * @param instructionsIn the instructions to prepare the recipe.
-   * @param prepTimeIn     how long it takes to prepare the recipe, including
-   *                       ingredient prep and cooking.
+   * @param prepTimeIn     how long it takes to prepare the recipe in minutes,
+   *                       including ingredient prep and cooking.
    * @param servingCountIn how many people can be served by one patch of this
    *                       recipe.
    * @param ingredients    takes 3 arrays of strings, of the same length, the
@@ -178,7 +178,7 @@ public class Runtime {
   public boolean addRecipe(
     String nameIn,
     String instructionsIn,
-    String prepTimeIn,
+    int prepTimeIn,
     int servingCountIn,
     String[][] ingredients
   ) throws IOException {
