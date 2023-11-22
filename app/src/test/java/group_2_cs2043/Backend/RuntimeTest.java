@@ -22,8 +22,8 @@ public class RuntimeTest {
   }
 
   @BeforeEach
-  void before() {
-    Runtime.clearSavedData();
+  void before() throws IOException {
+    Runtime.createDefaultData();
     run = new Runtime();
   }
 

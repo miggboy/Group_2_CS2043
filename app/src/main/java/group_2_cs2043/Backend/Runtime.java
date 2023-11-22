@@ -33,6 +33,12 @@ public class Runtime {
     f.delete();
   }
 
+  public static void createDefaultData() throws IOException {
+    clearSavedData();
+    Ingredient.writeDefaultList(0);
+    Recipe.writeDefaultList(0);
+  }
+
   /**
    * Deletes all saved data.
    */
