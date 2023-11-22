@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +26,7 @@ import javafx.scene.Node;
 
 public class RecipeViewController implements Initializable {
 	
+	//Components for 'Best Match' view
 	@FXML
 	private TableView<Recipe> recipeTable;
 	@FXML
@@ -34,17 +36,46 @@ public class RecipeViewController implements Initializable {
 	@FXML
 	private TableColumn<Recipe, Integer> servingCountColumn;
 	@FXML
-	private TableColumn<Recipe, ArrayList<Integer>> ratingColumn;
+	private TableColumn<Recipe, Boolean> favoriteColumn;
+	
+	//Components for 'Favorites' view
+	@FXML
+	private TableView<Recipe> favRecipeTable;
+	@FXML
+	private TableColumn<Recipe, String> favNameColumn;
+	@FXML
+	private TableColumn<Recipe, Duration> favPrepTimeColumn;
+	@FXML
+	private TableColumn<Recipe, Integer> favServingCountColumn;
+	@FXML
+	private TableColumn<Recipe, Boolean> favFavoriteColumn;	
+	
+	//Components for 'All Recipes' view
+	@FXML
+	private TableView<Recipe> allRecipeTable;
+	@FXML
+	private TableColumn<Recipe, String> allNameColumn;
+	@FXML
+	private TableColumn<Recipe, Duration> allPrepTimeColumn;
+	@FXML
+	private TableColumn<Recipe, Integer> allServingCountColumn;
+	@FXML
+	private TableColumn<Recipe, Boolean> allFavoriteColumn;
 	
     @FXML
     private Button recipeScreenBack;
 	
 	private ObservableList<Recipe> recipeList;
+	private ObservableList<Recipe> allRecipesList;
+	private ObservableList<Recipe> favRecipeList;
+	
 	private Runtime runtime = new Runtime();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		
+		//**Intializing components for 'Best Match' view**//
 		ArrayList<Recipe> tempArray = new ArrayList<Recipe>();
 		
 		int MAX = 7; 			//Missing ingredient tolerance, up to 7 missing ingredients in a recipe
@@ -56,11 +87,10 @@ public class RecipeViewController implements Initializable {
 			tempArray = runtime.getRecipes(i);
 			recipeList.addAll(tempArray);
 		}
-		
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
 		prepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));
 		servingCountColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("servingCount"));
-		
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Boolean>("favorite"));
 		recipeTable.setItems(recipeList);
 		
 		recipeTable.setOnMouseClicked(event ->{
@@ -70,6 +100,48 @@ public class RecipeViewController implements Initializable {
 				}
 			}
 		});
+		
+		
+		//**Initializing components for 'All Recipes' view**/
+		allRecipesList = FXCollections.observableArrayList();
+		
+		for(int i = 0; i < runtime.recipeCount(); i++) {
+			allRecipesList.add(runtime.getRecipe(i));
+		}
+		
+		allNameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
+		allPrepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));
+		allServingCountColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("servingCount"));
+		allFavoriteColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Boolean>("favorite"));
+		allRecipeTable.setItems(allRecipesList);
+		
+		allRecipeTable.setOnMouseClicked(event ->{
+			if(event.getClickCount() == 2) {
+				try { onRecipeClick();
+				} catch (IOException e) {
+				}
+			}
+		});
+		
+		//**Initializing components for 'Favorite' view**/
+		favRecipeList = FXCollections.observableArrayList();
+		
+		favRecipeList.addAll(runtime.getFavoriteRecipes());
+		
+		favNameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
+		favPrepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));
+		favServingCountColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("servingCount"));
+		favFavoriteColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Boolean>("favorite"));
+		favRecipeTable.setItems(favRecipeList);
+		
+		favRecipeTable.setOnMouseClicked(event ->{
+			if(event.getClickCount() == 2) {
+				try { onRecipeClick();
+				} catch (IOException e) {
+				}
+			}
+		});
+		
 	}
 	
 	/**
