@@ -33,12 +33,12 @@ public class RuntimeTest {
     arguments[0][0] = "Ingredient";
     arguments[1][0] = "Quantity";
     arguments[2][0] = "Substitution";
-    run.addRecipe("Name", "Instructions", Duration.ofMinutes(3), 0, arguments);
+    run.addRecipe("Name", "Instructions", Duration.ofMinutes(1), 0, arguments);
     run.setAvailable("Ingredient");
     Recipe rec = run.getRecipes(0).get(0);
     assertEquals(rec.getName(), "Name");
     assertEquals(rec.getInstructions(), "Instructions");
-    assertEquals(rec.getPrepTime(), 1);
+    assertEquals(rec.getPrepTime(), Duration.ofMinutes(1));
     assertEquals(rec.getServingCount(), 0);
   }
 

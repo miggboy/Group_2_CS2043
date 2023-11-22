@@ -3,6 +3,7 @@ package group_2_cs2043.Backend;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class RecipeTest {
 
   @BeforeEach
   void before() {
-    rec = new Recipe("Name", "Instructions", 1, 4, false);
+    rec = new Recipe("Name", "Instructions", Duration.ofMinutes(1), 4, false);
     rec.addIngredient("Ingredient", "Quantity", "Substitution");
   }
 
@@ -51,7 +52,7 @@ public class RecipeTest {
 
   @Test
   void testGetPrepTime() {
-    assertEquals(rec.getPrepTime(), "Time");
+    assertEquals(rec.getPrepTime(), Duration.ofMinutes(1));
   }
 
   @Test
