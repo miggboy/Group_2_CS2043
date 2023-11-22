@@ -240,6 +240,7 @@ public class Recipe implements Serializable {
   private ArrayList<RecipeIngredient> ingredients;
   private int servingCount;
   private ArrayList<Integer> ratings;
+  private boolean favorite;
   private boolean isDefault; // flag default recipies
 
   /**
@@ -267,6 +268,7 @@ public class Recipe implements Serializable {
     ingredients = new ArrayList<RecipeIngredient>();
     ratings = new ArrayList<Integer>();
     this.isDefault = isDefault;
+    favorite = false;
   }
 
   /**
@@ -283,6 +285,15 @@ public class Recipe implements Serializable {
     servingCount = in.getServingCount();
     ratings = in.getRatingArray();
     isDefault = in.isDefault;
+    favorite = in.isFavorite();
+  }
+
+  public boolean isFavorite() {
+    return favorite;
+  }
+
+  public void setFavorite(boolean in) {
+    favorite = in;
   }
 
   public boolean isDefault() {
