@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class RuntimeTest {
@@ -20,9 +21,16 @@ public class RuntimeTest {
     Runtime.clearSavedData();
   }
 
+  @BeforeEach
+  void before() throws IOException {
+    Runtime.createDefaultData();
+    run = new Runtime();
+  }
+
   @Test
   void testAddIngredient() throws IOException {
-    run.addIngredient("Ingredient");
+    assertTrue(run.addIngredient("Ingredient"));
+    assertFalse(run.addIngredient("Ingredient"));
     assertEquals(run.getIngredient(7).getName(), "Ingredient");
   }
 
@@ -90,7 +98,8 @@ public class RuntimeTest {
 
   @Test
   void testRecipeCount() {
-    assertEquals(run.recipeCount(), 2);
+    assertEquals(run.getRecipe(0).getName(), "Salmon with Brown Sugar Glaze");
+    assertEquals(run.recipeCount(), 1);
   }
 
   @Test
@@ -108,6 +117,90 @@ public class RuntimeTest {
     assertTrue(run.isAvailable(2));
     run.setUnAvailable("Honey");
     assertFalse(run.isAvailable(2));
+  }
+
+  @Test
+  void testGetMissingIngredients() throws IOException {
+    Recipe x = run.getRecipe(0);
+    assertEquals(run.getMissingIngredients(x).size(), 7);
+    run.setAvailable("Honey");
+    assertEquals(run.getMissingIngredients(x).size(), 6);
+    for (int i = 0; i < x.getIngredientCount(); i++) {
+      run.setAvailable(x.getIngredient(i).getIngredientName());
+    }
+    assertEquals(run.getMissingIngredients(x).size(), 0);
+
+    run.addIngredient("Ingredient");
+
+    run.setUnAvailable("Honey");
+
+    assertEquals(run.getMissingIngredients(x).size(), 1);
+    assertEquals(
+      run.getMissingIngredients(x).get(0).getIngredientName(),
+      "Honey"
+    );
+  }
+
+  @Test
+  void testShoppingList() throws IOException {
+    run.setAvailable("Brown Sugar");
+    run.setAvailable("Dijon Mustard");
+    run.setAvailable("Honey");
+    run.setAvailable("Black Pepper");
+    run.setAvailable("Red Pepper Flakes");
+    run.setAvailable("Salmon Filets");
+
+    ArrayList<Recipe> rec = run.getRecipes(1);
+
+    ArrayList<RecipeIngredient> shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.get(0).getIngredientName(), "Kosher Salt");
+    assertEquals(shoppingList.get(0).getAmount(), "1 Tablespoon");
+    assertEquals(shoppingList.get(0).getSubstitutions(), "");
+
+    run.setAvailable("Kosher Salt");
+
+    shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.size(), 0);
+  }
+
+  @Test
+  void testFilterFavorites() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterFavorites(rec).size(), 0);
+    run.setFavorite("Salmon with Brown Sugar Glaze", true);
+    rec = run.getRecipes(7);
+    assertEquals(run.filterFavorites(rec).size(), 1);
+  }
+
+  @Test
+  void testFilterIngredient() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterIngredient("Honey").size(), 1);
+    assertEquals(run.filterIngredient("NotReal").size(), 0);
+    assertEquals(run.filterIngredient("Honey", rec).size(), 1);
+    assertEquals(run.filterIngredient("NotReal", rec).size(), 0);
+  }
+
+  @Test
+  void testFilterRating() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterRating(5, rec).size(), 0);
+    assertEquals(run.filterRating(4, rec).size(), 1);
+  }
+
+  @Test
+  void testQuickSearch() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.quickSearch("Honey", false).size(), 1);
+    assertEquals(run.quickSearch("Honey", true).size(), 0);
+    run.setFavorite("Salmon with Brown Sugar Glaze", true);
+    assertEquals(run.quickSearch("Honey", true).size(), 1);
   }
 
   @AfterAll
