@@ -268,6 +268,36 @@ public class Runtime {
   }
 
   /**
+   * Sets a recipe as a favorite by name.
+   * @param name The name of the Recipe (case sensitive)
+   * @param in if it should be a favorite or not.
+   */
+  public void setFavorite(String name, boolean in) {
+    for (int i = 0; i < recipeList.size(); i++) {
+      if (recipeList.get(i).getName().equals(name)) {
+        recipeList.get(i).setFavorite(in);
+      }
+    }
+  }
+
+  /**
+   * Returns all recipes with favorite=true
+   *
+   * @return the recipes
+   */
+  public ArrayList<Recipe> getFavoriteRecipes() {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    for (int i = 0; i < recipeList.size(); i++) {
+      if (recipeList.get(i).isFavorite()) {
+        ret.add(recipeList.get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  /**
    * Returns an ArrayList of recipes with exactly the specified number of missing
    * ingredients (Using the existing array of available ingredients.)
    * Recipes with fewer missing ingredients will not be returned. For example, if
@@ -385,3 +415,145 @@ public class Runtime {
 	      }
 	    }
   }
+
+  /**
+   * Creates a shopping list for all missing ingredients from an ArrayList of Recipes.
+   * This assumes that ingredients marked as available are available in large enough
+   * quantities to satisfy all recipes that include them, user beware.
+   *
+   * @param in an Arraylist of Recipes to create a list for.
+   * @return The Names and Quantities of missing Ingredients.
+   *         Names may be duplicated if multiple recipes requre them.
+   */
+  public ArrayList<RecipeIngredient> makeShoppingList(ArrayList<Recipe> in) {
+    ArrayList<RecipeIngredient> ret = new ArrayList<RecipeIngredient>();
+
+    for (Recipe x : in) {
+      for (int i = 0; i < x.getIngredientCount(); i++) {
+        boolean add = true;
+        RecipeIngredient y = x.getIngredient(i);
+
+        for (int j = 0; j < ingredientList.size(); j++) {
+          if (
+            (y.getIngredientName().equals(ingredientList.get(j).getName())) &&
+            ingredientList.get(j).isAvailable()
+          ) {
+            add = false;
+          }
+        }
+        if (add) {
+          ret.add(y);
+        }
+      }
+    }
+
+    return ret;
+  }
+
+  /**
+   * Takes a list of Recipes and returns only those the user has favorited.
+   * @param in The list of recipes to check
+   * @return The list filtered down to only favorites.
+   */
+  public ArrayList<Recipe> filterFavorites(ArrayList<Recipe> in) {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    for (int i = 0; i < in.size(); i++) {
+      if (in.get(i).isFavorite()) {
+        ret.add(in.get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  /**
+   * Returns all Recipes containing a set ingredient.
+   *
+   * @param name The ingredient to check for
+   * @return The list of Recipes
+   */
+  public ArrayList<Recipe> filterIngredient(String name) {
+    ArrayList<Recipe> list = new ArrayList<Recipe>();
+
+    for (Recipe rec : recipeList) {
+      boolean hasIngredient = false;
+      for (int i = 0; i < rec.getIngredientCount(); i++) {
+        RecipeIngredient ing = rec.getIngredient(i);
+        if (ing.getIngredientName().equals(name)) {
+          hasIngredient = true;
+        }
+      }
+      if (hasIngredient) {
+        list.add(rec);
+      }
+    }
+
+    return list;
+  }
+
+  /**
+   * Returns all Recipes from an inputted list of Recipes containing a set ingredient.
+   * @param name The ingredient to check for
+   * @param in The list of Recipes to check from
+   * @return the list of Recipes with the ingredient
+   */
+  public ArrayList<Recipe> filterIngredient(String name, ArrayList<Recipe> in) {
+    ArrayList<Recipe> list = new ArrayList<Recipe>();
+
+    for (Recipe rec : in) {
+      boolean hasIngredient = false;
+      for (int i = 0; i < rec.getIngredientCount(); i++) {
+        RecipeIngredient ing = rec.getIngredient(i);
+        if (ing.getIngredientName().equals(name)) {
+          hasIngredient = true;
+        }
+      }
+      if (hasIngredient) {
+        list.add(rec);
+      }
+    }
+
+    return list;
+  }
+
+  /**
+   * Returns all the Recipes from a list that have a rating equal to or higher than
+   * the inputted value.
+   * @param in The filter Value
+   * @param toFilter The list to be filted
+   * @return The filtered List.
+   */
+  public ArrayList<Recipe> filterRating(double in, ArrayList<Recipe> toFilter) {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    for (int i = 0; i < toFilter.size(); i++) {
+      if (toFilter.get(i).getAverageRating() >= in) {
+        ret.add(toFilter.get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  /**
+   * Quickly returns all recipes including a certain ingredient and with a rating higher than 4 stars and optionally
+   * Only which the user has Favorited.
+   *
+   * @param in The Ingredient to find recipes for
+   * @param fav
+   * @return a list of Recipes that meet the criteria
+   */
+  public ArrayList<Recipe> quickSearch(String in, boolean fav) {
+    ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+    ret = filterIngredient(in);
+    ret = filterRating(4, ret);
+
+    if (fav) {
+      ret = filterFavorites(ret);
+    }
+
+    return ret;
+  }
+}

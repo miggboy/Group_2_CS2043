@@ -138,6 +138,68 @@ public class RuntimeTest {
     assertEquals(run.getMissingIngredients(x).get(0).getName(), "Honey");
   }
 
+  @Test
+  void testShoppingList() throws IOException {
+    run.setAvailable("Brown Sugar");
+    run.setAvailable("Dijon Mustard");
+    run.setAvailable("Honey");
+    run.setAvailable("Black Pepper");
+    run.setAvailable("Red Pepper Flakes");
+    run.setAvailable("Salmon Filets");
+
+    ArrayList<Recipe> rec = run.getRecipes(1);
+
+    ArrayList<RecipeIngredient> shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.get(0).getIngredientName(), "Kosher Salt");
+    assertEquals(shoppingList.get(0).getAmount(), "1 Tablespoon");
+    assertEquals(shoppingList.get(0).getSubstitutions(), "");
+
+    run.setAvailable("Kosher Salt");
+
+    shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.size(), 0);
+  }
+
+  @Test
+  void testFilterFavorites() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterFavorites(rec).size(), 0);
+    run.setFavorite("Salmon with Brown Sugar Glaze", true);
+    rec = run.getRecipes(7);
+    assertEquals(run.filterFavorites(rec).size(), 1);
+  }
+
+  @Test
+  void testFilterIngredient() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterIngredient("Honey").size(), 1);
+    assertEquals(run.filterIngredient("NotReal").size(), 0);
+    assertEquals(run.filterIngredient("Honey", rec).size(), 1);
+    assertEquals(run.filterIngredient("NotReal", rec).size(), 0);
+  }
+
+  @Test
+  void testFilterRating() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.filterRating(5, rec).size(), 0);
+    assertEquals(run.filterRating(4, rec).size(), 1);
+  }
+
+  @Test
+  void testQuickSearch() {
+    ArrayList<Recipe> rec = run.getRecipes(7);
+    assertEquals(rec.size(), 1);
+    assertEquals(run.quickSearch("Honey", false).size(), 1);
+    assertEquals(run.quickSearch("Honey", true).size(), 0);
+    run.setFavorite("Salmon with Brown Sugar Glaze", true);
+    assertEquals(run.quickSearch("Honey", true).size(), 1);
+  }
+
   @AfterAll
   static void after() {
     Runtime.clearSavedData();
