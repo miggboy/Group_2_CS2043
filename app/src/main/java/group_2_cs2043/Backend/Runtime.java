@@ -391,11 +391,12 @@ public class Runtime {
    * @param name the ingredient to be checked and removed
    */
 
-  public void removeIngredient(String name) {
+  public void removeIngredient(String name) throws IOException {
     for (int i = 0; i < ingredientList.size(); i++) {
       if (ingredientList.get(i).getName().equals(name)) {
         ingredientList.remove(i);
         i--;
+        this.saveRuntime();
       }
     }
   }
@@ -405,11 +406,12 @@ public class Runtime {
    *
    * @param name the Recipe to be checked and removed
    */
-  public void removeRecipe(String name) {
+  public void removeRecipe(String name) throws IOException {
     for (int i = 0; i < recipeList.size(); i++) {
       if (recipeList.get(i).getName().equals(name)) {
         recipeList.remove(i);
         i--;
+        this.saveRuntime();
       }
     }
   }
