@@ -2,6 +2,7 @@ package group_2_cs2043.Backend;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,30 @@ import java.util.ArrayList;
  * @version 1.0.0
  */
 public class Runtime {
+
+  /**
+   * Deletes a directory recursively (Helper method)
+   *
+   * @param f The directory to delete
+   */
+  private static void deleteDirectory(File f) {
+    File[] allContents = f.listFiles();
+    if (allContents != null) {
+      for (File file : allContents) {
+        deleteDirectory(file);
+      }
+    }
+    f.delete();
+  }
+
+  /**
+   * Deletes all saved data.
+   */
+  public static void clearSavedData() {
+    String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+    File f = new File(importPath);
+    deleteDirectory(f);
+  }
 
   private ArrayList<Ingredient> ingredientList;
   private ArrayList<Recipe> recipeList;
@@ -136,8 +161,8 @@ public class Runtime {
    *
    * @param nameIn         the name of the recipe.
    * @param instructionsIn the instructions to prepare the recipe.
-   * @param prepTimeIn     how long it takes to prepare the recipe, including
-   *                       ingredient prep and cooking.
+   * @param prepTimeIn     how long it takes to prepare the recipe,
+   *                       including ingredient prep and cooking.
    * @param servingCountIn how many people can be served by one patch of this
    *                       recipe.
    * @param ingredients    takes 3 arrays of strings, of the same length, the
@@ -154,7 +179,7 @@ public class Runtime {
   public boolean addRecipe(
     String nameIn,
     String instructionsIn,
-    String prepTimeIn,
+    Duration prepTimeIn,
     int servingCountIn,
     String[][] ingredients
   ) throws IOException {
@@ -285,11 +310,14 @@ public class Runtime {
    * 				  by the user.
    * @author Jaspreet S.Bedi
    */
-  public ArrayList<Recipe> comPrepTime(ArrayList<Recipe> list, String desTime) {
+  public ArrayList<Recipe> comPrepTime(
+    ArrayList<Recipe> list,
+    Duration desTime
+  ) {
     ArrayList<Recipe> newList = new ArrayList<Recipe>();
 
     for (Recipe x : list) {
-      if (Integer.parseInt(x.getPrepTime()) == Integer.parseInt(desTime)) {
+      if (x.getPrepTime().equals(desTime)) {
         newList.add(x);
       }
     }
