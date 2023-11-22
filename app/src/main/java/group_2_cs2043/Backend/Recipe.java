@@ -196,7 +196,7 @@ public class Recipe implements Serializable {
     one.addIngredient("Black Pepper", "1/4 Teaspoon");
     one.addIngredient("Red Pepper Flakes", "1/4 Teaspoon");
     one.addIngredient("Salmon Filets", "4");
-    one.addRating(5);
+    one.addRating(4);
     one.addRating(5);
     one.addRating(5);
 
