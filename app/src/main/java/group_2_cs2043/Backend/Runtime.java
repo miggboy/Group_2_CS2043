@@ -368,8 +368,8 @@ public class Runtime {
    * @param recIn the Recipe to be checked
    * @return The ingredients not marked as available.
    */
-  public ArrayList<Ingredient> getMissingIngredients(Recipe recIn) {
-    ArrayList<Ingredient> list = new ArrayList<Ingredient>();
+  public ArrayList<RecipeIngredient> getMissingIngredients(Recipe recIn) {
+    ArrayList<RecipeIngredient> list = new ArrayList<RecipeIngredient>();
     for (int i = 0; i < recIn.getIngredientCount(); i++) {
       RecipeIngredient compare = recIn.getIngredient(i);
       for (int j = 0; j < ingredientList.size(); j++) {
@@ -378,7 +378,7 @@ public class Runtime {
           compare.getIngredientName().equals(compare2.getName()) &&
           !compare2.isAvailable()
         ) {
-          list.add(new Ingredient(compare2));
+          list.add(new RecipeIngredient(compare));
         }
       }
     }

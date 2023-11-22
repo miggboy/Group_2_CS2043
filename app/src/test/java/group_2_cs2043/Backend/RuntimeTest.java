@@ -135,7 +135,10 @@ public class RuntimeTest {
     run.setUnAvailable("Honey");
 
     assertEquals(run.getMissingIngredients(x).size(), 1);
-    assertEquals(run.getMissingIngredients(x).get(0).getName(), "Honey");
+    assertEquals(
+      run.getMissingIngredients(x).get(0).getIngredientName(),
+      "Honey"
+    );
   }
 
   @Test
