@@ -98,6 +98,7 @@ public class RuntimeTest {
 
   @Test
   void testRecipeCount() {
+    assertEquals(run.getRecipe(0).getName(), "Salmon with Brown Sugar Glaze");
     assertEquals(run.recipeCount(), 1);
   }
 
