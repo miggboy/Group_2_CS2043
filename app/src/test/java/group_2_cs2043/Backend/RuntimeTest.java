@@ -32,12 +32,12 @@ public class RuntimeTest {
     arguments[0][0] = "Ingredient";
     arguments[1][0] = "Quantity";
     arguments[2][0] = "Substitution";
-    run.addRecipe("Name", "Instructions", "Time", 0, arguments);
+    run.addRecipe("Name", "Instructions", 1, 0, arguments);
     run.setAvailable("Ingredient");
     Recipe rec = run.getRecipes(0).get(0);
     assertEquals(rec.getName(), "Name");
     assertEquals(rec.getInstructions(), "Instructions");
-    assertEquals(rec.getPrepTime(), "Time");
+    assertEquals(rec.getPrepTime(), 1);
     assertEquals(rec.getServingCount(), 0);
   }
 
@@ -48,7 +48,7 @@ public class RuntimeTest {
     arguments[0][0] = "Ingredient";
     arguments[1][0] = "Quantity";
     arguments[2][0] = "Substitution";
-    run.addRecipe("Name", "Instructions", "3 Minutes", 0, arguments);
+    run.addRecipe("Name", "Instructions", 3, 0, arguments);
     run.setAvailable("Ingredient");
     ArrayList<Recipe> list = run.getRecipes(0);
     ArrayList<Recipe> listTwo = run.comPrepTime(list, "3 Minutes");

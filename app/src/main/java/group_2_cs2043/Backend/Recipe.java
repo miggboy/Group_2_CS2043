@@ -277,7 +277,7 @@ public class Recipe implements Serializable {
   public Recipe(Recipe in) {
     name = in.getName();
     instructions = in.getInstructions();
-    prepTime = in.getPrepTime();
+    prepTime = in.getPrepTimeInt();
     ingredients = in.getIngredients();
     servingCount = in.getServingCount();
     ratings = in.getRatingArray();
@@ -312,7 +312,11 @@ public class Recipe implements Serializable {
    * @return The preparation time for the recipe as a String.
    */
   public String getPrepTime() {
-    return new String(prepTime);
+    return prepTime + " Minutes";
+  }
+  
+  public int getPrepTimeInt() {
+	  return prepTime;
   }
 
   /**

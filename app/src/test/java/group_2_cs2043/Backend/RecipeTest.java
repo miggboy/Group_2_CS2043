@@ -12,7 +12,7 @@ public class RecipeTest {
 
   @BeforeEach
   void before() {
-    rec = new Recipe("Name", "Instructions", "Time", 4, false);
+    rec = new Recipe("Name", "Instructions", 1, 4, false);
     rec.addIngredient("Ingredient", "Quantity", "Substitution");
   }
 
