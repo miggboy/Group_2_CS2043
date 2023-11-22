@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class RuntimeTest {
@@ -20,9 +21,16 @@ public class RuntimeTest {
     Runtime.clearSavedData();
   }
 
+  @BeforeEach
+  void before() {
+    Runtime.clearSavedData();
+    run = new Runtime();
+  }
+
   @Test
   void testAddIngredient() throws IOException {
-    run.addIngredient("Ingredient");
+    assertTrue(run.addIngredient("Ingredient"));
+    assertFalse(run.addIngredient("Ingredient"));
     assertEquals(run.getIngredient(7).getName(), "Ingredient");
   }
 
@@ -90,7 +98,7 @@ public class RuntimeTest {
 
   @Test
   void testRecipeCount() {
-    assertEquals(run.recipeCount(), 2);
+    assertEquals(run.recipeCount(), 1);
   }
 
   @Test
