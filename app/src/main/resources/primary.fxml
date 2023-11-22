@@ -17,5 +17,6 @@
       <Button layoutX="510.0" layoutY="33.0" mnemonicParsing="false" onAction="#resetList" text="reset" />
       <Button layoutX="83.0" layoutY="380.0" mnemonicParsing="false" text="Remove Selected Ingredient" />
       <Button layoutX="377.0" layoutY="380.0" mnemonicParsing="false" onAction="#onClearSelectionClick" text="Clear Selection" />
+      <Button layoutX="248.0" layoutY="334.0" mnemonicParsing="false" onAction="#addNewRecipeClick" text="Add New Recipe" />
    </children>
 </AnchorPane>
