@@ -34,7 +34,7 @@ build
 # Ignore IDE's config dir.
 .vscode
 
-/bin/
+bin
 .project
 .classpath
 .settings
