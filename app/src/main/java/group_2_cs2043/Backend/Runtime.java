@@ -354,4 +354,34 @@ public class Runtime {
     }
     return list;
   }
-}
+    
+  
+  /**
+   * Takes a String representing an ingredient to check and remove from the ingredient list 
+   *
+   * @param name the ingredient to be checked and removed 
+   */ 
+  
+  public void removeIngredient(String name) {
+	    for (int i = 0; i < ingredientList.size(); i++) {
+	      if (ingredientList.get(i).getIngredientName().equals(name)) {
+	        ingredientList.remove(i);
+	        i--; 
+	      }
+	    }
+  }
+
+  /**
+   * Takes a String representing a recipe to check and remove from the recipe list
+   *
+   * @param name the Recipe to be checked and removed
+   */
+  public void removeRecipe(String name) {
+	    
+	    for (int i = 0; i < recipeList.size(); i++) {
+	      if (recipeList.get(i).getName().equals(name)) {
+	        recipeList.remove(i);
+	        i--; 
+	      }
+	    }
+  }
