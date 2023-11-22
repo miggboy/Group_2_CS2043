@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /*
@@ -26,6 +26,8 @@ import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
+  @FXML
+  private TextField ingredientField;
   @FXML
   private ListView<Ingredient> ingredientsListView;
   @FXML
@@ -41,15 +43,15 @@ public class PrimaryController implements Initializable {
    * ingredientsListView: 	provides view of available ingredients (both default and user-added)
    * selectedListView:		provides view of selected ingredients (to be passed into next scene to return matching Recipes)
    */
-
   @Override
-  public void initialize(URL arg0, ResourceBundle arg1) {
+  public void initialize(URL arg0, ResourceBundle arg1){
+	  
     try {
-      ingredientArray = Ingredient.loadSavedList();
+        ingredientArray = Ingredient.loadSavedList();
     } catch (IOException e) {}
-    
-    ingredientList = FXCollections.observableArrayList(ingredientArray); 	//Instantiate ingredientList with all available ingredient data
-    selectedList = FXCollections.observableArrayList(); 					//Instantiate selectedList, initially empty
+   
+    ingredientList = FXCollections.observableArrayList(ingredientArray); //Instantiate ingredientList with all available ingredient data				
+    selectedList = FXCollections.observableArrayList(); 				 //Instantiate selectedList, initially empty
     
     ingredientsListView.setItems(ingredientList); 	// Set items in ListView to reflect ingredientList ObservableList 
     selectedListView.setItems(selectedList);		// Set items in ListView to reflect selectedList ObservableList
@@ -76,19 +78,45 @@ public class PrimaryController implements Initializable {
     	}
     });
   }
-
+  
+  /*
+   * Helper method for resetting Ingredients list. To be removed before merge with main.
+   */
+  public void resetList() {
+	 ingredientArray = Ingredient.makeDefaultList();
+	 try {
+		Ingredient.writeCurrentList(ingredientArray);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}	
+	 ingredientList.clear();
+	 ingredientList.addAll(ingredientArray);
+  }
+  
+  
+  /*
+  * This method opens a pop-up window to add a new Ingredient.
+  */
   @FXML
-  void addIngredientAction(ActionEvent event) {
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/addIngredient.fxml"));
-      Parent root1 = loader.load();
-
-      Stage stage1 = new Stage();
-      Scene scene1 = new Scene(root1);
-      stage1.setScene(scene1);
-      stage1.show();
-    } catch (IOException e) {
-      System.out.println("Cannot load new window: " + e.getMessage());
-    }
+  public void onAddNewIngredientClick(ActionEvent event) throws IOException {
+	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addIngredient.fxml"));
+	  System.out.println(fxmlLoader);
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = new Stage();
+      stage.setScene(scene);
+      stage.setTitle("Add New Ingredient");
+      
+      String str = getClass().getResource("/IMG/icon.png").toString();
+      Image icon = new Image(str);
+      stage.getIcons().add(icon);
+      
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.showAndWait();									//Program will wait until pop-up is closed.
+      
+      
+      //Clearing list and refilling is necessary to refresh ListView
+      ingredientList.clear();
+      ArrayList<Ingredient> reList = Ingredient.loadSavedList();
+      ingredientList.addAll(reList);
   }
 }
