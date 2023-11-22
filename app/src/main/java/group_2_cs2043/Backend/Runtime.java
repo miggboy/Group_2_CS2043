@@ -33,6 +33,12 @@ public class Runtime {
     f.delete();
   }
 
+  public static void createDefaultData() throws IOException {
+    clearSavedData();
+    Ingredient.writeDefaultList(0);
+    Recipe.writeDefaultList(0);
+  }
+
   /**
    * Deletes all saved data.
    */
@@ -303,9 +309,10 @@ public class Runtime {
   }
 
   /**
+   * Takes a list of Recipes and returns that list with only recipes that match the requested time.
    *
-   * @param list
-   * @param desTime
+   * @param list The list of recipes.
+   * @param desTime The Desired Prep Time
    * @return newList: The arrayList of recipes that can be prepped in the cooking time range specified
    * 				  by the user.
    * @author Jaspreet S.Bedi
@@ -323,5 +330,28 @@ public class Runtime {
     }
 
     return newList;
+  }
+
+  /**
+   * Takes a recipe and returns what ingredients are missing from that recipe.
+   *
+   * @param recIn the Recipe to be checked
+   * @return The ingredients not marked as available.
+   */
+  public ArrayList<Ingredient> getMissingIngredients(Recipe recIn) {
+    ArrayList<Ingredient> list = new ArrayList<Ingredient>();
+    for (int i = 0; i < recIn.getIngredientCount(); i++) {
+      RecipeIngredient compare = recIn.getIngredient(i);
+      for (int j = 0; j < ingredientList.size(); j++) {
+        Ingredient compare2 = ingredientList.get(j);
+        if (
+          compare.getIngredientName().equals(compare2.getName()) &&
+          !compare2.isAvailable()
+        ) {
+          list.add(new Ingredient(compare2));
+        }
+      }
+    }
+    return list;
   }
 }

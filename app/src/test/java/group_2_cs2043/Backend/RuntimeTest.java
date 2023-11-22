@@ -22,8 +22,8 @@ public class RuntimeTest {
   }
 
   @BeforeEach
-  void before() {
-    Runtime.clearSavedData();
+  void before() throws IOException {
+    Runtime.createDefaultData();
     run = new Runtime();
   }
 
@@ -98,6 +98,7 @@ public class RuntimeTest {
 
   @Test
   void testRecipeCount() {
+    assertEquals(run.getRecipe(0).getName(), "Salmon with Brown Sugar Glaze");
     assertEquals(run.recipeCount(), 1);
   }
 
@@ -116,6 +117,25 @@ public class RuntimeTest {
     assertTrue(run.isAvailable(2));
     run.setUnAvailable("Honey");
     assertFalse(run.isAvailable(2));
+  }
+
+  @Test
+  void testGetMissingIngredients() throws IOException {
+    Recipe x = run.getRecipe(0);
+    assertEquals(run.getMissingIngredients(x).size(), 7);
+    run.setAvailable("Honey");
+    assertEquals(run.getMissingIngredients(x).size(), 6);
+    for (int i = 0; i < x.getIngredientCount(); i++) {
+      run.setAvailable(x.getIngredient(i).getIngredientName());
+    }
+    assertEquals(run.getMissingIngredients(x).size(), 0);
+
+    run.addIngredient("Ingredient");
+
+    run.setUnAvailable("Honey");
+
+    assertEquals(run.getMissingIngredients(x).size(), 1);
+    assertEquals(run.getMissingIngredients(x).get(0).getName(), "Honey");
   }
 
   @AfterAll
