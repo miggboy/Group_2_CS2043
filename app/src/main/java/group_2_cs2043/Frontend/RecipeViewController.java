@@ -9,11 +9,18 @@ import group_2_cs2043.Backend.Runtime;
 import group_2_cs2043.Backend.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class RecipeViewController implements Initializable {
 	
@@ -27,6 +34,9 @@ public class RecipeViewController implements Initializable {
 	private TableColumn<Recipe, Integer> servingCountColumn;
 	@FXML
 	private TableColumn<Recipe, ArrayList<Integer>> ratingColumn;
+	
+    @FXML
+    private Button recipeScreenBack;
 	
 	private ObservableList<Recipe> recipeList;
 	private ArrayList<Recipe> recipeArray;
@@ -50,4 +60,16 @@ public class RecipeViewController implements Initializable {
 		
 		recipeTable.setItems(recipeList);
 	}
+	/*
+	 * Go back to the previous screen
+	 */
+    @FXML
+    void recipeScreenBackClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
+	    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	    
+    }
 }
