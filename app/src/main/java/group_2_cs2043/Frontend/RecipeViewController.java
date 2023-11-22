@@ -1,5 +1,6 @@
 package group_2_cs2043.Frontend;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
