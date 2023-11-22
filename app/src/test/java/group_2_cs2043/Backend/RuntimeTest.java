@@ -138,6 +138,30 @@ public class RuntimeTest {
     assertEquals(run.getMissingIngredients(x).get(0).getName(), "Honey");
   }
 
+  @Test
+  void testShoppingList() throws IOException {
+    run.setAvailable("Brown Sugar");
+    run.setAvailable("Dijon Mustard");
+    run.setAvailable("Honey");
+    run.setAvailable("Black Pepper");
+    run.setAvailable("Red Pepper Flakes");
+    run.setAvailable("Salmon Filets");
+
+    ArrayList<Recipe> rec = run.getRecipes(1);
+
+    ArrayList<RecipeIngredient> shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.get(0).getIngredientName(), "Kosher Salt");
+    assertEquals(shoppingList.get(0).getAmount(), "1 Tablespoon");
+    assertEquals(shoppingList.get(0).getSubstitutions(), "");
+
+    run.setAvailable("Kosher Salt");
+
+    shoppingList = run.makeShoppingList(rec);
+
+    assertEquals(shoppingList.size(), 0);
+  }
+
   @AfterAll
   static void after() {
     Runtime.clearSavedData();
