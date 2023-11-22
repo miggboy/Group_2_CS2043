@@ -2,6 +2,7 @@ package group_2_cs2043.Backend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,5 +70,14 @@ public class RecipeTest {
   void testRemoveIngredient() {
     rec.removeIngredient("Ingredient");
     assertEquals(rec.getIngredientCount(), 0);
+  }
+
+  @Test
+  void testFavorite() {
+    assertFalse(rec.isFavorite());
+    rec.setFavorite(true);
+    assertTrue(rec.isFavorite());
+    rec.setFavorite(false);
+    assertFalse(rec.isFavorite());
   }
 }

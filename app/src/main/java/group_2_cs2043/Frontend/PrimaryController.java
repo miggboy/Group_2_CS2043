@@ -151,6 +151,21 @@ public class PrimaryController implements Initializable {
   }
   
   /**
+   * This method removes selected Ingredient from the existing Ingredients list
+ * @throws IOException 
+   */
+  @FXML
+  public void onRemoveIngredientClick() throws IOException {
+	  Ingredient ingr = ingredientsListView.getSelectionModel().getSelectedItem();
+	  runtime.removeIngredient(ingr.getName());
+	  
+      //Clearing list and refilling is necessary to refresh ListView
+      ingredientList.clear();
+      ingredientList.addAll(getSavedIngredientsArray());
+  }
+  
+  
+  /**
    * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
    */
   @FXML
