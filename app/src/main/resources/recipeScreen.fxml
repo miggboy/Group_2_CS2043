@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="35.0" layoutY="35.0" text="Recipes">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="212.0" layoutY="356.0" text="Double-Click a Recipe to open it!" />
+      <TableView layoutX="66.0" layoutY="95.0" prefHeight="230.0" prefWidth="468.0">
+        <columns>
+          <TableColumn editable="false" prefWidth="196.0" sortable="false" text="Name" />
+          <TableColumn editable="false" prefWidth="80.79998779296875" sortable="false" text="Prep Time" />
+            <TableColumn editable="false" prefWidth="106.39996337890625" sortable="false" text="Serving Count" />
+            <TableColumn editable="false" prefWidth="86.39996337890625" sortable="false" text="Rating" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -11,6 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ *This is a controller class for the Add Ingredient pop-up screen.
+ *
+ * @author Benjamin Martin
+ * 
+ */
+
 public class AddIngredientController {
 
 	@FXML
@@ -23,9 +30,10 @@ public class AddIngredientController {
 	private Label errorText;
 
   /**
-   * This OnActionEvent stores the text from the specificed text field
-   * Needs to update the list of ingredients on the previous scene.
+   * This ActionEvent handles creating a new Ingredient and storing it.
+   * Checks for blank input and duplicates.
    * @throws IOException  
+   * @author Benjamin Martin & Miguel Daigle Gould
    */
   @FXML
   void onEnterClick(ActionEvent event) throws IOException {

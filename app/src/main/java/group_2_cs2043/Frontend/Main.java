@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/*
+/**
  * The Main.java class serves as the primary launcher for the application.
  * Employs the use of JavaFX libraries.
  *
@@ -37,7 +37,7 @@ public class Main extends Application {
     }
   }
 
-  /*
+  /**
    * Launches the application.
    */
 

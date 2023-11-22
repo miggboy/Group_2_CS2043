@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/*
+/**
  * This is a controller class for the primary screen.
  *
  * @author Miguel Daigle Gould
@@ -38,11 +38,12 @@ public class PrimaryController implements Initializable {
   private ObservableList<Ingredient> selectedList;
   private Ingredient currentIngredient;
 
-  /*
+  /**
    * Method runs upon instantiation. Loads ObservableList with ingredient data, then in turn manipulates two ListView's
    * ingredientsListView: 	provides view of available ingredients (both default and user-added)
    * selectedListView:		provides view of selected ingredients (to be passed into next scene to return matching Recipes)
    */
+  
   @Override
   public void initialize(URL arg0, ResourceBundle arg1){
 	  
@@ -65,6 +66,7 @@ public class PrimaryController implements Initializable {
     	if((currentIngredient != null) && !(selectedList.contains(currentIngredient))) {
     		selectedList.add(currentIngredient);
     	}
+    	currentIngredient = null;
     });
     
   
@@ -76,10 +78,12 @@ public class PrimaryController implements Initializable {
     	if(currentIngredient != null) {
     		selectedList.remove(currentIngredient);
     	}
+    	currentIngredient = null;
     });
+     
   }
   
-  /*
+  /**
    * Helper method for resetting Ingredients list. To be removed before merge with main.
    */
   public void resetList() {
@@ -94,13 +98,13 @@ public class PrimaryController implements Initializable {
   }
   
   
-  /*
+  /**
   * This method opens a pop-up window to add a new Ingredient.
   */
+  
   @FXML
   public void onAddNewIngredientClick(ActionEvent event) throws IOException {
 	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addIngredient.fxml"));
-	  System.out.println(fxmlLoader);
       Scene scene = new Scene(fxmlLoader.load());
       Stage stage = new Stage();
       stage.setScene(scene);
@@ -118,5 +122,43 @@ public class PrimaryController implements Initializable {
       ingredientList.clear();
       ArrayList<Ingredient> reList = Ingredient.loadSavedList();
       ingredientList.addAll(reList);
+  }
+  
+  /**
+   * This method opens a prompt for removing a selected Ingredient.
+   * @throws IOException 
+   */
+  @FXML
+  public void onRemoveIngredientClick() throws IOException {
+	  currentIngredient = ingredientsListView.getSelectionModel().getSelectedItem();
+	  
+	  if(currentIngredient != null) {
+		  ingredientList.clear();
+	      ArrayList<Ingredient> reList = Ingredient.loadSavedList();
+	    
+	      //.remove() method always returns false.
+	      //Might be an issue with .equals not Overriding
+	      //Manual iteration here for now
+	      for(int i = 0; i < reList.size(); i++) {
+	    	  if(reList.get(i).getName().equals(currentIngredient.getName())) {
+	    		  reList.remove(i);
+	    		  break;
+	    	  }
+	      }
+	      
+	      Ingredient.writeCurrentList(reList);
+	      ingredientList.addAll(reList);
+	      if(selectedList.contains(currentIngredient)) {
+	    	  selectedList.remove(currentIngredient);
+	      }
+	  }
+  }
+  
+  /*
+   * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
+   */
+  @FXML
+  public void onClearSelectionClick() {
+	selectedList.clear();  
   }
 }
