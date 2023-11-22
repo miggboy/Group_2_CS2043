@@ -384,4 +384,38 @@ public class Runtime {
     }
     return list;
   }
+
+  /**
+   * Creates a shopping list for all missing ingredients from an ArrayList of Recipes.
+   * This assumes that ingredients marked as available are available in large enough
+   * quantities to satisfy all recipes that include them, user beware.
+   *
+   * @param in an Arraylist of Recipes to create a list for.
+   * @return The Names and Quantities of missing Ingredients.
+   *         Names may be duplicated if multiple recipes requre them.
+   */
+  public ArrayList<RecipeIngredient> makeShoppingList(ArrayList<Recipe> in) {
+    ArrayList<RecipeIngredient> ret = new ArrayList<RecipeIngredient>();
+
+    for (Recipe x : in) {
+      for (int i = 0; i < x.getIngredientCount(); i++) {
+        boolean add = true;
+        RecipeIngredient y = x.getIngredient(i);
+
+        for (int j = 0; j < ingredientList.size(); j++) {
+          if (
+            (y.getIngredientName().equals(ingredientList.get(j).getName())) &&
+            ingredientList.get(j).isAvailable()
+          ) {
+            add = false;
+          }
+        }
+        if (add) {
+          ret.add(y);
+        }
+      }
+    }
+
+    return ret;
+  }
 }
