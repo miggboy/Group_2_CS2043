@@ -5,7 +5,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import group_2_cs2043.Backend.Runtime;
 import group_2_cs2043.Backend.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +30,7 @@ public class RecipeViewController implements Initializable {
 	
 	private ObservableList<Recipe> recipeList;
 	private ArrayList<Recipe> recipeArray;
+	private Runtime runtime = new Runtime();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -39,6 +40,8 @@ public class RecipeViewController implements Initializable {
 			e.printStackTrace();
 		}
 		
+		recipeArray = runtime.getRecipes(1);
+		
 		recipeList = FXCollections.observableArrayList(recipeArray);	//Instantiate recipeList with all Recipe data
 		
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));;
@@ -46,16 +49,5 @@ public class RecipeViewController implements Initializable {
 		servingCountColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("servingCount"));
 		
 		recipeTable.setItems(recipeList);
-		
-		
-		
-		
-		//Test block. Wipe-out before push
-	
-		
-		
-		
-		
 	}
-
 }

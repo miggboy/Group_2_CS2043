@@ -15,7 +15,7 @@
       <Text layoutX="111.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Ingredients" />
       <Text layoutX="370.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Ingredients" />
       <Button layoutX="510.0" layoutY="33.0" mnemonicParsing="false" onAction="#resetList" text="reset" />
-      <Button layoutX="83.0" layoutY="380.0" mnemonicParsing="false" onAction="#onRemoveIngredientClick" text="Remove Selected Ingredient" />
+      <Button layoutX="83.0" layoutY="380.0" mnemonicParsing="false" text="Remove Selected Ingredient" />
       <Button layoutX="377.0" layoutY="380.0" mnemonicParsing="false" onAction="#onClearSelectionClick" text="Clear Selection" />
    </children>
 </AnchorPane>

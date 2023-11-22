@@ -1,6 +1,7 @@
 package group_2_cs2043.Frontend;
 
 import group_2_cs2043.Backend.Ingredient;
+import group_2_cs2043.Backend.Runtime;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,8 +37,11 @@ public class PrimaryController implements Initializable {
   @FXML
   private ListView<Ingredient> selectedListView;
   
+  private Runtime runtime = new Runtime();
+  
   //Variables for displaying and selecting Ingredients
   private ArrayList<Ingredient> ingredientArray = new ArrayList<Ingredient>();
+  private ArrayList<Ingredient> selectedArray = new ArrayList<Ingredient>();
   private ObservableList<Ingredient> ingredientList;
   private ObservableList<Ingredient> selectedList;
   private Ingredient currentIngredient;
@@ -51,13 +55,19 @@ public class PrimaryController implements Initializable {
   @Override
   public void initialize(URL arg0, ResourceBundle arg1){
 	  
-	//Load in the saved list
+	//Load in existing ingredients
     try {
         ingredientArray = Ingredient.loadSavedList();
     } catch (IOException e) {}
     
-    ingredientList = FXCollections.observableArrayList(ingredientArray); 	//Instantiate ingredientList with existing	  
-    selectedList = FXCollections.observableArrayList(); 					//Instantiate selectedList, initially empty
+    //Load all available ingredients, derived from existing ingredients
+    for(int i = 0; i < ingredientArray.size(); i++) {
+    	if(ingredientArray.get(i).isAvailable())
+    		selectedArray.add(ingredientArray.get(i));
+    }
+    
+    ingredientList = FXCollections.observableArrayList(ingredientArray); 	//Instantiate ingredientList with existing ingredients
+    selectedList = FXCollections.observableArrayList(selectedArray); 		//Instantiate selectedList with available ingredients
     
     ingredientsListView.setItems(ingredientList); 	// Set items in ListView to reflect ingredientList ObservableList 
     selectedListView.setItems(selectedList);		// Set items in ListView to reflect selectedList ObservableList
@@ -70,6 +80,9 @@ public class PrimaryController implements Initializable {
     	//Conditional statement verifies Ingredient is not null, and is not present in 'selectedList' ObservableList
     	if((currentIngredient != null) && !(selectedList.contains(currentIngredient))) {
     		selectedList.add(currentIngredient);
+    		try {
+				runtime.setAvailable(currentIngredient.getName());
+			} catch (IOException e) {}
     	}
     	currentIngredient = null;
     });
@@ -82,6 +95,9 @@ public class PrimaryController implements Initializable {
     	//Conditional statement verifies Ingredient is not null
     	if(currentIngredient != null) {
     		selectedList.remove(currentIngredient);
+    		try {
+				runtime.setUnAvailable(currentIngredient.getName());
+			} catch (IOException e) {}
     	}
     	currentIngredient = null;
     });
@@ -133,11 +149,14 @@ public class PrimaryController implements Initializable {
    * This method opens a prompt for removing a selected Ingredient.
    * @throws IOException 
    */
+  /*
   @FXML
   public void onRemoveIngredientClick() throws IOException {
 	  currentIngredient = ingredientsListView.getSelectionModel().getSelectedItem();
 	  
 	  if(currentIngredient != null) {
+		  
+		  
 		  ingredientList.clear();
 	      ArrayList<Ingredient> reList = Ingredient.loadSavedList();
 	    
@@ -156,33 +175,15 @@ public class PrimaryController implements Initializable {
 	      if(selectedList.contains(currentIngredient)) {
 	    	  selectedList.remove(currentIngredient);
 	      }
+	      
 	  }
   }
-  
+  */
   /**
    * This method opens the Recipe screen.
    */
   @FXML
   public void onConfirmIngredients(ActionEvent event) throws IOException{
-	  
-	  
-	  	//Sets selected ingredients to available
-	  	for(int i= 0; i < selectedList.size(); i++) {
-	  		for(int j = 0; j < ingredientList.size(); j++) {
-	  			if(ingredientList.get(j).getName().equals(selectedList.get(i).getName())) {
-	  				ingredientList.get(j).setAvailable(true);
-	  				break;
-	  			}
-	  		}
-	  	}
-	  	
-
-	  	//Please work
-	  	ingredientArray.clear();
-	  	ingredientArray.addAll(ingredientList);
-	  	Ingredient.writeCurrentList(ingredientArray);
-	  
-	  
 	  	Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	    Scene scene = new Scene(root);
@@ -195,7 +196,10 @@ public class PrimaryController implements Initializable {
    * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
    */
   @FXML
-  public void onClearSelectionClick() {
+  public void onClearSelectionClick() throws IOException{
+	for(int i = 0; i < selectedList.size(); i++) {
+		runtime.setUnAvailable(selectedList.get(i).getName());
+	}
 	selectedList.clear();  
   }
 }
