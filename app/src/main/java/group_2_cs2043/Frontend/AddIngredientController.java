@@ -46,13 +46,15 @@ public class AddIngredientController {
 		  //Testing shows .contains always returns false; whether the list contains the Ingredient or not
 		  //Maybe .equals in Ingredient needs to be @Override'd?
 		  //Manual iteration is in place for now
+		  //**
 		  boolean containsIngredient = false;
 		  for(int i = 0; i < ingredientArray.size(); i++) {
-			  if(ingredientArray.get(i).getName().equals(ingredientName)) {
+			  if(ingredientArray.get(i).getName().toLowerCase().equals(ingredientName.toLowerCase())) {
 				  containsIngredient = true;
 				  break;
 			  }
 		  }
+		  //**
 		  
 		  if(!containsIngredient) {
 			  ingredientArray.add(ingredient);

@@ -11,6 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,6 +28,7 @@ import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
+  //FXML variables for interactivity
   @FXML
   private TextField ingredientField;
   @FXML
@@ -33,6 +36,7 @@ public class PrimaryController implements Initializable {
   @FXML
   private ListView<Ingredient> selectedListView;
   
+  //Variables for displaying and selecting Ingredients
   private ArrayList<Ingredient> ingredientArray = new ArrayList<Ingredient>();
   private ObservableList<Ingredient> ingredientList;
   private ObservableList<Ingredient> selectedList;
@@ -47,12 +51,13 @@ public class PrimaryController implements Initializable {
   @Override
   public void initialize(URL arg0, ResourceBundle arg1){
 	  
+	//Load in the saved list
     try {
         ingredientArray = Ingredient.loadSavedList();
     } catch (IOException e) {}
-   
-    ingredientList = FXCollections.observableArrayList(ingredientArray); //Instantiate ingredientList with all available ingredient data				
-    selectedList = FXCollections.observableArrayList(); 				 //Instantiate selectedList, initially empty
+    
+    ingredientList = FXCollections.observableArrayList(ingredientArray); 	//Instantiate ingredientList with existing	  
+    selectedList = FXCollections.observableArrayList(); 					//Instantiate selectedList, initially empty
     
     ingredientsListView.setItems(ingredientList); 	// Set items in ListView to reflect ingredientList ObservableList 
     selectedListView.setItems(selectedList);		// Set items in ListView to reflect selectedList ObservableList
@@ -154,7 +159,39 @@ public class PrimaryController implements Initializable {
 	  }
   }
   
-  /*
+  /**
+   * This method opens the Recipe screen.
+   */
+  @FXML
+  public void onConfirmIngredients(ActionEvent event) throws IOException{
+	  
+	  
+	  	//Sets selected ingredients to available
+	  	for(int i= 0; i < selectedList.size(); i++) {
+	  		for(int j = 0; j < ingredientList.size(); j++) {
+	  			if(ingredientList.get(j).getName().equals(selectedList.get(i).getName())) {
+	  				ingredientList.get(j).setAvailable(true);
+	  				break;
+	  			}
+	  		}
+	  	}
+	  	
+
+	  	//Please work
+	  	ingredientArray.clear();
+	  	ingredientArray.addAll(ingredientList);
+	  	Ingredient.writeCurrentList(ingredientArray);
+	  
+	  
+	  	Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
+	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+  }
+  
+  
+  /**
    * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
    */
   @FXML
