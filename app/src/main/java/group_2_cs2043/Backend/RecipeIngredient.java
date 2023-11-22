@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @version 1.0.0
  */
 public class RecipeIngredient implements Serializable {
+
   private String ingredient;
   private String amount;
   private String substitutions;
@@ -40,9 +41,10 @@ public class RecipeIngredient implements Serializable {
    * @param substitutionsIn Any potential substitutions for the ingredient.
    */
   public RecipeIngredient(
-      String ingredientName,
-      String amountIn,
-      String substitutionsIn) {
+    String ingredientName,
+    String amountIn,
+    String substitutionsIn
+  ) {
     ingredient = ingredientName;
     amount = amountIn;
     substitutions = substitutionsIn;

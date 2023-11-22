@@ -31,10 +31,10 @@ replay_pid*
 # Ignore Gradle build output directory
 build
 
-# Ignore my IDE's config dir.
+# Ignore IDE's config dir.
 .vscode
 
-/bin/
+bin
 .project
 .classpath
 .settings
