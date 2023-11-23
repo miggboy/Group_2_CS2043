@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 /**
  * This is a controller class for the primary screen.
- *
+ * This class showcases the ingredient selection feature.
  * @author Miguel Daigle Gould
  */
 
@@ -126,6 +126,7 @@ public class PrimaryController implements Initializable {
   
   /**
   * This method opens a pop-up window to add a new Ingredient.
+  * @throws IOException
   */
   
   @FXML
@@ -139,7 +140,7 @@ public class PrimaryController implements Initializable {
   
   /**
    * This method removes selected Ingredient from the existing Ingredients list
- * @throws IOException 
+   * @throws IOException 
    */
   @FXML
   public void onRemoveIngredientClick() throws IOException {
@@ -152,6 +153,7 @@ public class PrimaryController implements Initializable {
   
   /**
    * This method clears the selectedList ObservableList, thus clearing the corresponding ListView
+   * @throws IOException
    */
   @FXML
   public void onClearSelectionClick() throws IOException{
@@ -162,7 +164,9 @@ public class PrimaryController implements Initializable {
   }
   
   /**
-   * This method opens the Recipe screen.
+   * This method opens the next scene contains a set of Recipe views.
+   * This method executes upon user confirming ingredient selection.
+   * @throws IOException
    */
   @FXML
   public void onConfirmIngredients(ActionEvent event) throws IOException{
@@ -172,6 +176,11 @@ public class PrimaryController implements Initializable {
 	    stage.setScene(scene);
 	    stage.show();
   }
+  
+  /**
+   * This method opens the addRecipe.fxml scene.
+   * @throws IOException
+   */
   @FXML
   void addNewRecipeClick(ActionEvent event) throws IOException {
 	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addRecipe.fxml"));

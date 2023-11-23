@@ -5,7 +5,6 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import group_2_cs2043.Backend.Ingredient;
 import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.Runtime;

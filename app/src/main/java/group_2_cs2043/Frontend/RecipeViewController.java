@@ -16,13 +16,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+
+/**
+ * This class displays several Recipe views, such as 'Best Match', 'Favorites' and 'All Recipes.
+ * Also provides buttons to access secondary use-case features.
+ * @author Miguel Daigle Gould
+ */
 
 public class RecipeViewController implements Initializable {
 	
@@ -145,7 +149,8 @@ public class RecipeViewController implements Initializable {
 	}
 	
 	/**
-	 * Go back to the previous screen
+	 * Go back to the previous screen.
+	 * @throws IOException
 	 */
     @FXML
     public void recipeScreenBackClick(ActionEvent event) throws IOException {
@@ -156,6 +161,7 @@ public class RecipeViewController implements Initializable {
 	    stage.show();
     }
     
+    
     /**
      * This method opens up the recipe in a pop-up, and shows all recipe details.
      * @throws IOException 
@@ -163,7 +169,6 @@ public class RecipeViewController implements Initializable {
     @FXML
     public void onRecipeClick(Recipe rcp) throws IOException {
     	//Get selected Recipe index number
- 
     	int index = -1;
     	for(int i = 0; i < runtime.recipeCount(); i++) {
     		if(runtime.getRecipe(i).getName().equals(rcp.getName())) {
@@ -178,10 +183,50 @@ public class RecipeViewController implements Initializable {
     	RecipeInformationController ric = loader.getController();
     	ric.setValue(index);			//Pass index of recipe through to pop-up scene. Vital for populating data.
     	
+    	Stage stage = (Stage)(recipeScreenBack.getScene()).getWindow();
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        stage.show();
     }
+    
+    /**
+     * This method opens the Shopping List scene.
+     * @throws IOException.
+     */
+    
+    @FXML
+    public void onShoppingListClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/shoppingList.fxml"));
+ 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 	    Scene scene = new Scene(root);
+ 	    stage.setScene(scene);
+ 	    stage.show();
+    }
+    
+    /**
+     * This method opens the Quick Search scene.
+     * @throws IOException
+     */
+    @FXML
+    public void onQuickSearchClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/quickSearch.fxml"));
+ 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 	    Scene scene = new Scene(root);
+ 	    stage.setScene(scene);
+ 	    stage.show();
+    }
+    
+    /**
+     * This method opens the Cook Time Search scene.
+     * @throws IOException
+     */
+    @FXML
+    public void onCookTimeSearchClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/cookTimeSearch.fxml"));
+ 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 	    Scene scene = new Scene(root);
+ 	    stage.setScene(scene);
+ 	    stage.show();
+    }
+    
 }

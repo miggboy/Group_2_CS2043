@@ -11,42 +11,59 @@ import group_2_cs2043.Backend.RecipeIngredient;
 import group_2_cs2043.Backend.Runtime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+/**
+ * This controller showcases all data relating to a Recipe object.
+ * @author Miguel Daigle Gould
+ */
 
 public class RecipeInformationController implements Initializable{
 	
+	//Displays for various Recipe attributes
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	@FXML
-	Label prepTimeLabel;
+	private Label prepTimeLabel;
 	@FXML
-	Label servingCountLabel;
+	private Label servingCountLabel;
 	@FXML
-	Label ratingLabel;
+	private Label ratingLabel;
 	@FXML
-	Label missingLabel;
+	private Label missingLabel;
 	@FXML
-	TextArea instructionTextArea;
+	private TextArea instructionTextArea;
 	@FXML
-	TableView<RecipeIngredient> ingredientTable;
+	private TableView<RecipeIngredient> ingredientTable;
 	@FXML
-	TableColumn<RecipeIngredient, String> ingredientsColumn;
-	@FXML
-	CheckBox favTick;
+	private TableColumn<RecipeIngredient, String> ingredientsColumn;
 	
+	@FXML
+	private CheckBox favTick;			//Checkbox for adding a recipe to Favorites
 	
-    private ObservableList<Ingredient> ingredientList = FXCollections.observableArrayList();
+	//Components for adding ratings
+	@FXML
+	private Label errorLabel;
+	@FXML
+	private TextField rateField;
 	
-	int index;
-	Runtime runtime = new Runtime();
-	Recipe recipe;
+	private int index;
+	private Runtime runtime = new Runtime();
+	private Recipe recipe;
 	
 	public void setValue(int index) {
 		this.index = index;
@@ -67,9 +84,7 @@ public class RecipeInformationController implements Initializable{
 		instructionTextArea.setText(recipe.getInstructions());
 		
 		//Format and display rating
-		Double avgRate = recipe.getAverageRating();
-		DecimalFormat decimalFormat = new DecimalFormat("#.#");
-		ratingLabel.setText(decimalFormat.format(avgRate));
+		dispAverageRating();
 		
 		//Set column values
 		ingredientsColumn.setCellValueFactory(new PropertyValueFactory<RecipeIngredient, String>("ingredientName"));
@@ -94,6 +109,10 @@ public class RecipeInformationController implements Initializable{
 		missingLabel.setText(disp);
 	}
 	
+	/**
+	 * This method modifies the isFavorite attribute of a recipe depending on user input
+	 * @throws IOException
+	 */
 	
 	@FXML
 	public void setFavorite() throws IOException {
@@ -106,4 +125,54 @@ public class RecipeInformationController implements Initializable{
 		}
 	}
 	
+	/**
+	 * This method adds a rating to the recipe.
+	 * @throws IOException
+	 */
+	public void addRating() throws IOException {
+		try {
+			int rate = Integer.parseInt(rateField.getText());
+			if(rate > 5 || rate < 0) throw new NumberFormatException();
+			runtime.getRecipe(index).addRating(rate);
+			dispAverageRating();
+			rateField.setText("");
+			errorLabel.setText("");
+		}
+		catch(NumberFormatException e) {
+			errorLabel.setText("Bad input. Please enter 0-5.");
+		}
+	}
+	
+	/**
+	 * This method returns to the previous scene.
+	 * @throws IOException
+	 */
+	@FXML
+	public void onReturnClick(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
+	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	}
+	
+	/**
+	 * This method removes a recipe from runtime, then returns to the previous scene.
+	 * @throws IOException
+	 */
+	@FXML
+	public void onDeleteClick(ActionEvent event) throws IOException {
+		recipe = runtime.getRecipe(index);
+		runtime.removeRecipe(recipe.getName());
+		onReturnClick(event);
+	}
+	
+	/**
+	 * Helper method for calculating and displaying average rating.
+	 */
+	public void dispAverageRating() {
+		Double avgRate = recipe.getAverageRating();
+		DecimalFormat decimalFormat = new DecimalFormat("#.#");
+		ratingLabel.setText(decimalFormat.format(avgRate));
+	}
 }
