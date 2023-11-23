@@ -155,6 +155,7 @@ public class RecipeViewController implements Initializable {
 	    stage.show();
     }
     
+    
     /**
      * This method opens up the recipe in a pop-up, and shows all recipe details.
      * @throws IOException 

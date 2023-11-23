@@ -55,5 +55,6 @@
       <Label fx:id="missingLabel" layoutX="195.0" layoutY="401.0" prefHeight="19.0" prefWidth="470.0" text="NA" textFill="RED" />
       <CheckBox fx:id="favTick" layoutX="514.0" layoutY="105.0" mnemonicParsing="false" onAction="#setFavorite" text="Favorite" />
       <Button layoutX="25.0" layoutY="426.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
+      <Button layoutX="456.0" layoutY="426.0" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete Recipe (cannot be undone)" />
    </children>
 </AnchorPane>

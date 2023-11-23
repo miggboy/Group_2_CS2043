@@ -121,5 +121,12 @@ public class RecipeInformationController implements Initializable{
 	    stage.show();
 	}
 	
+	@FXML
+	public void onDeleteClick(ActionEvent event) throws IOException {
+		recipe = runtime.getRecipe(index);
+		runtime.removeRecipe(recipe.getName());
+		onReturnClick(event);
+	}
+	
 	
 }
