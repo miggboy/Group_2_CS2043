@@ -49,7 +49,7 @@ public class Ingredient implements Serializable {
   public static ArrayList<Ingredient> loadSavedList()
     throws IOException, IllegalArgumentException {
     // Directory path for saving the list
-    String importPath = System.getProperty("user.home") + "\\.RecipeBrowser";
+    String importPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(importPath);
     // Step 1: Verify if the directory exists, and handle accordingly
     if (!f.exists()) {
@@ -57,7 +57,7 @@ public class Ingredient implements Serializable {
     } else if (!f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.home") +
-        "\\.RecipeBrowser" +
+        "/.RecipeBrowser" +
         " is a file, where it should be a folder. Execution cannot continue."
       );
     }
@@ -72,7 +72,7 @@ public class Ingredient implements Serializable {
     } else if (f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.home") +
-        "\\.RecipeBrowser\\Ingredients.bin" +
+        "/.RecipeBrowser\\Ingredients.bin" +
         " is a folder, where it should be a file. Execution cannot continue."
       );
     }
@@ -135,14 +135,14 @@ public class Ingredient implements Serializable {
   public static void writeDefaultList(int state)
     throws IOException, IllegalArgumentException {
     if (state == 0) {
-      new File(System.getProperty("user.home") + "\\.RecipeBrowser").mkdir();
+      new File(System.getProperty("user.home") + "/.RecipeBrowser").mkdir();
       state = 1;
     }
     if (state == 1) {
       ArrayList<Ingredient> list = makeDefaultList();
       ObjectOutputStream objOut = new ObjectOutputStream(
         new FileOutputStream(
-          System.getProperty("user.home") + "\\.RecipeBrowser\\Ingredients.bin"
+          System.getProperty("user.home") + "/.RecipeBrowser\\Ingredients.bin"
         )
       );
       objOut.writeObject(list);
@@ -161,14 +161,14 @@ public class Ingredient implements Serializable {
    */
   public static void writeCurrentList(ArrayList<Ingredient> input)
     throws IOException {
-    String exportPath = System.getProperty("user.home") + "\\.RecipeBrowser";
+    String exportPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(exportPath);
     if (!f.exists()) {
       f.mkdir();
     } else if (!f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.home") +
-        "\\.RecipeBrowser" +
+        "/.RecipeBrowser" +
         " is a file, where it should be a folder. Execution cannot continue."
       );
     }

@@ -43,7 +43,7 @@ public class Runtime {
    * Deletes all saved data.
    */
   public static void clearSavedData() {
-    String importPath = System.getProperty("user.home") + "\\.RecipeBrowser";
+    String importPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(importPath);
     deleteDirectory(f);
   }
@@ -126,7 +126,7 @@ public class Runtime {
    * @throws IOException if something breaks while writing the data.
    */
   private void saveRuntime() throws IOException {
-    File f = new File(System.getProperty("user.home") + "\\.RecipeBrowser");
+    File f = new File(System.getProperty("user.home") + "/.RecipeBrowser");
     String[] entries = f.list();
     for (String s : entries) {
       File currentFile = new File(f.getPath(), s);
