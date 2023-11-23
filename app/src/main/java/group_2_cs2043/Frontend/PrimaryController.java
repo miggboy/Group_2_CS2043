@@ -171,11 +171,9 @@ public class PrimaryController implements Initializable {
   @FXML
   public void onRemoveIngredientClick() throws IOException {
 	  Ingredient ingr = ingredientsListView.getSelectionModel().getSelectedItem();
+	  ingredientList.remove(ingr);
+	  selectedList.remove(ingr);
 	  runtime.removeIngredient(ingr.getName());
-	  
-      //Clearing list and refilling is necessary to refresh ListView
-      ingredientList.clear();
-      ingredientList.addAll(getSavedIngredientsArray());
   }
   
   
