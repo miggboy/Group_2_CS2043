@@ -15,17 +15,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddRecipeController implements Initializable{
 	private Runtime runtime = new Runtime();
 	  
-	//Variables for displaying and selecting Ingredients
+	//Variable for displaying and selecting Ingredients
 	private ArrayList<Ingredient> ingredientArray = new ArrayList<Ingredient>();
-	private ObservableList<Recipe> recipeList;
 
 	@FXML
     private ChoiceBox<String> dropDownMenu;
@@ -40,7 +44,9 @@ public class AddRecipeController implements Initializable{
     @FXML
     private ListView<Ingredient> ingredientsListView;
     private String[][] holder = {{"wow","1 cup",""},{"wow2","2 cups",""},{"wow3","3 cups",""}};
-
+    /*
+     * Creates a new recipe from the specified fields and adds it to runtime, then changes scene back to primary
+     */
     @FXML
     void createButtonClick(ActionEvent event) throws NumberFormatException, IOException {
     	runtime.addRecipe(recipeNameField.getText(), 
@@ -48,9 +54,16 @@ public class AddRecipeController implements Initializable{
     					  Duration.ofMinutes(Integer.parseInt(prepTimeField.getText())), 
     					  Integer.parseInt(servingSizeField.getText()), 
     					  holder);
+    	Parent root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
+	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
     }
-    
-	@Override
+    /*
+     * Update the current scene with the updated list view data
+	 *@Override
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Populate the ChoiceBox with ingredients
 		ingredientArray = getSavedIngredientsArray();
@@ -58,15 +71,9 @@ public class AddRecipeController implements Initializable{
 	    	dropDownMenu.getItems().add(ingredientArray.get(i).getName());
 	    }
 		dropDownMenu.setOnAction(this::getIngredient);
-		ingredientsListView.getItems().add(new Ingredient("Test",true));
-		//
-		
-		ArrayList<Recipe> tempArray = new ArrayList<Recipe>();
-		
+		//Test add ingredient
+		//ingredientsListView.getItems().add(new Ingredient("Test",true));
 	}
-
-    
-    
 	/**
 	 * Helper method for getting saved Ingredients list from drive 
 	 */
@@ -77,22 +84,11 @@ public class AddRecipeController implements Initializable{
 		  }
 		  return arr;
 	 }
-	
+	/*
+	 * A method to help display the selected ingredients in a list view
+	 */
 	public void getIngredient(ActionEvent event) {
 		String myIngredient = dropDownMenu.getValue();
 		ingredientsListView.getItems().add(new Ingredient(myIngredient,true));
-		/**
-		ingredientsListView.getSelectionModel().selectedItemProperty().addListener((InvalidationListener) new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				
-				
-			}
-		
-		
-		});
-		*/
-	}
-    
+	}  
 }

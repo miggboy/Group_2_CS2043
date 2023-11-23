@@ -12,10 +12,10 @@
       <TextField fx:id="recipeNameField" layoutX="147.0" layoutY="15.0" prefHeight="25.0" prefWidth="238.0" />
       <TextField fx:id="instructionField" layoutX="524.0" layoutY="18.0" prefHeight="343.0" prefWidth="238.0" />
       <Label layoutX="14.0" layoutY="19.0" text="Name of the new recipe: " />
-      <Label layoutX="408.0" layoutY="19.0" text="Recipe instructions: " />
-      <Label layoutX="14.0" layoutY="50.0" text="Prep time: " />
+      <Label layoutX="409.0" layoutY="19.0" text="Recipe instructions: " />
+      <Label layoutX="14.0" layoutY="50.0" text="Prep time (in minutes): " />
       <TextField fx:id="prepTimeField" layoutX="147.0" layoutY="46.0" prefHeight="25.0" prefWidth="238.0" />
-      <Label layoutX="14.0" layoutY="80.0" text="Serving size:" />
+      <Label layoutX="14.0" layoutY="80.0" text="Serving size(1-100):" />
       <TextField fx:id="servingSizeField" layoutX="147.0" layoutY="76.0" prefHeight="25.0" prefWidth="238.0" />
       <Label layoutX="15.0" layoutY="181.0" text="Ingredients:" />
       <ListView fx:id="ingredientsListView" layoutX="252.0" layoutY="178.0" prefHeight="200.0" prefWidth="133.0" />
