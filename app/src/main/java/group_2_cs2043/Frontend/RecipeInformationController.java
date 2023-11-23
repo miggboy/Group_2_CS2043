@@ -62,9 +62,10 @@ public class RecipeInformationController{
 	private Recipe recipe;
 	
 	public void setValue(int index) {
-		System.out.println(index + "POPUP");
-		ind = index;
-		recipe = runtime.getRecipe(ind);
+		this.ind = index;
+		recipe = runtime.getRecipe(index);			//Retrieve indexed recipe from runtime
+		
+
 		if(recipe.isFavorite()) {
 			favTick.setSelected(true);
 		}
