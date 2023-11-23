@@ -1,5 +1,6 @@
 package group_2_cs2043.Frontend;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class RecipeInformationController implements Initializable{
 	
 	
 	@FXML
-	public void setFavorite() {
+	public void setFavorite() throws IOException {
 		Recipe rec = runtime.getRecipe(index);		
 		if(!favTick.isSelected()) {
 			runtime.setFavorite(rec.getName(), false);

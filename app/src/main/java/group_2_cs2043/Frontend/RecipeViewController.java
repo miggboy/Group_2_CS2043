@@ -95,7 +95,7 @@ public class RecipeViewController implements Initializable {
 		
 		recipeTable.setOnMouseClicked(event ->{
 			if(event.getClickCount() == 2) {
-				try { onRecipeClick();
+				try { onRecipeClick(recipeTable.getSelectionModel().getSelectedItem());
 				} catch (IOException e) {
 				}
 			}
@@ -117,7 +117,7 @@ public class RecipeViewController implements Initializable {
 		
 		allRecipeTable.setOnMouseClicked(event ->{
 			if(event.getClickCount() == 2) {
-				try { onRecipeClick();
+				try { onRecipeClick(allRecipeTable.getSelectionModel().getSelectedItem());
 				} catch (IOException e) {
 				}
 			}
@@ -136,7 +136,7 @@ public class RecipeViewController implements Initializable {
 		
 		favRecipeTable.setOnMouseClicked(event ->{
 			if(event.getClickCount() == 2) {
-				try { onRecipeClick();
+				try { onRecipeClick(favRecipeTable.getSelectionModel().getSelectedItem());
 				} catch (IOException e) {
 				}
 			}
@@ -161,12 +161,9 @@ public class RecipeViewController implements Initializable {
      * @throws IOException 
      */
     @FXML
-    public void onRecipeClick() throws IOException {
+    public void onRecipeClick(Recipe rcp) throws IOException {
     	//Get selected Recipe index number
-    	Recipe rcp = recipeTable.getSelectionModel().getSelectedItem();
-    	if(rcp == null)	allRecipeTable.getSelectionModel().getSelectedItem();
-    	if(rcp == null) favRecipeTable.getSelectionModel().getSelectedItem();
-    	
+ 
     	int index = -1;
     	for(int i = 0; i < runtime.recipeCount(); i++) {
     		if(runtime.getRecipe(i).getName().equals(rcp.getName())) {
