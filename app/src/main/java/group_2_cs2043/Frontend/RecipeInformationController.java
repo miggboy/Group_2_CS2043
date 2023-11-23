@@ -1,11 +1,8 @@
 package group_2_cs2043.Frontend;
 
 import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import group_2_cs2043.Backend.Ingredient;
 import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.RecipeIngredient;
 import group_2_cs2043.Backend.Runtime;
@@ -14,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,7 +28,7 @@ import javafx.stage.Stage;
  * @author Miguel Daigle Gould
  */
 
-public class RecipeInformationController implements Initializable{
+public class RecipeInformationController{
 	
 	//Displays for various Recipe attributes
 	@FXML
@@ -61,18 +57,14 @@ public class RecipeInformationController implements Initializable{
 	@FXML
 	private TextField rateField;
 	
-	private int index;
+	private int ind;
 	private Runtime runtime = new Runtime();
 	private Recipe recipe;
 	
 	public void setValue(int index) {
-		this.index = index;
-	}
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		recipe = runtime.getRecipe(index);			//Retrieve indexed recipe from runtime
-		
+		System.out.println(index + "POPUP");
+		ind = index;
+		recipe = runtime.getRecipe(ind);
 		if(recipe.isFavorite()) {
 			favTick.setSelected(true);
 		}
@@ -105,7 +97,6 @@ public class RecipeInformationController implements Initializable{
 		for(int i = 0; i < recinArray.size(); i++) {
 			disp += recinArray.get(i).getIngredientName() + ", ";
 		}
-
 		missingLabel.setText(disp);
 	}
 	
@@ -116,7 +107,7 @@ public class RecipeInformationController implements Initializable{
 	
 	@FXML
 	public void setFavorite() throws IOException {
-		Recipe rec = runtime.getRecipe(index);		
+		Recipe rec = runtime.getRecipe(ind);		
 		if(!favTick.isSelected()) {
 			runtime.setFavorite(rec.getName(), false);
 		}
@@ -133,7 +124,7 @@ public class RecipeInformationController implements Initializable{
 		try {
 			int rate = Integer.parseInt(rateField.getText());
 			if(rate > 5 || rate < 0) throw new NumberFormatException();
-			runtime.getRecipe(index).addRating(rate);
+			runtime.getRecipe(ind).addRating(rate);
 			dispAverageRating();
 			rateField.setText("");
 			errorLabel.setText("");
@@ -162,7 +153,7 @@ public class RecipeInformationController implements Initializable{
 	 */
 	@FXML
 	public void onDeleteClick(ActionEvent event) throws IOException {
-		recipe = runtime.getRecipe(index);
+		recipe = runtime.getRecipe(ind);
 		runtime.removeRecipe(recipe.getName());
 		onReturnClick(event);
 	}
