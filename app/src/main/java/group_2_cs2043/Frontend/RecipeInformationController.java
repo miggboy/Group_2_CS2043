@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  * @author Miguel Daigle Gould
  */
 
-public class RecipeInformationController implements Initializable{
+public class RecipeInformationController{
 	
 	//Displays for various Recipe attributes
 	@FXML
@@ -67,10 +67,6 @@ public class RecipeInformationController implements Initializable{
 	
 	public void setValue(int index) {
 		this.index = index;
-	}
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
 		recipe = runtime.getRecipe(index);			//Retrieve indexed recipe from runtime
 		
 		if(recipe.isFavorite()) {
