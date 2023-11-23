@@ -322,9 +322,6 @@ public class Runtime {
           Ingredient test = ingredientList.get(k);
           if (test.equals(compare) && test.isAvailable()) {
             found = true;
-            System.out.println(
-              "Found " + compare + " Which is available: " + test.isAvailable()
-            );
           }
         }
         if (!found) {
