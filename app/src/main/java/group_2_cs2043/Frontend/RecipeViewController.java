@@ -16,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -178,10 +177,9 @@ public class RecipeViewController implements Initializable {
     	RecipeInformationController ric = loader.getController();
     	ric.setValue(index);			//Pass index of recipe through to pop-up scene. Vital for populating data.
     	
+    	Stage stage = (Stage)(recipeScreenBack.getScene()).getWindow();
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        stage.show();
     }
 }
