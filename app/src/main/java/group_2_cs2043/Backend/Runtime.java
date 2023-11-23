@@ -36,7 +36,7 @@ public class Runtime {
   public static void createDefaultData() throws IOException {
     clearSavedData();
     Ingredient.writeDefaultList(0);
-    Recipe.writeDefaultList(0);
+    Recipe.writeDefaultList(1);
   }
 
   /**
