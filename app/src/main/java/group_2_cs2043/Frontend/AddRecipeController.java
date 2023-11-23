@@ -40,7 +40,7 @@ public class AddRecipeController implements Initializable{
     private TextField servingSizeField;
     @FXML
     private ListView<Ingredient> ingredientsListView;
-    private String[][] holder = {{"wow","1 cup",""}};
+    private String[][] holder = {{"wow","1 cup",""},{"wow2","2 cups",""},{"wow3","3 cups",""}};
 
     @FXML
     void createButtonClick(ActionEvent event) throws NumberFormatException, IOException {
