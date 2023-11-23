@@ -199,6 +199,13 @@ public class PrimaryController implements Initializable {
 	    stage.setScene(scene);
 	    stage.show();
   }
-  
+  @FXML
+  void addNewRecipeClick(ActionEvent event) throws IOException {
+	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addRecipe.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = new Stage();
+      stage.setScene(scene);
+      stage.showAndWait();
+  }
 
 }
