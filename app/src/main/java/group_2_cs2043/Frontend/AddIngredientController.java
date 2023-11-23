@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 /**
  *This is a controller class for the Add Ingredient pop-up screen.
  *
- * @author Benjamin Martin
+ * @author Benjamin Martin & Miguel Daigle Gould
  * 
  */
 
@@ -38,7 +38,6 @@ public class AddIngredientController {
    * This ActionEvent handles creating a new Ingredient and storing it.
    * Checks for blank input and duplicates.
    * @throws IOException  
-   * @author Benjamin Martin & Miguel Daigle Gould
    */
   @FXML
   void onEnterClick(ActionEvent event) throws IOException {
