@@ -163,7 +163,6 @@ public class RecipeViewController implements Initializable {
     @FXML
     public void onRecipeClick(Recipe rcp) throws IOException {
     	//Get selected Recipe index number
- 
     	int index = -1;
     	for(int i = 0; i < runtime.recipeCount(); i++) {
     		if(runtime.getRecipe(i).getName().equals(rcp.getName())) {
@@ -183,4 +182,14 @@ public class RecipeViewController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    public void onShoppingListClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/shoppingList.fxml"));
+ 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 	    Scene scene = new Scene(root);
+ 	    stage.setScene(scene);
+ 	    stage.show();
+    }
+    
 }

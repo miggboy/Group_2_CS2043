@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.RecipeViewController">
    <children>
-      <Label layoutX="270.0" layoutY="21.0" text="Recipes">
+      <Label layoutX="35.0" layoutY="21.0" text="Recipes">
          <font>
             <Font size="18.0" />
          </font>
@@ -70,5 +70,6 @@
             </Tab>
         </tabs>
       </TabPane>
+      <Button layoutX="212.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
    </children>
 </AnchorPane>
