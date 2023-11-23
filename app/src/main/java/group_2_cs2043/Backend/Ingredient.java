@@ -49,21 +49,21 @@ public class Ingredient implements Serializable {
   public static ArrayList<Ingredient> loadSavedList()
     throws IOException, IllegalArgumentException {
     // Directory path for saving the list
-    String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+    String importPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(importPath);
     // Step 1: Verify if the directory exists, and handle accordingly
     if (!f.exists()) {
       Ingredient.writeDefaultList(0);
     } else if (!f.isDirectory()) {
       throw new IOException(
-        System.getProperty("user.dir") +
-        "\\.RecipeBrowser" +
+        System.getProperty("user.home") +
+        "/.RecipeBrowser" +
         " is a file, where it should be a folder. Execution cannot continue."
       );
     }
 
     // Append the filename to the path
-    importPath += "\\Ingredients.bin";
+    importPath += "/Ingredients.bin";
     f = new File(importPath);
 
     // Step 3: Verify if the file exists, and handle accordingly
@@ -71,8 +71,8 @@ public class Ingredient implements Serializable {
       Ingredient.writeDefaultList(1);
     } else if (f.isDirectory()) {
       throw new IOException(
-        System.getProperty("user.dir") +
-        "\\.RecipeBrowser\\Ingredients.bin" +
+        System.getProperty("user.home") +
+        "/.RecipeBrowser/Ingredients.bin" +
         " is a folder, where it should be a file. Execution cannot continue."
       );
     }
@@ -135,14 +135,14 @@ public class Ingredient implements Serializable {
   public static void writeDefaultList(int state)
     throws IOException, IllegalArgumentException {
     if (state == 0) {
-      new File(System.getProperty("user.dir") + "\\.RecipeBrowser").mkdir();
+      new File(System.getProperty("user.home") + "/.RecipeBrowser").mkdir();
       state = 1;
     }
     if (state == 1) {
       ArrayList<Ingredient> list = makeDefaultList();
       ObjectOutputStream objOut = new ObjectOutputStream(
         new FileOutputStream(
-          System.getProperty("user.dir") + "\\.RecipeBrowser\\Ingredients.bin"
+          System.getProperty("user.home") + "/.RecipeBrowser/Ingredients.bin"
         )
       );
       objOut.writeObject(list);
@@ -161,20 +161,20 @@ public class Ingredient implements Serializable {
    */
   public static void writeCurrentList(ArrayList<Ingredient> input)
     throws IOException {
-    String exportPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+    String exportPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(exportPath);
     if (!f.exists()) {
       f.mkdir();
     } else if (!f.isDirectory()) {
       throw new IOException(
-        System.getProperty("user.dir") +
-        "\\.RecipeBrowser" +
+        System.getProperty("user.home") +
+        "/.RecipeBrowser" +
         " is a file, where it should be a folder. Execution cannot continue."
       );
     }
 
     ObjectOutputStream objOut = new ObjectOutputStream(
-      new FileOutputStream(exportPath + "\\Ingredients.bin")
+      new FileOutputStream(exportPath + "/Ingredients.bin")
     );
     objOut.writeObject(input);
     objOut.close();

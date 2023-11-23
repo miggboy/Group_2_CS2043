@@ -36,14 +36,14 @@ public class Runtime {
   public static void createDefaultData() throws IOException {
     clearSavedData();
     Ingredient.writeDefaultList(0);
-    Recipe.writeDefaultList(0);
+    Recipe.writeDefaultList(1);
   }
 
   /**
    * Deletes all saved data.
    */
   public static void clearSavedData() {
-    String importPath = System.getProperty("user.dir") + "\\.RecipeBrowser";
+    String importPath = System.getProperty("user.home") + "/.RecipeBrowser";
     File f = new File(importPath);
     deleteDirectory(f);
   }
@@ -126,7 +126,7 @@ public class Runtime {
    * @throws IOException if something breaks while writing the data.
    */
   private void saveRuntime() throws IOException {
-    File f = new File(System.getProperty("user.dir") + "\\.RecipeBrowser");
+    File f = new File(System.getProperty("user.home") + "/.RecipeBrowser");
     String[] entries = f.list();
     for (String s : entries) {
       File currentFile = new File(f.getPath(), s);
@@ -322,9 +322,6 @@ public class Runtime {
           Ingredient test = ingredientList.get(k);
           if (test.equals(compare) && test.isAvailable()) {
             found = true;
-            System.out.println(
-              "Found " + compare + " Which is available: " + test.isAvailable()
-            );
           }
         }
         if (!found) {
