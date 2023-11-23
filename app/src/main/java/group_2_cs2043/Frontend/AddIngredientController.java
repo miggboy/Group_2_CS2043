@@ -4,6 +4,10 @@ import java.io.IOException;
 import group_2_cs2043.Backend.Runtime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -41,8 +45,11 @@ public class AddIngredientController {
 	  String ingredientName = ingredientField.getText();
 	  if(!(ingredientName.isBlank() || ingredientName.isEmpty())) {
 		  if(runtime.addIngredient(ingredientName)) {
-			  Stage stage = (Stage) enterButton.getScene().getWindow();
-		      stage.close();
+			  Parent root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
+			    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			    Scene scene = new Scene(root);
+			    stage.setScene(scene);
+			    stage.show();
 		  }
 		  else {
 			  errorText.setTextFill(Color.RED);

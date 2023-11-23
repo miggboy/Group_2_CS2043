@@ -132,6 +132,14 @@ public class PrimaryController implements Initializable {
   
   @FXML
   public void onAddNewIngredientClick(ActionEvent event) throws IOException {
+	  Parent root = FXMLLoader.load(getClass().getResource("/addIngredient.fxml"));
+	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	  
+	  
+	  /*
 	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addIngredient.fxml"));
       Scene scene = new Scene(fxmlLoader.load());
       Stage stage = new Stage();
@@ -146,8 +154,14 @@ public class PrimaryController implements Initializable {
       stage.showAndWait();									//Program will wait until pop-up is closed.
       
       //Clearing list and refilling is necessary to refresh ListView
-      ingredientList.clear();
-      ingredientList.addAll(getSavedIngredientsArray());
+      ArrayList<Ingredient> arr = new ArrayList<Ingredient>();
+	  for(int i = 0; i < runtime.ingredientCount(); i++) {
+		  arr.add(runtime.getIngredient(i));
+	  }
+	  
+	  ingredientList.clear();
+	  ingredientList.addAll(arr);
+	  */
   }
   
   /**
