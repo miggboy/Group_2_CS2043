@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.RecipeIngredient;
 import group_2_cs2043.Backend.Runtime;
@@ -22,6 +21,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+/**
+ * This class is a controller for the Shopping List scene.
+ * It showcases the Shopping List feature by taking user input,
+ * passing it through the Runtime, and displaying the results.
+ * 
+ * @author Miguel Daigle Gould
+ */
 
 public class ShoppingListController implements Initializable{
 	
@@ -46,17 +53,19 @@ public class ShoppingListController implements Initializable{
 		recList = FXCollections.observableArrayList();
 		selList = FXCollections.observableArrayList();
 		
+		//Gets recipe names from runtime
 		for(int i = 0; i < runtime.recipeCount(); i++) {
 			recList.add(runtime.getRecipe(i).getName());
 		}
 		recipeBox.setItems(recList);
 		
+		//Set column values
 		selRecColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
 		selRecTable.setItems(selList);
 		
 		missIngColumn.setCellValueFactory(new PropertyValueFactory<RecipeIngredient, String>("ingredientName"));
 		
-		recipeBox.setOnAction(this::addRecipe);
+		recipeBox.setOnAction(this::addRecipe);		//Calls addRecipe upon interaction
 	}
 	
 	/**
@@ -76,10 +85,10 @@ public class ShoppingListController implements Initializable{
 	public void onGenerateClick() {
 		ArrayList<Recipe> recArrList = new ArrayList<Recipe>();
 		recArrList.addAll(selList);
-		ArrayList<RecipeIngredient> recIngList= runtime.makeShoppingList(recArrList);
+		ArrayList<RecipeIngredient> recIngList= runtime.makeShoppingList(recArrList);			//Creates sorted list
 		ObservableList<RecipeIngredient> obsRecIngList = FXCollections.observableArrayList();
 		obsRecIngList.addAll(recIngList);
-		missIngTable.setItems(obsRecIngList);	
+		missIngTable.setItems(obsRecIngList);													//Displays list
 	}
 	
 	/**

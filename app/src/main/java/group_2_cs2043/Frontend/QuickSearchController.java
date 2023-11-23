@@ -22,10 +22,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * This class is the controller for quickSearch.fxml.
+ * It showcases the Quick Search feature.
+ * @author Miguel Daigle Gould
+ */
+
 public class QuickSearchController implements Initializable{
 	
-	@FXML
-	ChoiceBox<String> ingredientBox;
+	//Components for TableView
 	@FXML
 	private TableView<Recipe> recipeTable;
 	@FXML
@@ -37,7 +42,11 @@ public class QuickSearchController implements Initializable{
 	@FXML
 	private TableColumn<Recipe, Boolean> favoriteColumn;
 	
-	Runtime runtime = new Runtime();
+	@FXML
+	ChoiceBox<String> ingredientBox;
+	
+	Runtime runtime = new Runtime();		//Runtime to interface with Backend
+	
 	ObservableList<String> ingList;
 
 	@Override
@@ -107,6 +116,7 @@ public class QuickSearchController implements Initializable{
 	
 	/**
 	 * This method returns to the previous scene.
+	 * @throws IOException
 	 */
 	@FXML
 	public void onReturnClick(ActionEvent event) throws IOException {

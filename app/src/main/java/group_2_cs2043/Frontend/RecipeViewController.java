@@ -19,9 +19,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+
+/**
+ * This class displays several Recipe views, such as 'Best Match', 'Favorites' and 'All Recipes.
+ * Also provides buttons to access secondary use-case features.
+ * @author Miguel Daigle Gould
+ */
 
 public class RecipeViewController implements Initializable {
 	
@@ -144,7 +149,8 @@ public class RecipeViewController implements Initializable {
 	}
 	
 	/**
-	 * Go back to the previous screen
+	 * Go back to the previous screen.
+	 * @throws IOException
 	 */
     @FXML
     public void recipeScreenBackClick(ActionEvent event) throws IOException {
@@ -185,6 +191,7 @@ public class RecipeViewController implements Initializable {
     
     /**
      * This method opens the Shopping List scene.
+     * @throws IOException.
      */
     
     @FXML
@@ -198,6 +205,7 @@ public class RecipeViewController implements Initializable {
     
     /**
      * This method opens the Quick Search scene.
+     * @throws IOException
      */
     @FXML
     public void onQuickSearchClick(ActionEvent event) throws IOException {
@@ -210,6 +218,7 @@ public class RecipeViewController implements Initializable {
     
     /**
      * This method opens the Cook Time Search scene.
+     * @throws IOException
      */
     @FXML
     public void onCookTimeSearchClick(ActionEvent event) throws IOException {

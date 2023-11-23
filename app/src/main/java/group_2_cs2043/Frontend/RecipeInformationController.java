@@ -26,33 +26,36 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * This controller showcases all data relating to a Recipe object.
+ * @author Miguel Daigle Gould
+ */
+
 public class RecipeInformationController implements Initializable{
 	
+	//Displays for various Recipe attributes
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	@FXML
-	Label prepTimeLabel;
+	private Label prepTimeLabel;
 	@FXML
-	Label servingCountLabel;
+	private Label servingCountLabel;
 	@FXML
-	Label ratingLabel;
+	private Label ratingLabel;
 	@FXML
-	Label missingLabel;
+	private Label missingLabel;
 	@FXML
-	TextArea instructionTextArea;
+	private TextArea instructionTextArea;
 	@FXML
-	TableView<RecipeIngredient> ingredientTable;
+	private TableView<RecipeIngredient> ingredientTable;
 	@FXML
-	TableColumn<RecipeIngredient, String> ingredientsColumn;
+	private TableColumn<RecipeIngredient, String> ingredientsColumn;
 	@FXML
-	CheckBox favTick;
+	private CheckBox favTick;			//Checkbox for adding a recipe to Favorites
 	
-	
-    private ObservableList<Ingredient> ingredientList = FXCollections.observableArrayList();
-	
-	int index;
-	Runtime runtime = new Runtime();
-	Recipe recipe;
+	private int index;
+	private Runtime runtime = new Runtime();
+	private Recipe recipe;
 	
 	public void setValue(int index) {
 		this.index = index;
@@ -100,6 +103,10 @@ public class RecipeInformationController implements Initializable{
 		missingLabel.setText(disp);
 	}
 	
+	/**
+	 * This method modifies the isFavorite attribute of a recipe depending on user input
+	 * @throws IOException
+	 */
 	
 	@FXML
 	public void setFavorite() throws IOException {
@@ -112,6 +119,11 @@ public class RecipeInformationController implements Initializable{
 		}
 	}
 	
+	/**
+	 * This method returns to the previous scene.
+	 * @throws IOException
+	 */
+	
 	@FXML
 	public void onReturnClick(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
@@ -121,6 +133,10 @@ public class RecipeInformationController implements Initializable{
 	    stage.show();
 	}
 	
+	/**
+	 * This method removes a recipe from runtime, then returns to the previous scene.
+	 * @throws IOException
+	 */
 	@FXML
 	public void onDeleteClick(ActionEvent event) throws IOException {
 		recipe = runtime.getRecipe(index);

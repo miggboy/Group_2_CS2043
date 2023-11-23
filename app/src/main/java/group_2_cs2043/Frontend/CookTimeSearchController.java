@@ -5,7 +5,6 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.Runtime;
 import javafx.collections.FXCollections;
@@ -24,6 +23,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * This class is the controller for cookTimeSearch.fxml.
+ * This class is vital for showcasing the Cook Time Search feature functionality.
+ * 
+ * @author Miguel Daigle Gould
+ */
+
 public class CookTimeSearchController implements Initializable{
 	
 	//Components for TableView
@@ -38,21 +44,24 @@ public class CookTimeSearchController implements Initializable{
 	@FXML
 	private TableColumn<Recipe, Boolean> favoriteColumn;
 	
+	//Interactive components
 	@FXML
 	private TextField timeField;
 	@FXML
 	private Label errorLabel;
 	
-	private Runtime runtime = new Runtime();
+	private Runtime runtime = new Runtime();	//Runtime object to interface with Backend
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		//Set column values
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
 		prepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));
 		servingCountColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("servingCount"));
 		favoriteColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Boolean>("favorite"));
 		
+		//Double click on recipe - triggers new scene
 		recipeTable.setOnMouseClicked(event ->{
 			if(event.getClickCount() == 2) {
 				try { onRecipeClick(recipeTable.getSelectionModel().getSelectedItem());
@@ -78,16 +87,16 @@ public class CookTimeSearchController implements Initializable{
 			long minutes = Long.parseLong(timeField.getText());
 			Duration cookTime = Duration.ofMinutes(minutes);
 			
-			recArr = runtime.comPrepTime(recArr, cookTime);
+			recArr = runtime.comPrepTime(recArr, cookTime);			//Backend computes list given parameters
 			
 			ObservableList<Recipe> recList = FXCollections.observableArrayList();
 			recList.addAll(recArr);
-			recipeTable.setItems(recList);
+			recipeTable.setItems(recList);							//List is displayed in TableView
 			errorLabel.setText("");
 		}
 		catch(NumberFormatException e) {
-			errorLabel.setText("Not valid. Please try again.");
-		}
+			errorLabel.setText("Not valid. Please try again.");		//If user input yields anything other than numerals,
+		}															//show error text.
 	}
 	
     /**
