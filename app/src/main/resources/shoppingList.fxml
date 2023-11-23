@@ -24,13 +24,13 @@
       </TableView>
       <Label layoutX="56.0" layoutY="258.0" text="Pick your recipes" />
       <Label layoutX="273.0" layoutY="336.0" text="Enough recipes? Click generate!" />
-      <Button layoutX="325.0" layoutY="367.0" mnemonicParsing="false" text="Generate" />
+      <Button layoutX="325.0" layoutY="367.0" mnemonicParsing="false" onAction="#onGenerateClick" text="Generate" />
       <Label alignment="CENTER" layoutX="554.0" layoutY="332.0" prefHeight="44.0" prefWidth="104.0" text="Missing ingredients will populate here" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="26.0" layoutY="31.0" text="Shopping List">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="647.0" layoutY="34.0" mnemonicParsing="false" text="Return" />
+      <Button layoutX="647.0" layoutY="34.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
    </children>
 </AnchorPane>
