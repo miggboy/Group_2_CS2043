@@ -26,5 +26,5 @@ jobs:
     - name: Upload compiled jars
       uses: actions/upload-artifact@v3
       with:
-        name: release-$GITHUB_SHA
+        name: release-${{ github.sha }}
         path: app/build/libs/
