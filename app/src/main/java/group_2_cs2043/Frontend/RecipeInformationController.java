@@ -57,14 +57,15 @@ public class RecipeInformationController{
 	@FXML
 	private TextField rateField;
 	
-	private int index;
+	private int ind;
 	private Runtime runtime = new Runtime();
 	private Recipe recipe;
 	
 	public void setValue(int index) {
-		this.index = index;
+		this.ind = index;
 		recipe = runtime.getRecipe(index);			//Retrieve indexed recipe from runtime
 		
+
 		if(recipe.isFavorite()) {
 			favTick.setSelected(true);
 		}
@@ -97,7 +98,6 @@ public class RecipeInformationController{
 		for(int i = 0; i < recinArray.size(); i++) {
 			disp += recinArray.get(i).getIngredientName() + ", ";
 		}
-
 		missingLabel.setText(disp);
 	}
 	
@@ -108,7 +108,7 @@ public class RecipeInformationController{
 	
 	@FXML
 	public void setFavorite() throws IOException {
-		Recipe rec = runtime.getRecipe(index);		
+		Recipe rec = runtime.getRecipe(ind);		
 		if(!favTick.isSelected()) {
 			runtime.setFavorite(rec.getName(), false);
 		}
@@ -125,7 +125,7 @@ public class RecipeInformationController{
 		try {
 			int rate = Integer.parseInt(rateField.getText());
 			if(rate > 5 || rate < 0) throw new NumberFormatException();
-			runtime.getRecipe(index).addRating(rate);
+			runtime.getRecipe(ind).addRating(rate);
 			dispAverageRating();
 			rateField.setText("");
 			errorLabel.setText("");
@@ -154,7 +154,7 @@ public class RecipeInformationController{
 	 */
 	@FXML
 	public void onDeleteClick(ActionEvent event) throws IOException {
-		recipe = runtime.getRecipe(index);
+		recipe = runtime.getRecipe(ind);
 		runtime.removeRecipe(recipe.getName());
 		onReturnClick(event);
 	}
