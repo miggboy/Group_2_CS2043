@@ -164,6 +164,9 @@ public class RecipeViewController implements Initializable {
     public void onRecipeClick() throws IOException {
     	//Get selected Recipe index number
     	Recipe rcp = recipeTable.getSelectionModel().getSelectedItem();
+    	if(rcp == null)	allRecipeTable.getSelectionModel().getSelectedItem();
+    	if(rcp == null) favRecipeTable.getSelectionModel().getSelectedItem();
+    	
     	int index = -1;
     	for(int i = 0; i < runtime.recipeCount(); i++) {
     		if(runtime.getRecipe(i).getName().equals(rcp.getName())) {

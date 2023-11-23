@@ -17,8 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -137,31 +135,6 @@ public class PrimaryController implements Initializable {
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
-	  
-	  
-	  /*
-	  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addIngredient.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = new Stage();
-      stage.setScene(scene);
-      stage.setTitle("Add New Ingredient");
-      
-      String str = getClass().getResource("/IMG/icon.png").toString();
-      Image icon = new Image(str);
-      stage.getIcons().add(icon);
-      
-      stage.initModality(Modality.APPLICATION_MODAL);
-      stage.showAndWait();									//Program will wait until pop-up is closed.
-      
-      //Clearing list and refilling is necessary to refresh ListView
-      ArrayList<Ingredient> arr = new ArrayList<Ingredient>();
-	  for(int i = 0; i < runtime.ingredientCount(); i++) {
-		  arr.add(runtime.getIngredient(i));
-	  }
-	  
-	  ingredientList.clear();
-	  ingredientList.addAll(arr);
-	  */
   }
   
   /**
