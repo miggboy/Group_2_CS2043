@@ -10,6 +10,12 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 javafx {
@@ -29,7 +35,16 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'group_2_cs2043.Frontend.Main'
+    mainClass = 'group_2_cs2043.Frontend.Launcher'
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency('org.junit.jupiter:junit-jupiter:5.9.1'))
+    }
+   archiveBaseName.set('shadow')
+   archiveClassifier.set('')
+   archiveVersion.set('')
 }
 
 tasks.named('test') {
