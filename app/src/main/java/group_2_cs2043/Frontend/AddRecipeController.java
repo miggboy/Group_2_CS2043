@@ -1,5 +1,6 @@
 package group_2_cs2043.Frontend;
 
+import java.awt.TextArea;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
@@ -32,9 +33,9 @@ public class AddRecipeController implements Initializable{
 	private ArrayList<Ingredient> ingredientArray = new ArrayList<Ingredient>();
 
 	@FXML
-    private ChoiceBox<String> dropDownMenu;
+    private ChoiceBox<String> dropDownMenu; 
     @FXML
-    private TextField instructionField;
+    private TextField instructionField;  
     @FXML
     private TextField prepTimeField;
     @FXML
@@ -43,19 +44,53 @@ public class AddRecipeController implements Initializable{
     private TextField servingSizeField;
     @FXML
     private ListView<Ingredient> ingredientsListView;
-    private String[][] holder = {{"wow","1 cup",""},{"wow2","2 cups",""},{"wow3","3 cups",""}};
+    private ArrayList<Ingredient> newRecipeIngredients = new ArrayList<Ingredient>();
+    private String[][] ingredients;
     /*
      * Creates a new recipe from the specified fields and adds it to runtime, then changes scene back to primary
      */
     @FXML
     void createButtonClick(ActionEvent event) throws NumberFormatException, IOException {
+    	/*
+    	 * Initialize ingredients with ingredients that have been added
+    	 */
+    	ingredients = new String[3][newRecipeIngredients.size()];
+    	for (int i = 0; i < ingredients.length; i++) {
+    	    for (int j = 0; j < ingredients[i].length; j++) {
+    	    	ingredients[i][j] = "";
+    	    }
+    	}
+    	/*
+    	 * Populate the ingredients with appropriate names
+    	 */
+    	for(int i = 0; i < newRecipeIngredients.size();i++) {
+    		ingredients[0][i] = newRecipeIngredients.get(i).getName();
+    	}
+    	/*
+    	 * Create the new recipe with specified data
+    	 */
     	runtime.addRecipe(recipeNameField.getText(), 
-    					  instructionField.getText(), 
+    			instructionField.getText(), 
     					  Duration.ofMinutes(Integer.parseInt(prepTimeField.getText())), 
     					  Integer.parseInt(servingSizeField.getText()), 
-    					  holder);
+    					  ingredients);
+    	/*
+    	 * Return to previous scene
+    	 */
+	    Parent root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
+	    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	    
+    }
+    /*
+	 * Return to previous scene
+	 */
+    @FXML
+    void goBackButtonClick(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/primary.fxml"));
-	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
@@ -71,8 +106,6 @@ public class AddRecipeController implements Initializable{
 	    	dropDownMenu.getItems().add(ingredientArray.get(i).getName());
 	    }
 		dropDownMenu.setOnAction(this::getIngredient);
-		//Test add ingredient
-		//ingredientsListView.getItems().add(new Ingredient("Test",true));
 	}
 	/**
 	 * Helper method for getting saved Ingredients list from drive 
@@ -90,5 +123,7 @@ public class AddRecipeController implements Initializable{
 	public void getIngredient(ActionEvent event) {
 		String myIngredient = dropDownMenu.getValue();
 		ingredientsListView.getItems().add(new Ingredient(myIngredient,true));
+		newRecipeIngredients.add(new Ingredient(myIngredient,true));
 	}  
+	
 }
