@@ -1,5 +1,5 @@
 .root {
-	-fx-background-color: #ffe4b5 ;
+	-fx-background-color: #F9DAD0 ;
 }
 
 #startButton {
@@ -15,4 +15,13 @@
     -fx-font-family: "Arial", sans-serif;
     -fx-font-weight: bold;
     -fx-text-fill: #333; /* Adjust the text color to match your application */
+}
+
+.table-view {
+    -fx-font-size: 8pt; /* Set the font size for the entire TableView */
+    -fx-background-color: #C5DCA0; /* Pastel green color */
+}
+
+.table-view .column-header {
+    -fx-background-color: #A5C474; /* Darker green color for the headers */
 }

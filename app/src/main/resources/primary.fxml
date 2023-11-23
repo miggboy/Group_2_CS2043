@@ -5,14 +5,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.PrimaryController">
    <children>
       <Text layoutX="37.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Selection:" />
       <ListView fx:id="ingredientsListView" layoutX="81.0" layoutY="85.0" prefHeight="230.0" prefWidth="170.0" />
-      <Button layoutX="368.0" layoutY="334.0" mnemonicParsing="false" text="Confirm Selection" />
-      <Button layoutX="104.0" layoutY="334.0" mnemonicParsing="false" text="Add New Ingredient" />
+      <Button layoutX="369.0" layoutY="334.0" mnemonicParsing="false" onAction="#onConfirmIngredients" text="Confirm Selection" />
+      <Button layoutX="104.0" layoutY="334.0" mnemonicParsing="false" onAction="#onAddNewIngredientClick" text="Add New Ingredient" />
       <ListView fx:id="selectedListView" layoutX="339.0" layoutY="85.0" prefHeight="230.0" prefWidth="170.0" />
       <Text layoutX="111.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Ingredients" />
       <Text layoutX="370.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Ingredients" />
+      <Button layoutX="510.0" layoutY="33.0" mnemonicParsing="false" onAction="#resetList" text="reset" />
+      <Button layoutX="83.0" layoutY="380.0" mnemonicParsing="false" onAction="#onRemoveIngredientClick" text="Remove Selected Ingredient" />
+      <Button layoutX="377.0" layoutY="380.0" mnemonicParsing="false" onAction="#onClearSelectionClick" text="Clear Selection" />
+      <Button layoutX="248.0" layoutY="334.0" mnemonicParsing="false" onAction="#addNewRecipeClick" text="Add New Recipe" />
    </children>
 </AnchorPane>
