@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,12 +18,12 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="43.0" text="Cooking Time:">
+      <Label layoutX="432.0" layoutY="31.0" text="Cooking Time:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fx:id="ingredientTable" editable="true" layoutX="463.0" layoutY="133.0" prefHeight="200.0" prefWidth="166.0">
+      <TableView fx:id="ingredientTable" editable="true" layoutX="463.0" layoutY="98.0" prefHeight="200.0" prefWidth="166.0">
         <columns>
           <TableColumn fx:id="ingredientsColumn" prefWidth="122.4000244140625" text="Ingredients" />
         </columns>
@@ -30,19 +31,19 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="430.0" layoutY="70.0" text="Serving Count:">
+      <Label layoutX="432.0" layoutY="58.0" text="Serving Count:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="prepTimeLabel" layoutX="530.0" layoutY="43.0" text="NA" />
-      <Label fx:id="servingCountLabel" layoutX="530.0" layoutY="70.0" text="NA" />
-      <Label layoutX="491.0" layoutY="345.0" text="Rating:">
+      <Label fx:id="prepTimeLabel" layoutX="532.0" layoutY="31.0" text="NA" />
+      <Label fx:id="servingCountLabel" layoutX="532.0" layoutY="58.0" text="NA" />
+      <Label layoutX="434.0" layoutY="323.0" text="Rating:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="ratingLabel" layoutX="554.0" layoutY="342.0" text="NA">
+      <Label fx:id="ratingLabel" layoutX="490.0" layoutY="320.0" text="NA">
          <font>
             <Font size="16.0" />
          </font>
@@ -53,8 +54,11 @@
          </font>
       </Label>
       <Label fx:id="missingLabel" layoutX="195.0" layoutY="401.0" prefHeight="19.0" prefWidth="470.0" text="NA" textFill="RED" />
-      <CheckBox fx:id="favTick" layoutX="514.0" layoutY="105.0" mnemonicParsing="false" onAction="#setFavorite" text="Favorite" />
+      <CheckBox fx:id="favTick" layoutX="334.0" layoutY="374.0" mnemonicParsing="false" onAction="#setFavorite" text="Favorite" />
       <Button layoutX="25.0" layoutY="426.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
       <Button layoutX="456.0" layoutY="426.0" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete Recipe (cannot be undone)" />
+      <TextField fx:id="rateField" layoutX="532.0" layoutY="319.0" prefHeight="26.0" prefWidth="29.0" />
+      <Button layoutX="570.0" layoutY="319.0" mnemonicParsing="false" onAction="#addRating" text="Add Rating" />
+      <Label fx:id="errorLabel" layoutX="443.0" layoutY="359.0" prefHeight="18.0" prefWidth="222.0" textFill="RED" />
    </children>
 </AnchorPane>

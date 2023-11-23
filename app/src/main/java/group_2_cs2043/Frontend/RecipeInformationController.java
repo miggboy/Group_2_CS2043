@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -50,8 +51,15 @@ public class RecipeInformationController implements Initializable{
 	private TableView<RecipeIngredient> ingredientTable;
 	@FXML
 	private TableColumn<RecipeIngredient, String> ingredientsColumn;
+	
 	@FXML
 	private CheckBox favTick;			//Checkbox for adding a recipe to Favorites
+	
+	//Components for adding ratings
+	@FXML
+	private Label errorLabel;
+	@FXML
+	private TextField rateField;
 	
 	private int index;
 	private Runtime runtime = new Runtime();
@@ -76,9 +84,7 @@ public class RecipeInformationController implements Initializable{
 		instructionTextArea.setText(recipe.getInstructions());
 		
 		//Format and display rating
-		Double avgRate = recipe.getAverageRating();
-		DecimalFormat decimalFormat = new DecimalFormat("#.#");
-		ratingLabel.setText(decimalFormat.format(avgRate));
+		dispAverageRating();
 		
 		//Set column values
 		ingredientsColumn.setCellValueFactory(new PropertyValueFactory<RecipeIngredient, String>("ingredientName"));
@@ -120,10 +126,27 @@ public class RecipeInformationController implements Initializable{
 	}
 	
 	/**
+	 * This method adds a rating to the recipe.
+	 * @throws IOException
+	 */
+	public void addRating() throws IOException {
+		try {
+			int rate = Integer.parseInt(rateField.getText());
+			if(rate > 5 || rate < 0) throw new NumberFormatException();
+			runtime.getRecipe(index).addRating(rate);
+			dispAverageRating();
+			rateField.setText("");
+			errorLabel.setText("");
+		}
+		catch(NumberFormatException e) {
+			errorLabel.setText("Bad input. Please enter 0-5.");
+		}
+	}
+	
+	/**
 	 * This method returns to the previous scene.
 	 * @throws IOException
 	 */
-	
 	@FXML
 	public void onReturnClick(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
@@ -144,5 +167,12 @@ public class RecipeInformationController implements Initializable{
 		onReturnClick(event);
 	}
 	
-	
+	/**
+	 * Helper method for calculating and displaying average rating.
+	 */
+	public void dispAverageRating() {
+		Double avgRate = recipe.getAverageRating();
+		DecimalFormat decimalFormat = new DecimalFormat("#.#");
+		ratingLabel.setText(decimalFormat.format(avgRate));
+	}
 }
