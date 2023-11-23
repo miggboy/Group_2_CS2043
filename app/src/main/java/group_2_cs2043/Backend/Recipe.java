@@ -63,7 +63,7 @@ public class Recipe implements Serializable {
     }
 
     // Append the filename to the path
-    importPath += "\\Recipes.bin";
+    importPath += "/Recipes.bin";
     f = new File(importPath);
 
     // Step 3: Verify if the file exists, and handle accordingly
@@ -72,7 +72,7 @@ public class Recipe implements Serializable {
     } else if (f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.home") +
-        "/.RecipeBrowser\\Recipes.bin" +
+        "/.RecipeBrowser/Recipes.bin" +
         " is a folder, where it should be a file. Execution cannot continue."
       );
     }
@@ -141,7 +141,7 @@ public class Recipe implements Serializable {
       ArrayList<Recipe> list = makeDefaultList();
       ObjectOutputStream objOut = new ObjectOutputStream(
         new FileOutputStream(
-          System.getProperty("user.home") + "/.RecipeBrowser\\Recipes.bin"
+          System.getProperty("user.home") + "/.RecipeBrowser/Recipes.bin"
         )
       );
       objOut.writeObject(list);
@@ -228,7 +228,7 @@ public class Recipe implements Serializable {
     }
 
     ObjectOutputStream objOut = new ObjectOutputStream(
-      new FileOutputStream(exportPath + "\\Recipes.bin")
+      new FileOutputStream(exportPath + "/Recipes.bin")
     );
     objOut.writeObject(input);
     objOut.close();

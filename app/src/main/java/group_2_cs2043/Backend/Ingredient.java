@@ -63,7 +63,7 @@ public class Ingredient implements Serializable {
     }
 
     // Append the filename to the path
-    importPath += "\\Ingredients.bin";
+    importPath += "/Ingredients.bin";
     f = new File(importPath);
 
     // Step 3: Verify if the file exists, and handle accordingly
@@ -72,7 +72,7 @@ public class Ingredient implements Serializable {
     } else if (f.isDirectory()) {
       throw new IOException(
         System.getProperty("user.home") +
-        "/.RecipeBrowser\\Ingredients.bin" +
+        "/.RecipeBrowser/Ingredients.bin" +
         " is a folder, where it should be a file. Execution cannot continue."
       );
     }
@@ -142,7 +142,7 @@ public class Ingredient implements Serializable {
       ArrayList<Ingredient> list = makeDefaultList();
       ObjectOutputStream objOut = new ObjectOutputStream(
         new FileOutputStream(
-          System.getProperty("user.home") + "/.RecipeBrowser\\Ingredients.bin"
+          System.getProperty("user.home") + "/.RecipeBrowser/Ingredients.bin"
         )
       );
       objOut.writeObject(list);
@@ -174,7 +174,7 @@ public class Ingredient implements Serializable {
     }
 
     ObjectOutputStream objOut = new ObjectOutputStream(
-      new FileOutputStream(exportPath + "\\Ingredients.bin")
+      new FileOutputStream(exportPath + "/Ingredients.bin")
     );
     objOut.writeObject(input);
     objOut.close();
