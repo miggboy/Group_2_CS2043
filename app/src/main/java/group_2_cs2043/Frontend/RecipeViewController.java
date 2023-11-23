@@ -183,6 +183,10 @@ public class RecipeViewController implements Initializable {
         stage.show();
     }
     
+    /**
+     * This method opens the Shopping List scene.
+     */
+    
     @FXML
     public void onShoppingListClick(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/shoppingList.fxml"));
@@ -192,9 +196,24 @@ public class RecipeViewController implements Initializable {
  	    stage.show();
     }
     
+    /**
+     * This method opens the Quick Search scene.
+     */
     @FXML
     public void onQuickSearchClick(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/quickSearch.fxml"));
+ 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 	    Scene scene = new Scene(root);
+ 	    stage.setScene(scene);
+ 	    stage.show();
+    }
+    
+    /**
+     * This method opens the Cook Time Search scene.
+     */
+    @FXML
+    public void onCookTimeSearchClick(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/cookTimeSearch.fxml"));
  	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
  	    Scene scene = new Scene(root);
  	    stage.setScene(scene);

@@ -72,5 +72,6 @@
       </TabPane>
       <Button layoutX="242.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
       <Button layoutX="344.0" layoutY="22.0" mnemonicParsing="false" onAction="#onQuickSearchClick" text="Quick Search" />
+      <Button layoutX="445.0" layoutY="22.0" mnemonicParsing="false" onAction="#onCookTimeSearchClick" text="Cook Time Search" />
    </children>
 </AnchorPane>

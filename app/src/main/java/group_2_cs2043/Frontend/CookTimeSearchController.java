@@ -5,27 +5,28 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.Runtime;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class QuickSearchController implements Initializable{
+public class CookTimeSearchController implements Initializable{
 	
-	@FXML
-	ChoiceBox<String> ingredientBox;
+	//Components for TableView
 	@FXML
 	private TableView<Recipe> recipeTable;
 	@FXML
@@ -37,18 +38,15 @@ public class QuickSearchController implements Initializable{
 	@FXML
 	private TableColumn<Recipe, Boolean> favoriteColumn;
 	
-	Runtime runtime = new Runtime();
-	ObservableList<String> ingList;
+	@FXML
+	private TextField timeField;
+	@FXML
+	private Label errorLabel;
+	
+	private Runtime runtime = new Runtime();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		ingList = FXCollections.observableArrayList();
-		for(int i = 0; i < runtime.ingredientCount(); i++) {
-			ingList.add(runtime.getIngredient(i).getName());
-		}
-		
-		ingredientBox.getItems().addAll(ingList);
 		
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("name"));
 		prepTimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Duration>("prepTime"));
@@ -62,20 +60,34 @@ public class QuickSearchController implements Initializable{
 				}
 			}
 		});
-		
-		ingredientBox.setOnAction(this::findRecipes);
 	}
 	
 	/**
-	 * This method retrieves and displays a list of recipes based on input ingredient.
+	 * This method uses runtime to filter through a given list, return recipes with a specific cook time,
+	 * and display those recipes in the TableView.
 	 */
 	
-	public void findRecipes(ActionEvent event) {
-		String ingName = ingredientBox.getValue();
-		ArrayList<Recipe> recArr = runtime.quickSearch(ingName, false);
-		ObservableList<Recipe> recList = FXCollections.observableArrayList();
-		recList.addAll(recArr);
-		recipeTable.setItems(recList);
+	@FXML
+	public void getRecipes() {
+		try {
+			ArrayList<Recipe> recArr = new ArrayList<Recipe>();
+			
+			for(int i = 0; i < runtime.recipeCount(); i++) {
+				recArr.add(runtime.getRecipe(i));
+			}
+			long minutes = Long.parseLong(timeField.getText());
+			Duration cookTime = Duration.ofMinutes(minutes);
+			
+			recArr = runtime.comPrepTime(recArr, cookTime);
+			
+			ObservableList<Recipe> recList = FXCollections.observableArrayList();
+			recList.addAll(recArr);
+			recipeTable.setItems(recList);
+			errorLabel.setText("");
+		}
+		catch(NumberFormatException e) {
+			errorLabel.setText("Not valid. Please try again.");
+		}
 	}
 	
     /**
@@ -99,16 +111,17 @@ public class QuickSearchController implements Initializable{
     	RecipeInformationController ric = loader.getController();
     	ric.setValue(index);			//Pass index of recipe through to pop-up scene. Vital for populating data.
     	
-    	Stage stage = (Stage)(ingredientBox.getScene()).getWindow();
+    	Stage stage = (Stage)(timeField.getScene()).getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 	
+	
 	/**
 	 * This method returns to the previous scene.
+	 * @throws IOException 
 	 */
-	@FXML
 	public void onReturnClick(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/recipeScreen.fxml"));
 	    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
