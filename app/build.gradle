@@ -5,11 +5,20 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/8.0.2/userguide/building_java_projects.html
  */
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+def os = DefaultNativePlatform.currentOperatingSystem;
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 javafx {
@@ -29,7 +38,26 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'group_2_cs2043.Frontend.Main'
+    mainClass = 'group_2_cs2043.Frontend.Launcher'
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency('org.junit.jupiter:junit-jupiter:5.9.1'))
+    }
+   
+   if (os.isWindows()) {
+    archiveBaseName.set('Pantry-Pal-win')
+   }
+   if (os.isMacOsX()) {
+    archiveBaseName.set('Pantry-Pal-osx')
+   }
+   if (os.isLinux()) {
+    archiveBaseName.set('Pantry-Pal-linux')
+   }
+   
+   archiveClassifier.set('')
+   archiveVersion.set('')
 }
 
 tasks.named('test') {
