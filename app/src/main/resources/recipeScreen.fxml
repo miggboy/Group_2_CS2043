@@ -70,6 +70,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="212.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
+      <Button layoutX="242.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
+      <Button layoutX="344.0" layoutY="22.0" mnemonicParsing="false" onAction="#onQuickSearchClick" text="Quick Search" />
    </children>
 </AnchorPane>
