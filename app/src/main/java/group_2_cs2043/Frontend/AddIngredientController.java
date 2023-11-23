@@ -38,7 +38,6 @@ public class AddIngredientController {
    * This ActionEvent handles creating a new Ingredient and storing it.
    * Checks for blank input and duplicates.
    * @throws IOException  
-
    */
   @FXML
   void onEnterClick(ActionEvent event) throws IOException {
