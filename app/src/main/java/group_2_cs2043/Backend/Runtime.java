@@ -272,10 +272,11 @@ public class Runtime {
    * @param name The name of the Recipe (case sensitive)
    * @param in if it should be a favorite or not.
    */
-  public void setFavorite(String name, boolean in) {
+  public void setFavorite(String name, boolean in) throws IOException {
     for (int i = 0; i < recipeList.size(); i++) {
       if (recipeList.get(i).getName().equals(name)) {
         recipeList.get(i).setFavorite(in);
+        saveRuntime();
       }
     }
   }

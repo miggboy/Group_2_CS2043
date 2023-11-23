@@ -166,7 +166,7 @@ public class RuntimeTest {
   }
 
   @Test
-  void testFilterFavorites() {
+  void testFilterFavorites() throws IOException {
     ArrayList<Recipe> rec = run.getRecipes(7);
     assertEquals(rec.size(), 1);
     assertEquals(run.filterFavorites(rec).size(), 0);
@@ -194,7 +194,7 @@ public class RuntimeTest {
   }
 
   @Test
-  void testQuickSearch() {
+  void testQuickSearch() throws IOException {
     ArrayList<Recipe> rec = run.getRecipes(7);
     assertEquals(rec.size(), 1);
     assertEquals(run.quickSearch("Honey", false).size(), 1);
