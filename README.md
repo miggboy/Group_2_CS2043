@@ -12,5 +12,3 @@ Authors:
 - Backend devs: Maxwell MacNeill, Jaspreet Singh
 - Frontend devs: Miguel Gould, Ben Martin
 ---
-
-Miguel
