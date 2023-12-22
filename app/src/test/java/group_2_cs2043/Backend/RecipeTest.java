@@ -15,7 +15,7 @@ public class RecipeTest {
   @BeforeEach
   void before() {
     rec = new Recipe("Name", "Instructions", Duration.ofMinutes(1), 4, false);
-    rec.addIngredient("Ingredient", "Quantity", "Substitution");
+    rec.addIngredient("Ingredient");
   }
 
   @Test
@@ -32,8 +32,6 @@ public class RecipeTest {
     RecipeIngredient ing = rec.getIngredient(0);
 
     assertEquals(ing.getIngredientName(), "Ingredient");
-    assertEquals(ing.getAmount(), "Quantity");
-    assertEquals(ing.getSubstitutions(), "Substitution");
   }
 
   @Test

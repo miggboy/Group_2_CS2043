@@ -14,22 +14,6 @@ import java.io.Serializable;
 public class RecipeIngredient implements Serializable {
 
   private String ingredient;
-  private String amount;
-  private String substitutions;
-
-  /**
-   * Constructs a new `RecipeIngredient` object with the specified ingredient name
-   * and amount.
-   *
-   * @param ingredientName The name of the ingredient.
-   * @param amountIn       The quantity or amount of the ingredient to be used in
-   *                       the recipe.
-   */
-  public RecipeIngredient(String ingredientName, String amountIn) {
-    ingredient = ingredientName;
-    amount = amountIn;
-    substitutions = "";
-  }
 
   /**
    * Constructs a new `RecipeIngredient` object with the specified ingredient
@@ -41,13 +25,9 @@ public class RecipeIngredient implements Serializable {
    * @param substitutionsIn Any potential substitutions for the ingredient.
    */
   public RecipeIngredient(
-    String ingredientName,
-    String amountIn,
-    String substitutionsIn
+    String ingredientName
   ) {
     ingredient = ingredientName;
-    amount = amountIn;
-    substitutions = substitutionsIn;
   }
 
   /**
@@ -58,8 +38,6 @@ public class RecipeIngredient implements Serializable {
    */
   public RecipeIngredient(RecipeIngredient copy) {
     ingredient = copy.getIngredientName();
-    amount = copy.getAmount();
-    substitutions = copy.getSubstitutions();
   }
 
   /**
@@ -69,23 +47,5 @@ public class RecipeIngredient implements Serializable {
    */
   public String getIngredientName() {
     return new String(ingredient);
-  }
-
-  /**
-   * Retrieves the amount of the ingredient.
-   *
-   * @return The amount of the ingredient as a String.
-   */
-  public String getAmount() {
-    return new String(amount);
-  }
-
-  /**
-   * Retrieves any potential substitutions for the ingredient.
-   *
-   * @return The substitutions for the ingredient as a String.
-   */
-  public String getSubstitutions() {
-    return new String(substitutions);
   }
 }

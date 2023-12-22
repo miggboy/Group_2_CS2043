@@ -37,10 +37,8 @@ public class RuntimeTest {
   @Test
   void testAddRecipe() throws IOException {
     run.addIngredient("Ingredient");
-    String[][] arguments = new String[3][1];
-    arguments[0][0] = "Ingredient";
-    arguments[1][0] = "Quantity";
-    arguments[2][0] = "Substitution";
+    String[] arguments = new String[1];
+    arguments[0] = "Ingredient";
     run.addRecipe("Name", "Instructions", Duration.ofMinutes(1), 0, arguments);
     run.setAvailable("Ingredient");
     Recipe rec = run.getRecipes(0).get(0);
@@ -53,10 +51,8 @@ public class RuntimeTest {
   @Test
   void testComPrepTime() throws IOException {
     run.addIngredient("Ingredient");
-    String[][] arguments = new String[3][1];
-    arguments[0][0] = "Ingredient";
-    arguments[1][0] = "Quantity";
-    arguments[2][0] = "Substitution";
+    String[] arguments = new String[1];
+    arguments[0] = "Ingredient";
     run.addRecipe("Name", "Instructions", Duration.ofMinutes(1), 0, arguments);
     run.setAvailable("Ingredient");
     ArrayList<Recipe> list = run.getRecipes(0);
@@ -155,8 +151,6 @@ public class RuntimeTest {
     ArrayList<RecipeIngredient> shoppingList = run.makeShoppingList(rec);
 
     assertEquals(shoppingList.get(0).getIngredientName(), "Kosher Salt");
-    assertEquals(shoppingList.get(0).getAmount(), "1 Tablespoon");
-    assertEquals(shoppingList.get(0).getSubstitutions(), "");
 
     run.setAvailable("Kosher Salt");
 
