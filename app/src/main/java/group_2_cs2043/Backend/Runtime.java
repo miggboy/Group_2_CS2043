@@ -187,22 +187,8 @@ public class Runtime {
     String instructionsIn,
     Duration prepTimeIn,
     int servingCountIn,
-    String[][] ingredients
+    String[] ingredients
   ) throws IOException {
-    boolean arrayValid = true;
-    if (ingredients.length != 3) {
-      arrayValid = false;
-    }
-    if (
-      ingredients[0].length != ingredients[1].length ||
-      ingredients[1].length != ingredients[2].length
-    ) {
-      arrayValid = false;
-    }
-
-    if (!arrayValid) {
-      throw new IllegalArgumentException("The ingredients array is invalid.");
-    }
 
     boolean success = true;
     for (int i = 0; i < recipeList.size(); i++) {
@@ -219,11 +205,9 @@ public class Runtime {
       false
     );
 
-    for (int i = 0; i < ingredients[0].length; i++) {
+    for (int i = 0; i < ingredients.length; i++) {
       toSave.addIngredient(
-        ingredients[0][i],
-        ingredients[1][i],
-        ingredients[2][i]
+        ingredients[i]
       );
     }
 

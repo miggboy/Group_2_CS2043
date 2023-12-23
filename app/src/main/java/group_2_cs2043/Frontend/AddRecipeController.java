@@ -1,19 +1,13 @@
 package group_2_cs2043.Frontend;
 
-import java.awt.TextArea;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import group_2_cs2043.Backend.Ingredient;
-import group_2_cs2043.Backend.Recipe;
 import group_2_cs2043.Backend.Runtime;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +39,7 @@ public class AddRecipeController implements Initializable{
     @FXML
     private ListView<Ingredient> ingredientsListView;
     private ArrayList<Ingredient> newRecipeIngredients = new ArrayList<Ingredient>();
-    private String[][] ingredients;
+    private String[] ingredients;
     /*
      * Creates a new recipe from the specified fields and adds it to runtime, then changes scene back to primary
      */
@@ -54,17 +48,17 @@ public class AddRecipeController implements Initializable{
     	/*
     	 * Initialize ingredients with ingredients that have been added
     	 */
-    	ingredients = new String[3][newRecipeIngredients.size()];
+    	ingredients = new String[newRecipeIngredients.size()];
     	for (int i = 0; i < ingredients.length; i++) {
-    	    for (int j = 0; j < ingredients[i].length; j++) {
-    	    	ingredients[i][j] = "";
+    	    for (int j = 0; j < ingredients.length; j++) {
+    	    	ingredients[i] = "";
     	    }
     	}
     	/*
     	 * Populate the ingredients with appropriate names
     	 */
     	for(int i = 0; i < newRecipeIngredients.size();i++) {
-    		ingredients[0][i] = newRecipeIngredients.get(i).getName();
+    		ingredients[i] = newRecipeIngredients.get(i).getName();
     	}
     	/*
     	 * Create the new recipe with specified data

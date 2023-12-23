@@ -189,13 +189,13 @@ public class Recipe implements Serializable {
       4,
       true
     );
-    one.addIngredient("Brown Sugar", "2 Tablespoons");
-    one.addIngredient("Dijon Mustard", "1 Tablespoon");
-    one.addIngredient("Honey", "1 Tablespoon");
-    one.addIngredient("Kosher Salt", "1 Tablespoon");
-    one.addIngredient("Black Pepper", "1/4 Teaspoon");
-    one.addIngredient("Red Pepper Flakes", "1/4 Teaspoon");
-    one.addIngredient("Salmon Filets", "4");
+    one.addIngredient("Brown Sugar");
+    one.addIngredient("Dijon Mustard");
+    one.addIngredient("Honey");
+    one.addIngredient("Kosher Salt");
+    one.addIngredient("Black Pepper");
+    one.addIngredient("Red Pepper Flakes");
+    one.addIngredient("Salmon Filets");
     one.addRating(4);
     one.addRating(5);
     one.addRating(5);
@@ -396,24 +396,8 @@ public class Recipe implements Serializable {
    * @param quantity   The quantity or amount of the ingredient to be added to the
    *                   recipe.
    */
-  public void addIngredient(String ingredient, String quantity) {
-    addIngredient(new RecipeIngredient(ingredient, quantity));
-  }
-
-  /**
-   * Adds a new ingredient to the recipe.
-   *
-   * @param ingredient    An `Ingredient` object to be included in the recipe.
-   * @param quantity      The quantity or amount of the ingredient to be added to
-   *                      the recipe.
-   * @param substitutions A list of valid substitutions for this ingredient.
-   */
-  public void addIngredient(
-    String ingredient,
-    String quantity,
-    String substitutions
-  ) {
-    addIngredient(new RecipeIngredient(ingredient, quantity, substitutions));
+  public void addIngredient(String ingredient) {
+    addIngredient(new RecipeIngredient(ingredient));
   }
 
   /**

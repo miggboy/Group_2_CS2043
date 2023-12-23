@@ -11,21 +11,11 @@ public class RecipeIngredientTest {
 
   @BeforeEach
   void before() {
-    recIng = new RecipeIngredient("Name", "Amount", "Subs");
-  }
-
-  @Test
-  void testGetAmount() {
-    assertEquals(recIng.getAmount(), "Amount");
+    recIng = new RecipeIngredient("Name");
   }
 
   @Test
   void testGetIngredientName() {
     assertEquals(recIng.getIngredientName(), "Name");
-  }
-
-  @Test
-  void testGetSubstitutions() {
-    assertEquals(recIng.getSubstitutions(), "Subs");
   }
 }
