@@ -1,5 +1,5 @@
-# CS2043-Project
-This project is the final project for CS2043 - Introduction to Software Engineering.
+# Pantry Pal
+The final project for CS2043 - Introduction to Software Engineering.
 
 Pantry Pal is an ingredient-matching application. Input a sequence of ingredients and receive a list of best-matched recipes in return.
 
