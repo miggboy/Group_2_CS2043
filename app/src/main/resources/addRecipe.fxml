@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="801.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.AddRecipeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="801.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.AddRecipeController">
    <children>
       <TextField fx:id="recipeNameField" layoutX="147.0" layoutY="15.0" prefHeight="25.0" prefWidth="238.0" />
       <Label layoutX="14.0" layoutY="19.0" text="Name of the new recipe: " />
@@ -23,6 +23,6 @@
       <Button layoutX="131.0" layoutY="342.0" mnemonicParsing="false" onAction="#createButtonClick" prefHeight="39.0" prefWidth="65.0" text="Create" />
       <Label layoutX="14.0" layoutY="304.0" text="Fill in the specified fields, then click create" />
       <Button layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#goBackButtonClick" prefHeight="39.0" prefWidth="65.0" text="Go Back" />
-      <TextField fx:id="instructionField" layoutX="420.0" layoutY="59.0" prefHeight="318.0" prefWidth="360.0" />
+      <TextField fx:id="instructionField" alignment="TOP_LEFT" layoutX="420.0" layoutY="59.0" prefHeight="318.0" prefWidth="360.0" />
    </children>
 </AnchorPane>
