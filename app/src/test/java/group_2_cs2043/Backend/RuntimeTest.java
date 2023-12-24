@@ -31,7 +31,7 @@ public class RuntimeTest {
   void testAddIngredient() throws IOException {
     assertTrue(run.addIngredient("Ingredient"));
     assertFalse(run.addIngredient("Ingredient"));
-    assertEquals(run.getIngredient(7).getName(), "Ingredient");
+    assertEquals(run.getIngredient(12).getName(), "Ingredient");
   }
 
   @Test
@@ -81,7 +81,7 @@ public class RuntimeTest {
   @Test
   void testIngredientCount() throws IOException {
     run.addIngredient("Ingredient");
-    assertEquals(run.ingredientCount(), 8);
+    assertEquals(run.ingredientCount(), 13);
   }
 
   @Test
@@ -89,13 +89,13 @@ public class RuntimeTest {
     run.addIngredient("Ingredient");
     run.setAvailable("Ingredient");
     assertFalse(run.isAvailable(2));
-    assertTrue(run.isAvailable(7));
+    assertTrue(run.isAvailable(12));
   }
 
   @Test
   void testRecipeCount() {
     assertEquals(run.getRecipe(0).getName(), "Salmon with Brown Sugar Glaze");
-    assertEquals(run.recipeCount(), 1);
+    assertEquals(run.recipeCount(), 3);
   }
 
   @Test
@@ -173,7 +173,7 @@ public class RuntimeTest {
   void testFilterIngredient() {
     ArrayList<Recipe> rec = run.getRecipes(7);
     assertEquals(rec.size(), 1);
-    assertEquals(run.filterIngredient("Honey").size(), 1);
+    assertEquals(run.filterIngredient("Honey").size(), 2);
     assertEquals(run.filterIngredient("NotReal").size(), 0);
     assertEquals(run.filterIngredient("Honey", rec).size(), 1);
     assertEquals(run.filterIngredient("NotReal", rec).size(), 0);

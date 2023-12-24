@@ -203,6 +203,13 @@ public class Ingredient implements Serializable {
     Ingredient five = new Ingredient("Black Pepper", false);
     Ingredient six = new Ingredient("Red Pepper Flakes", false);
     Ingredient seven = new Ingredient("Salmon Filets", false);
+    //
+    Ingredient eight = new Ingredient("Chicken Breasts", false);
+    Ingredient nine = new Ingredient("Olive Oil", false);
+    //
+    Ingredient ten = new Ingredient("Shrimp", false);
+    Ingredient eleven = new Ingredient("Lemon Juice", false);
+    Ingredient twelve = new Ingredient("Garlic", false);
 
     // Add the ingredients to the default list
     defaultIngredients.add(one);
@@ -212,6 +219,11 @@ public class Ingredient implements Serializable {
     defaultIngredients.add(five);
     defaultIngredients.add(six);
     defaultIngredients.add(seven);
+    defaultIngredients.add(eight);
+    defaultIngredients.add(nine);
+    defaultIngredients.add(ten);
+    defaultIngredients.add(eleven);
+    defaultIngredients.add(twelve);
 
     // Return the default ingredients list
     return defaultIngredients;

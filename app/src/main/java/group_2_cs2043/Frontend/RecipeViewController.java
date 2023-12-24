@@ -82,7 +82,7 @@ public class RecipeViewController implements Initializable {
 		//**Intializing components for 'Best Match' view**//
 		ArrayList<Recipe> tempArray = new ArrayList<Recipe>();
 		
-		int MAX = 7; 			//Missing ingredient tolerance, up to 7 missing ingredients in a recipe
+		int MAX = 3; 			//Missing ingredient tolerance, up to 7 missing ingredients in a recipe
 		
 		recipeList = FXCollections.observableArrayList();	//Instantiate recipeList with all Recipe data
 		
