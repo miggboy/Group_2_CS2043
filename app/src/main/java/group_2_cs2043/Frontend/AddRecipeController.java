@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ public class AddRecipeController implements Initializable{
 	@FXML
     private ChoiceBox<String> dropDownMenu; 
     @FXML
-    private TextField instructionField;  
+    private TextArea instructionField;  
     @FXML
     private TextField prepTimeField;
     @FXML

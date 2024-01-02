@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -23,6 +24,6 @@
       <Button layoutX="131.0" layoutY="342.0" mnemonicParsing="false" onAction="#createButtonClick" prefHeight="39.0" prefWidth="65.0" text="Create" />
       <Label layoutX="14.0" layoutY="304.0" text="Fill in the specified fields, then click create" />
       <Button layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#goBackButtonClick" prefHeight="39.0" prefWidth="65.0" text="Go Back" />
-      <TextField fx:id="instructionField" alignment="TOP_LEFT" layoutX="420.0" layoutY="59.0" prefHeight="318.0" prefWidth="360.0" />
+      <TextArea fx:id="instructionField" layoutX="445.0" layoutY="59.0" prefHeight="309.0" prefWidth="315.0" />
    </children>
 </AnchorPane>
