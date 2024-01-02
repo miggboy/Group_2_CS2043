@@ -1,3 +1,4 @@
+![Pantry Pal Logo](https://github.com/miggboy/Pantry-Pal/blob/main/app/src/main/resources/IMG/logo.png)
 # Pantry Pal
 The final project for CS2043 - Introduction to Software Engineering.
 
