@@ -25,5 +25,6 @@
       <Label layoutX="14.0" layoutY="304.0" text="Fill in the specified fields, then click create" />
       <Button layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#goBackButtonClick" prefHeight="39.0" prefWidth="65.0" text="Go Back" />
       <TextArea fx:id="instructionField" layoutX="445.0" layoutY="59.0" prefHeight="309.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel" layoutX="15.0" layoutY="263.0" prefHeight="18.0" prefWidth="204.0" text="One or more fields are missing/invalid" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

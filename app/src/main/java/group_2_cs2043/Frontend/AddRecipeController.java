@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -39,6 +40,8 @@ public class AddRecipeController implements Initializable{
     private TextField servingSizeField;
     @FXML
     private ListView<Ingredient> ingredientsListView;
+    @FXML
+    private Label errorLabel;
     private ArrayList<Ingredient> newRecipeIngredients = new ArrayList<Ingredient>();
     private String[] ingredients;
     /*
@@ -64,6 +67,27 @@ public class AddRecipeController implements Initializable{
     	/*
     	 * Create the new recipe with specified data
     	 */
+    	
+    	String nameText = recipeNameField.getText();
+    	String instructionText = instructionField.getText();
+    	Duration prepTimeDuration = null;
+    	try {
+    		prepTimeDuration = Duration.ofMinutes(Integer.parseInt(prepTimeField.getText()));
+    	}
+    	catch(Exception e) {
+    	}
+    	Integer servingSize = null;
+    	try {
+    		servingSize = Integer.parseInt(servingSizeField.getText());
+    	}
+    	catch(Exception e) {
+    	}
+    	
+    	if((nameText.isBlank()) || (instructionText.isBlank()) || prepTimeDuration == null || servingSize == null) {
+    		errorLabel.setVisible(true);
+    		return;
+    	}
+    	
     	runtime.addRecipe(recipeNameField.getText(), 
     			instructionField.getText(), 
     					  Duration.ofMinutes(Integer.parseInt(prepTimeField.getText())), 
