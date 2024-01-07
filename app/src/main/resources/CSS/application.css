@@ -2,12 +2,19 @@
 	-fx-background-color: #F9DAD0 ;
 }
 
-#startButton {
-	-fx-background-color: #ffb6c1; /* Pastel pink background */
+.button {
+    -fx-background-color: #ffb6c1; /* Pastel pink background */
     -fx-background-radius: 20; /* Rounded corners */
+}
+
+.button:hover {
+    -fx-background-color: #00FFFF;
+}
+
+#startButton {
     -fx-font-family: "Verdana";
-    -fx-font-size: 14pt;
     -fx-font-weight: bold;
+    -fx-font-size: 14pt;
 }
 
 #credits {
@@ -17,6 +24,10 @@
     -fx-text-fill: #333; /* Adjust the text color to match your application */
 }
 
+#header {
+    -fx-font-weight: bold;
+}
+
 .table-view {
     -fx-font-size: 8pt; /* Set the font size for the entire TableView */
     -fx-background-color: #C5DCA0; /* Pastel green color */
@@ -24,4 +35,16 @@
 
 .table-view .column-header {
     -fx-background-color: #A5C474; /* Darker green color for the headers */
+}
+
+.tab {
+    -fx-background-color: #ffb6c1; 
+}
+
+.tab:hover{
+    -fx-background-color: #00FFFF;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #C5DCA0;
 }

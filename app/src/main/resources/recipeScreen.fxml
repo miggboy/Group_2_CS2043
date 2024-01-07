@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.RecipeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.RecipeViewController">
    <children>
-      <Label layoutX="35.0" layoutY="21.0" text="Recipes">
+      <Label fx:id="header" layoutX="35.0" layoutY="21.0" text="Recipes">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Label layoutX="212.0" layoutY="356.0" text="Double-Click a Recipe to open it!" />
       <Button fx:id="recipeScreenBack" layoutX="28.0" layoutY="352.0" mnemonicParsing="false" onAction="#recipeScreenBackClick" prefHeight="25.0" prefWidth="61.0" text="Back" />
-      <TabPane layoutX="35.0" layoutY="55.0" prefHeight="282.0" prefWidth="522.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabpane" layoutX="35.0" layoutY="55.0" prefHeight="282.0" prefWidth="522.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Best Match">
             <content>
@@ -70,8 +70,8 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="242.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
-      <Button layoutX="344.0" layoutY="22.0" mnemonicParsing="false" onAction="#onQuickSearchClick" text="Quick Search" />
+      <Button layoutX="221.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingListClick" text="Shopping List" />
+      <Button layoutX="335.0" layoutY="22.0" mnemonicParsing="false" onAction="#onQuickSearchClick" text="Quick Search" />
       <Button layoutX="445.0" layoutY="22.0" mnemonicParsing="false" onAction="#onCookTimeSearchClick" text="Cook Time Search" />
    </children>
 </AnchorPane>

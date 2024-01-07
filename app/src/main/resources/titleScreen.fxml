@@ -6,14 +6,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.TitleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.TitleController">
    <children>
-      <Button fx:id="startButton" alignment="BOTTOM_CENTER" layoutX="227.0" layoutY="200.0" mnemonicParsing="false" onAction="#onStartClick" text="Get Started" textAlignment="CENTER" />
-      <ImageView fx:id="myImageView" fitHeight="167.0" fitWidth="306.0" layoutX="147.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="startButton" alignment="BOTTOM_CENTER" layoutX="227.0" layoutY="259.0" mnemonicParsing="false" onAction="#onStartClick" text="Get Started" textAlignment="CENTER" />
+      <ImageView fx:id="myImageView" fitHeight="167.0" fitWidth="306.0" layoutX="148.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@IMG/logo.png" />
          </image>
       </ImageView>
-      <Label fx:id="credits" layoutX="182.0" layoutY="353.0" text="Made by CS2043 Group #2" />
+      <Label fx:id="credits" layoutX="160.0" layoutY="353.0" text="Made by CS2043 Group #2" />
    </children>
 </AnchorPane>

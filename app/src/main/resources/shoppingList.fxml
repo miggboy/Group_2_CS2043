@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="741.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.ShoppingListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="741.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.ShoppingListController">
    <children>
       <ChoiceBox fx:id="recipeBox" layoutX="26.0" layoutY="188.0" prefWidth="150.0" />
       <TableView fx:id="selRecTable" layoutX="247.0" layoutY="114.0" prefHeight="200.0" prefWidth="220.0">
@@ -24,13 +23,13 @@
       </TableView>
       <Label layoutX="56.0" layoutY="258.0" text="Pick your recipes" />
       <Label layoutX="273.0" layoutY="336.0" text="Enough recipes? Click generate!" />
-      <Button layoutX="325.0" layoutY="367.0" mnemonicParsing="false" onAction="#onGenerateClick" text="Generate" />
+      <Button layoutX="296.0" layoutY="367.0" mnemonicParsing="false" onAction="#onGenerateClick" text="Generate" />
       <Label alignment="CENTER" layoutX="554.0" layoutY="332.0" prefHeight="44.0" prefWidth="104.0" text="Missing ingredients will populate here" textAlignment="CENTER" wrapText="true" />
-      <Label layoutX="26.0" layoutY="31.0" text="Shopping List">
+      <Label fx:id="header" layoutX="26.0" layoutY="31.0" text="Shopping List">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="647.0" layoutY="34.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
+      <Button layoutX="631.0" layoutY="26.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="678.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.RecipeInformationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="678.0" stylesheets="@CSS/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group_2_cs2043.Frontend.RecipeInformationController">
    <children>
       <TextArea fx:id="instructionTextArea" editable="false" layoutX="37.0" layoutY="98.0" prefHeight="270.0" prefWidth="362.0" promptText="Instruction text here" wrapText="true" />
       <Label fx:id="nameLabel" layoutX="37.0" layoutY="53.0" text="Recipe Name">
@@ -56,7 +56,7 @@
       <Label fx:id="missingLabel" layoutX="195.0" layoutY="401.0" prefHeight="19.0" prefWidth="470.0" text="NA" textFill="RED" />
       <CheckBox fx:id="favTick" layoutX="334.0" layoutY="374.0" mnemonicParsing="false" onAction="#setFavorite" text="Favorite" />
       <Button layoutX="25.0" layoutY="426.0" mnemonicParsing="false" onAction="#onReturnClick" text="Return" />
-      <Button layoutX="456.0" layoutY="426.0" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete Recipe (cannot be undone)" />
+      <Button layoutX="421.0" layoutY="426.0" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete Recipe (cannot be undone)" />
       <TextField fx:id="rateField" layoutX="532.0" layoutY="319.0" prefHeight="26.0" prefWidth="29.0" />
       <Button layoutX="570.0" layoutY="319.0" mnemonicParsing="false" onAction="#addRating" text="Add Rating" />
       <Label fx:id="errorLabel" layoutX="443.0" layoutY="359.0" prefHeight="18.0" prefWidth="222.0" textFill="RED" />
