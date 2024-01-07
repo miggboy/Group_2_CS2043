@@ -17,7 +17,7 @@ gradlew run will clear saved data during tests.
 Automatic builds are saved under the "Run builds on merge" action, and precompiled jars can be acquired through the artifacts there.
 
 ## Demo Video
-[![Click to Watch Demo Video](https://img.youtube.com/vi/VKhMJ-SQMnM/hqdefault.jpg)](https://www.youtube.com/watch?v=qep-ZDOAbmw&ab)
+[![Click to Watch Demo Video](https://img.youtube.com/vi/VKhMJ-SQMnM/hqdefault.jpg)](https://youtu.be/VKhMJ-SQMnM?si=vbPVb7dK0Cu2ccWR)
 
 ---
 Authors:
