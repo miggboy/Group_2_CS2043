@@ -16,6 +16,9 @@ App should be run from app/build/libs, with the package matching your operating 
 gradlew run will clear saved data during tests. 
 Automatic builds are saved under the "Run builds on merge" action, and precompiled jars can be acquired through the artifacts there.
 
+## Demo Video
+[![Click to Watch Demo Video](https://img.youtube.com/vi/VKhMJ-SQMnM/hqdefault.jpg)](https://www.youtube.com/watch?v=qep-ZDOAbmw&ab)
+
 ---
 Authors:
 - Backend devs: Maxwell MacNeill, Jaspreet Singh
